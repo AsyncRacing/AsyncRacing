@@ -5,7 +5,17 @@
 <!-- Introduce the step-by-step guide to set up and contribute to the project. -->
 
 ## Tech Stack
-<!-- List out the tech stack that is used. -->
+| Technology        | Usage     |
+|:------------------|:----------|
+| GitHub            | Version Control; Collaboration Tools |
+| TypeScript        | Frontend  |
+| JavaScript ESNext | Frontend  |
+| React.js          | Frontend  |
+| Jest              | Testing   |
+| Firebase          | Database  |
+| Google Analytics  | Analytics |
+| Netlify           | Hosting; Continuous Integration |
+| MapBox            | Map API   |
 
 # Contributors
 - [Ben Simpson]
