@@ -1,36 +1,37 @@
 import React from 'react';
-import './Button.css';
+import './UploadButton.css';
 
-interface ButtonProps {
-  // Is this the principal call to action on the page?
-  primary?: boolean;
-  // What background color to use
-  backgroundColor?: string;
-  // How large should the button be?
-  size?: 'small' | 'medium' | 'large';
+interface PropTypes {
   // Button contents
   label: string;
-  // Optional click handler
-  onClick?: () => void;
-}
+};
 
 // Primary UI component for user interaction
-export const Button = ({
-  primary = false,
-  size = 'medium',
-  backgroundColor,
+const UploadButton = ({
   label,
   ...props
-}: ButtonProps) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+}: PropTypes) => {
+  // Set the state of the file.
+  const [file, setFile] = React.useState(null)
   return (
-    <button
-      type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
-      style={{ backgroundColor }}
-      {...props}
-    >
-      {label}
-    </button>
+    <div>
+      <label htmlFor="gpx-file-uploader">
+        {label}
+      </label>
+
+      <input
+        id="gpx-file-uploader"
+        name="gpx-file"
+        type="file"
+        onChange={(onChangeEvent) => {
+          // Get the data of this file uploader HTML element.
+          const gpxFileUploader = onChangeEvent.currentTarget
+          console.dir(gpxFileUploader)
+        }}
+        {...props}
+      />
+    </div>
   );
 };
+
+export default UploadButton;
