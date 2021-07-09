@@ -26,7 +26,25 @@ const UploadButton = ({
         onChange={(onChangeEvent) => {
           // Get the data of this file uploader HTML element.
           const gpxFileUploader = onChangeEvent.currentTarget
-          console.dir(gpxFileUploader)
+          // Make sure it has the files.
+          if (gpxFileUploader.files === null || gpxFileUploader.files.length < 1) {
+            return
+          }
+
+          // Per the documentation of input, there is only one file
+          // in the files array unless the multiple property is enabled.
+          // Also, gpxFile is type "File", which is a JS Web API.
+          const gpxFile: File = gpxFileUploader.files[0]
+
+          // Use the "FileReader" JS Web API to read variables with type "File".
+          const reader: FileReader = new FileReader()
+          // Assign properties to various functions to execute onEvent.
+          reader.onload = (onLoadEvent) => {
+            const data = onLoadEvent.target.result
+            console.dir(data)
+          }
+          // Use the reader.
+          reader.readAsText(gpxFile)
         }}
         {...props}
       />
