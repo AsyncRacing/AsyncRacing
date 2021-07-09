@@ -12,39 +12,50 @@ const UploadButton = ({
   ...props
 }: PropTypes) => {
   // Set the state of the file.
-  const [file, setFile] = React.useState(null)
+  const [file, setFile]= React.useState(null)
   return (
     <div>
-      <label htmlFor="gpx-file-uploader">
+      <label htmlFor="file-uploader">
         {label}
       </label>
 
       <input
-        id="gpx-file-uploader"
-        name="gpx-file"
+        id="file-uploader"
+        name="file"
         type="file"
         onChange={(onChangeEvent) => {
           // Get the data of this file uploader HTML element.
-          const gpxFileUploader = onChangeEvent.currentTarget
+          const fileUploader = onChangeEvent.currentTarget
           // Make sure it has the files.
-          if (gpxFileUploader.files === null || gpxFileUploader.files.length < 1) {
+          if (fileUploader.files === null || fileUploader.files.length < 1) {
             return
           }
 
-          // Per the documentation of input, there is only one file
+          // Per the documentation of <input>, there is only one file
           // in the files array unless the multiple property is enabled.
-          // Also, gpxFile is type "File", which is a JS Web API.
-          const gpxFile: File = gpxFileUploader.files[0]
+          // Also, file is type "File", which is a JS Web API.
+          const selectedFile: File = fileUploader.files[0]
 
           // Use the "FileReader" JS Web API to read variables with type "File".
           const reader: FileReader = new FileReader()
           // Assign properties to various functions to execute onEvent.
+          // This will set up the file reader for use.
           reader.onload = (onLoadEvent) => {
-            const data = onLoadEvent.target.result
-            console.dir(data)
+            // Ensure the event target...exists!
+            if (onLoadEvent.target === null) {
+              return
+            }
+
+            /*
+              NOTE: TypeScript is giving an unneeded warning here.
+              Because reader.onload will only ever run from reader.readAsText(),
+              fileData will only ever end up being a string or null.
+            */ // @ts-expect-error
+            const fileData: string | null = onLoadEvent.target.result
+            setFile(fileData)
           }
           // Use the reader.
-          reader.readAsText(gpxFile)
+          reader.readAsText(selectedFile)
         }}
         {...props}
       />
