@@ -11,7 +11,21 @@ export default {
   },
 } as ComponentMeta<typeof UploadButton>;
 
-const Template: ComponentStory<typeof UploadButton> = (args) => <UploadButton {...args} />;
+const Template: ComponentStory<typeof UploadButton> = (args) => {
+  const [file, setFile] = React.useState<null|string>(null);
+  return (
+    <>
+      <UploadButton
+        {...args}
+        setFile={setFile}
+      />
+      <textarea
+        value={file ?? ""}
+        readOnly
+      />
+    </>
+  );
+}
 
 export const Primary = Template.bind({});
 Primary.args = {
