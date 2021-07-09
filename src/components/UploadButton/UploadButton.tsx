@@ -12,7 +12,7 @@ const UploadButton = ({
   ...props
 }: PropTypes) => {
   // Set the state of the file.
-  const [file, setFile]= React.useState(null)
+  const [file, setFile]= React.useState<null|string>(null)
   return (
     <div>
       <label htmlFor="file-uploader">
