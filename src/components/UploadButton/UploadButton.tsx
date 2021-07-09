@@ -3,7 +3,7 @@ import './UploadButton.css';
 
 interface PropTypes {
   // Button contents
-  label: string;
+  label?: string;
   // This type comes from a built-in React method.
   // Essentially, its typed to the "setState" function.
   setFile: React.Dispatch<React.SetStateAction<string | null>>;
@@ -11,7 +11,7 @@ interface PropTypes {
 
 // Primary UI component for user interaction
 const UploadButton = ({
-  label,
+  label="Upload a File...",
   setFile,
   ...props
 }: PropTypes) => {

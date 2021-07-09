@@ -21,6 +21,7 @@ const Template: ComponentStory<typeof UploadButton> = (args) => {
       />
       <textarea
         value={file ?? ""}
+        disabled
         readOnly
       />
     </>
@@ -28,6 +29,4 @@ const Template: ComponentStory<typeof UploadButton> = (args) => {
 }
 
 export const Primary = Template.bind({});
-Primary.args = {
-  label: 'Upload a File...',
-};
+Primary.args = {};
