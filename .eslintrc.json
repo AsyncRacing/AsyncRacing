@@ -32,5 +32,32 @@
     "@typescript-eslint"
   ],
   "rules": {
+    // Fixes "React was used before it was defined"
+    // from using "import React from 'react'".
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+
+    // Allows TSX files to contain JSX.
+    "react/jsx-filename-extension": ["error", {"extensions": [".jsx", ".tsx"]}],
+
+    // Don't require explicit imports of TSX files and etcetera.
+    // EX. "import App from './App'"
+    "import/extensions": ["error", "ignorePackages", {"ts": "never", "tsx": "never"}],
+
+    // This will allow dev-dependancies from within the storybook files.
+    // After all, Storybook is a dev dependancy.
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.stories.*"]}],
+
+    // Should allow imports of explicit files as modules, such as CSS and JSON.
+    "import/no-unresolved": ["error"]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        // This allows for implcit imports of TSX files and etcetera.
+        // EX. "import App from './App'" resolves to "App.tsx".
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
   }
 }
