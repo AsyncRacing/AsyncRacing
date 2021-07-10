@@ -49,7 +49,13 @@
     "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.stories.*"]}],
 
     // Should allow imports of explicit files as modules, such as CSS and JSON.
-    "import/no-unresolved": ["error"]
+    "import/no-unresolved": ["error"],
+
+    /*
+      Rules above this line are required to configure eslint for this project;
+      the rules below are implemented for style, consistancy, and preference.
+    */
+    "indent": ["error", 2]
   },
   "settings": {
     "import/resolver": {
