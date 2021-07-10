@@ -57,7 +57,8 @@
         // This allows for implcit imports of TSX files and etcetera.
         // EX. "import App from './App'" resolves to "App.tsx".
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
+      },
+      "typescript": {}
     }
   }
 }
