@@ -1,7 +1,12 @@
 {
   "name": "async-racing",
   "version": "0.1.0",
+  "description": "<!-- Add description of app here. -->",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AsyncRacing/AsyncRacing.git"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
