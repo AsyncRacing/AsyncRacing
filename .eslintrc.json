@@ -59,7 +59,8 @@
       the rules below are implemented for style, consistancy, and preference.
     */
     "indent": ["error", 2],
-    "react/jsx-props-no-spreading": ["off"]
+    "react/jsx-props-no-spreading": ["off"],
+    "react/jsx-max-props-per-line": ["error", {"maximum": 1}]
   },
   "settings": {
     "import/resolver": {
