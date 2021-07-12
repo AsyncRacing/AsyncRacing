@@ -51,6 +51,9 @@
     // Should allow imports of explicit files as modules, such as CSS and JSON.
     "import/no-unresolved": ["error"],
 
+    // React default props are being deprecated in favor of default parameters.
+    "react/require-default-props": "off",
+
     /*
       Rules above this line are required to configure eslint for this project;
       the rules below are implemented for style, consistancy, and preference.
