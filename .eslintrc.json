@@ -34,7 +34,7 @@
   "rules": {
     // Fixes "React was used before it was defined"
     // from using "import React from 'react'".
-    "no-use-before-define": "off",
+    "no-use-before-define": ["off"],
     "@typescript-eslint/no-use-before-define": ["error"],
 
     // Allows TSX files to contain JSX.
@@ -52,13 +52,14 @@
     "import/no-unresolved": ["error"],
 
     // React default props are being deprecated in favor of default parameters.
-    "react/require-default-props": "off",
+    "react/require-default-props": ["off"],
 
     /*
       Rules above this line are required to configure eslint for this project;
       the rules below are implemented for style, consistancy, and preference.
     */
-    "indent": ["error", 2]
+    "indent": ["error", 2],
+    "react/jsx-props-no-spreading": ["off"]
   },
   "settings": {
     "import/resolver": {
