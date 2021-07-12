@@ -1,0 +1,1108 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="GDAL 3.0.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogr="http://osgeo.org/gdal" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata><bounds minlat="41.316422820000000" minlon="-81.619793070000000" maxlat="41.319166629999998" maxlon="-81.615316280000002"/></metadata>                
+<wpt lat="41.31899842" lon="-81.61643524">
+  <name> Point 1</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:49:17</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3190595" lon="-81.61636051">
+  <name> Point 2</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:49:26</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31908464" lon="-81.61623569">
+  <name> Point 3</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:49:36</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31909997" lon="-81.61608553">
+  <name> Point 4</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:49:46</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31913565" lon="-81.615919">
+  <name> Point 5</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:49:55</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31914002" lon="-81.61587948">
+  <name> Point 6</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:50:05</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31913619" lon="-81.61587968">
+  <name> Point 7</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:50:15</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31913626" lon="-81.61587743">
+  <name> Point 8</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:50:25</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3191264" lon="-81.61586532">
+  <name> Point 9</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:50:35</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31898292" lon="-81.61580955">
+  <name> Point 10</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:50:45</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31891424" lon="-81.61575742">
+  <name> Point 11</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:50:55</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3188075" lon="-81.61572723">
+  <name> Point 12</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:51:05</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31876097" lon="-81.61569209">
+  <name> Point 13</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:51:15</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3187063" lon="-81.6155779">
+  <name> Point 14</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:51:25</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31862014" lon="-81.61553883">
+  <name> Point 15</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:51:35</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31851104" lon="-81.61553">
+  <name> Point 16</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:51:45</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31840498" lon="-81.61555212">
+  <name> Point 17</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:51:55</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31828931" lon="-81.61554187">
+  <name> Point 18</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:52:05</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31824942" lon="-81.61555021">
+  <name> Point 19</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:52:15</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31824863" lon="-81.6155455">
+  <name> Point 20</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:52:25</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31825098" lon="-81.61554714">
+  <name> Point 21</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:52:35</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31824937" lon="-81.61554631">
+  <name> Point 22</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:52:45</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31815309" lon="-81.61565278">
+  <name> Point 23</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:52:55</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31797874" lon="-81.61576692">
+  <name> Point 24</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:53:05</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31783736" lon="-81.61582117">
+  <name> Point 25</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:53:15</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31774271" lon="-81.61582903">
+  <name> Point 26</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:53:25</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31774009" lon="-81.61577193">
+  <name> Point 27</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:53:35</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3176614" lon="-81.6156152">
+  <name> Point 28</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:53:45</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31762959" lon="-81.61571519">
+  <name> Point 29</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:53:55</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31769409" lon="-81.61566805">
+  <name> Point 30</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:54:05</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31764539" lon="-81.61563399">
+  <name> Point 31</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:54:15</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3176383" lon="-81.61560184">
+  <name> Point 32</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:54:25</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31761702" lon="-81.61550853">
+  <name> Point 33</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:54:34</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31764372" lon="-81.61544544">
+  <name> Point 34</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:54:44</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31760034" lon="-81.61547986">
+  <name> Point 35</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:54:54</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3175671" lon="-81.61547843">
+  <name> Point 36</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:55:04</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31756655" lon="-81.61546284">
+  <name> Point 37</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:55:14</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31756632" lon="-81.61546188">
+  <name> Point 38</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:55:24</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31756694" lon="-81.61546255">
+  <name> Point 39</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:55:34</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31756676" lon="-81.61546207">
+  <name> Point 40</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:55:44</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31756533" lon="-81.61545985">
+  <name> Point 41</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:55:54</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31754581" lon="-81.61543205">
+  <name> Point 42</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:56:04</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31746856" lon="-81.61534801">
+  <name> Point 43</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:56:14</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31738589" lon="-81.61531628">
+  <name> Point 44</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:56:24</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3173077" lon="-81.61532387">
+  <name> Point 45</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:56:34</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31728452" lon="-81.61534098">
+  <name> Point 46</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:56:44</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31727608" lon="-81.6153373">
+  <name> Point 47</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:56:54</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31724399" lon="-81.61537446">
+  <name> Point 48</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:57:04</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31715799" lon="-81.61549569">
+  <name> Point 49</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:57:14</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31710719" lon="-81.61558416">
+  <name> Point 50</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:57:23</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31714057" lon="-81.61564142">
+  <name> Point 51</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:57:33</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31710518" lon="-81.61569401">
+  <name> Point 52</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:57:43</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31712748" lon="-81.61566893">
+  <name> Point 53</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:57:53</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31713821" lon="-81.61568324">
+  <name> Point 54</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:58:03</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31713875" lon="-81.61568334">
+  <name> Point 55</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:58:13</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31713618" lon="-81.6156834">
+  <name> Point 56</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:58:23</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31709421" lon="-81.61576598">
+  <name> Point 57</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:58:33</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31706988" lon="-81.61594584">
+  <name> Point 58</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:58:43</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31708751" lon="-81.61606475">
+  <name> Point 59</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:58:53</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31716989" lon="-81.6161382">
+  <name> Point 60</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:59:03</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31712714" lon="-81.61621313">
+  <name> Point 61</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:59:13</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31707815" lon="-81.61630361">
+  <name> Point 62</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:59:23</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31704601" lon="-81.61636755">
+  <name> Point 63</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:59:33</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31698027" lon="-81.61649146">
+  <name> Point 64</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:59:43</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31697318" lon="-81.61653655">
+  <name> Point 65</name>
+  <extensions>
+    <ogr:description>10/07/2021  18:59:53</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31694004" lon="-81.61657908">
+  <name> Point 66</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:00:02</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31693294" lon="-81.61658161">
+  <name> Point 67</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:00:12</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31692935" lon="-81.61659273">
+  <name> Point 68</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:00:22</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31686253" lon="-81.61667826">
+  <name> Point 69</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:00:32</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31681494" lon="-81.61678188">
+  <name> Point 70</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:00:42</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31675021" lon="-81.61692674">
+  <name> Point 71</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:00:52</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31670256" lon="-81.61704574">
+  <name> Point 72</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:01:02</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31667728" lon="-81.61709244">
+  <name> Point 73</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:01:12</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31659247" lon="-81.61723206">
+  <name> Point 74</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:01:22</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31652795" lon="-81.61741078">
+  <name> Point 75</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:01:32</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31646788" lon="-81.6174968">
+  <name> Point 76</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:01:41</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31642693" lon="-81.61760993">
+  <name> Point 77</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:01:51</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31643919" lon="-81.61774953">
+  <name> Point 78</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:02:01</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31642282" lon="-81.61788372">
+  <name> Point 79</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:02:11</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31644116" lon="-81.61796824">
+  <name> Point 80</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:02:21</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31649521" lon="-81.61811677">
+  <name> Point 81</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:02:31</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31656479" lon="-81.61824108">
+  <name> Point 82</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:02:41</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31658471" lon="-81.61826744">
+  <name> Point 83</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:02:51</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3165878" lon="-81.61831321">
+  <name> Point 84</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:03:01</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31663536" lon="-81.61851351">
+  <name> Point 85</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:03:11</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31666206" lon="-81.61867216">
+  <name> Point 86</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:03:21</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31656531" lon="-81.61876288">
+  <name> Point 87</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:03:31</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31654293" lon="-81.61886011">
+  <name> Point 88</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:03:41</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31658258" lon="-81.61896198">
+  <name> Point 89</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:03:51</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31662575" lon="-81.61903126">
+  <name> Point 90</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:04:01</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31667823" lon="-81.61915316">
+  <name> Point 91</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:04:11</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31672883" lon="-81.61928163">
+  <name> Point 92</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:04:21</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31679094" lon="-81.61931561">
+  <name> Point 93</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:04:31</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31682117" lon="-81.61931992">
+  <name> Point 94</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:04:41</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31687313" lon="-81.61934847">
+  <name> Point 95</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:04:51</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3170051" lon="-81.61937742">
+  <name> Point 96</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:05:01</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31709449" lon="-81.61951375">
+  <name> Point 97</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:05:11</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31709897" lon="-81.61959069">
+  <name> Point 98</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:05:21</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31712425" lon="-81.61962014">
+  <name> Point 99</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:05:31</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31712705" lon="-81.61962407">
+  <name> Point 100</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:05:41</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31715049" lon="-81.61965306">
+  <name> Point 101</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:05:51</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31719061" lon="-81.61967479">
+  <name> Point 102</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:06:01</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31719561" lon="-81.61967687">
+  <name> Point 103</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:06:11</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31719368" lon="-81.61967571">
+  <name> Point 104</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:06:21</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31719358" lon="-81.61967471">
+  <name> Point 105</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:06:31</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31719568" lon="-81.61967449">
+  <name> Point 106</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:06:41</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3171963" lon="-81.61967462">
+  <name> Point 107</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:06:51</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3172181" lon="-81.61970498">
+  <name> Point 108</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:07:01</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31723707" lon="-81.61979307">
+  <name> Point 109</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:07:11</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31722495" lon="-81.61978691">
+  <name> Point 110</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:07:21</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31722634" lon="-81.61978945">
+  <name> Point 111</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:07:31</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31726236" lon="-81.61977846">
+  <name> Point 112</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:07:41</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31738384" lon="-81.6197178">
+  <name> Point 113</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:07:51</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31746238" lon="-81.61965727">
+  <name> Point 114</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:08:01</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31752419" lon="-81.6196131">
+  <name> Point 115</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:08:11</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31755062" lon="-81.6194437">
+  <name> Point 116</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:08:21</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31763292" lon="-81.61940884">
+  <name> Point 117</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:08:31</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31770144" lon="-81.61933166">
+  <name> Point 118</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:08:41</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3177701" lon="-81.61925383">
+  <name> Point 119</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:08:51</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31775834" lon="-81.619182">
+  <name> Point 120</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:09:01</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31773003" lon="-81.61913142">
+  <name> Point 121</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:09:11</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31781978" lon="-81.61908179">
+  <name> Point 122</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:09:21</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31787311" lon="-81.61901266">
+  <name> Point 123</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:09:31</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3179481" lon="-81.61899727">
+  <name> Point 124</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:09:41</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31791334" lon="-81.6188901">
+  <name> Point 125</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:09:51</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3178774" lon="-81.61877107">
+  <name> Point 126</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:10:01</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31780806" lon="-81.61868132">
+  <name> Point 127</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:10:11</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31774067" lon="-81.61867224">
+  <name> Point 128</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:10:21</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31766162" lon="-81.61860236">
+  <name> Point 129</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:10:31</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3176412" lon="-81.61845685">
+  <name> Point 130</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:10:41</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31766532" lon="-81.61827252">
+  <name> Point 131</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:10:51</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31769397" lon="-81.61818109">
+  <name> Point 132</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:11:01</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31771947" lon="-81.61801063">
+  <name> Point 133</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:11:11</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31773157" lon="-81.61789558">
+  <name> Point 134</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:11:20</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31770245" lon="-81.61780696">
+  <name> Point 135</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:11:30</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31774042" lon="-81.61769022">
+  <name> Point 136</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:11:40</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31776224" lon="-81.61754457">
+  <name> Point 137</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:11:50</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31780257" lon="-81.6174333">
+  <name> Point 138</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:12:00</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3177677" lon="-81.61739318">
+  <name> Point 139</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:12:09</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31767502" lon="-81.61734425">
+  <name> Point 140</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:12:19</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31763288" lon="-81.61731722">
+  <name> Point 141</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:12:29</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31761174" lon="-81.6171935">
+  <name> Point 142</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:12:39</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31756928" lon="-81.61703892">
+  <name> Point 143</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:12:49</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31761043" lon="-81.61692121">
+  <name> Point 144</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:12:59</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31761462" lon="-81.61668208">
+  <name> Point 145</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:13:09</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31764278" lon="-81.61655601">
+  <name> Point 146</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:13:18</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.317665" lon="-81.61645208">
+  <name> Point 147</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:13:28</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31769392" lon="-81.6163322">
+  <name> Point 148</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:13:38</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31768066" lon="-81.61624285">
+  <name> Point 149</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:13:48</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31773324" lon="-81.61604293">
+  <name> Point 150</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:13:58</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31774239" lon="-81.61590546">
+  <name> Point 151</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:14:08</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31774927" lon="-81.61580726">
+  <name> Point 152</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:14:18</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31783208" lon="-81.61576715">
+  <name> Point 153</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:14:28</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31792766" lon="-81.61574654">
+  <name> Point 154</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:14:38</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31801628" lon="-81.6157095">
+  <name> Point 155</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:14:48</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31802499" lon="-81.6157518">
+  <name> Point 156</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:14:58</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3180734" lon="-81.61569541">
+  <name> Point 157</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:15:08</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31817009" lon="-81.615591">
+  <name> Point 158</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:15:18</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3182758" lon="-81.61554341">
+  <name> Point 159</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:15:28</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31839617" lon="-81.61547709">
+  <name> Point 160</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:15:38</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31845055" lon="-81.6154814">
+  <name> Point 161</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:15:48</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31855417" lon="-81.615511">
+  <name> Point 162</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:15:57</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3186578" lon="-81.61559305">
+  <name> Point 163</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:16:07</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31875638" lon="-81.61563122">
+  <name> Point 164</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:16:17</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31883928" lon="-81.61568019">
+  <name> Point 165</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:16:27</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31897047" lon="-81.61569955">
+  <name> Point 166</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:16:37</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31907026" lon="-81.61575625">
+  <name> Point 167</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:16:47</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31916663" lon="-81.61584726">
+  <name> Point 168</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:16:57</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3191663" lon="-81.61591662">
+  <name> Point 169</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:17:07</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31913254" lon="-81.61600467">
+  <name> Point 170</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:17:17</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31908102" lon="-81.61609181">
+  <name> Point 171</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:17:27</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31909274" lon="-81.61620864">
+  <name> Point 172</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:17:37</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3191107" lon="-81.61627368">
+  <name> Point 173</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:17:47</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31911347" lon="-81.61629971">
+  <name> Point 174</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:17:56</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31911802" lon="-81.61632487">
+  <name> Point 175</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:18:06</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31913569" lon="-81.61639187">
+  <name> Point 176</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:18:16</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3191216" lon="-81.61640262">
+  <name> Point 177</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:18:26</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3191249" lon="-81.61639954">
+  <name> Point 178</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:18:36</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.3191248" lon="-81.61639953">
+  <name> Point 179</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:18:45</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31912079" lon="-81.61640817">
+  <name> Point 180</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:18:55</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31911079" lon="-81.61640919">
+  <name> Point 181</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:19:05</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31903058" lon="-81.61646807">
+  <name> Point 182</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:19:15</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31898229" lon="-81.61697534">
+  <name> Point 183</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:19:25</ogr:description>
+  </extensions>
+</wpt>
+<wpt lat="41.31907427" lon="-81.61717258">
+  <name> Point 184</name>
+  <extensions>
+    <ogr:description>10/07/2021  19:19:35</ogr:description>
+  </extensions>
+</wpt>
+</gpx>
