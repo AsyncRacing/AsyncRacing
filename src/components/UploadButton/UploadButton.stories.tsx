@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-
 import UploadButton from './UploadButton';
+import { useFileContentString } from './useFileContent';
 
 export default {
   title: 'components/UploadButton',
@@ -12,7 +12,8 @@ export default {
 } as ComponentMeta<typeof UploadButton>;
 
 const Template: ComponentStory<typeof UploadButton> = (args) => {
-  const [file, setFile] = React.useState<null|File>(null);
+  const [file, setFile] = useState<null|File>(null);
+  const fileContent: string = useFileContentString(file)
   return (
     <>
       <UploadButton
@@ -20,7 +21,7 @@ const Template: ComponentStory<typeof UploadButton> = (args) => {
         setFile={setFile}
       />
       <textarea
-        value={file ? "Input has data." : "Input wants data."} // ! temporary value until hook is introduced
+        value={fileContent}
         disabled
         readOnly
       />
