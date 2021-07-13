@@ -12,7 +12,7 @@ export default {
 } as ComponentMeta<typeof UploadButton>;
 
 const Template: ComponentStory<typeof UploadButton> = (args) => {
-  const [file, setFile] = React.useState<null|string>(null);
+  const [file, setFile] = React.useState<null|File>(null);
   return (
     <>
       <UploadButton
@@ -20,7 +20,7 @@ const Template: ComponentStory<typeof UploadButton> = (args) => {
         setFile={setFile}
       />
       <textarea
-        value={file ?? ""}
+        value={file ? "Input has data." : "Input wants data."} // ! temporary value until hook is introduced
         disabled
         readOnly
       />

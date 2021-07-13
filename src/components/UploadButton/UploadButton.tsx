@@ -6,7 +6,7 @@ interface PropTypes {
   label?: string;
   // This type comes from a built-in React method.
   // Essentially, its typed to the "setState" function.
-  setFile: React.Dispatch<React.SetStateAction<string | null>>;
+  setFile: React.Dispatch<React.SetStateAction<File | null>>;
 };
 
 // Primary UI component for user interaction
@@ -38,7 +38,10 @@ const UploadButton = ({
           // in the files array unless the multiple property is enabled.
           // Also, file is type "File", which is a JS Web API.
           const selectedFile: File = fileUploader.files[0]
+          // Set the selected file.
+          setFile(selectedFile)
 
+          /*********************************************************************
           // Use the "FileReader" JS Web API to read variables with type "File".
           const reader: FileReader = new FileReader()
           // Assign properties to various functions to execute onEvent.
@@ -49,16 +52,17 @@ const UploadButton = ({
               return
             }
 
-            /*
+            /\
               NOTE: TypeScript is giving an unneeded warning here.
               Because reader.onload will only ever run from reader.readAsText(),
               fileData will only ever end up being a string or null.
-            */ // @ts-expect-error
+            \/ // @ts-expect-error
             const fileData: string | null = onLoadEvent.target.result
             setFile(fileData)
           }
           // Use the reader.
           reader.readAsText(selectedFile)
+          *********************************************************************/
         }}
         {...props}
       />
