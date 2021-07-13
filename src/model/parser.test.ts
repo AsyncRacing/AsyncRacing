@@ -8,8 +8,8 @@ it('can parse a file', () => {
 
     expect(points).toHaveLength(3)
     expect(points[0]).toMatchObject({
-        latitude: 38.5439,
-        longitude: -121.7039
+        lat: 38.5439,
+        lon: -121.7039
         ,
         time: Date.parse('2021-07-09T18:18:21Z')
     })
