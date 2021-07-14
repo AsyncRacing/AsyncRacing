@@ -20,6 +20,8 @@ const readFileContent = (
     if (onLoadEvent.target === null) {
       return
     }
+
+    // Gather the file's text content and then set it.
     const fileContent: string | null = onLoadEvent.target.result as string | null
     setFileContent(fileContent)
   }
@@ -36,6 +38,8 @@ const useFileContent = (
   // Use react state for the hook!
   const [fileContent, setFileContent] = useState<string | null>(null)
 
+  // Use react effect hooks as well for watching changes.
+  // This enables more declaritive programming styles.
   useEffect(() => {
     readFileContent(file, setFileContent)
   }, [file])

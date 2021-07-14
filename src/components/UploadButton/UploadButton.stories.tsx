@@ -13,7 +13,6 @@ export default {
 
 const Template: ComponentStory<typeof UploadButton> = (args) => {
   const [file, setFile] = useState<File | null>(null)
-  const [name, setName] = useState("")
   const fileContent = useFileContent(file)
 
   return (
@@ -26,13 +25,6 @@ const Template: ComponentStory<typeof UploadButton> = (args) => {
         value={fileContent ?? ""}
         disabled
         readOnly
-      />
-      <input
-        type='text'
-        value={name}
-        onChange={(e)=>{
-          setName(e.target.value)
-        }}
       />
     </>
   );
