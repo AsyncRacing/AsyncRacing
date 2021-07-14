@@ -1,12 +1,19 @@
-import React, { Dispatch } from 'react';
+import React, {
+  Dispatch,
+  HTMLProps,
+} from 'react';
 import './UploadButton.css';
 
-interface PropTypes {
+interface PropTypes extends Omit<
+  HTMLProps<HTMLInputElement>,
+  "id" | "name" | "type" | "onChange"
+> {
   // Button contents
   label?: string,
+
   // This type comes from a built-in React method.
   // Essentially, its typed to the "setState" function.
-  setFile: Dispatch<File | null>,
+  setFile: Dispatch<File | null>
 };
 
 // Primary UI component for user interaction
