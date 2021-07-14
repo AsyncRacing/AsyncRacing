@@ -5,15 +5,15 @@ import React, {
 } from 'react';
 
 interface fileDataType {
-  file: null | File,
-  text?: undefined | null | string,
+  file: File | null,
+  text?: string | null | undefined,
 }
 
 // Create a file-reader helper function here.
 const readFileData = (
-  file: null | File,
-  fileData: fileDataType = {file: null},
-  setFileData: (fileData: any) => (void),
+  file: File | null,
+  fileData: fileDataType,
+  setFileData: (fileData: fileDataType) => (void),
 ): void => {
   // Immediately clear the previous value for fileData.
   setFileData({file})
@@ -48,13 +48,13 @@ const readFileData = (
 }
 
 const useFileData = (
-  defaultFile: null | File = null
+  defaultFile: File | null = null
 ): [
   fileDataType,
-  Dispatch<SetStateAction<any>>,
+  Dispatch<File | null>,
 ] => {
   // Use react state for the hook!
-  const [fileData, setFileData] = useState({file: null})
+  const [fileData, setFileData] = useState<fileDataType>({file: null})
 
   // Integrate helper function into setState.
   const setFileDataByReading = (file: File | null) => {

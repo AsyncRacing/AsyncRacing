@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Dispatch } from 'react';
 import './UploadButton.css';
 
 interface PropTypes {
   // Button contents
-  label?: string;
+  label?: string,
   // This type comes from a built-in React method.
   // Essentially, its typed to the "setState" function.
-  setFile: React.Dispatch<React.SetStateAction<File | null>>;
+  setFile: Dispatch<File | null>,
 };
 
 // Primary UI component for user interaction

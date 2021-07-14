@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import UploadButton from './UploadButton';
-import useFileContent from './useFileContent';
+import useFileData from './useFileData';
 
 export default {
   title: 'components/UploadButton',
@@ -12,15 +12,15 @@ export default {
 } as ComponentMeta<typeof UploadButton>;
 
 const Template: ComponentStory<typeof UploadButton> = (args) => {
-  const [fileContent, setFileContent] = useFileContent()
+  const [fileData, setFileData] = useFileData()
   return (
     <>
       <UploadButton
         {...args}
-        setFile={setFileContent}
+        setFile={setFileData}
       />
       <textarea
-        value={fileContent.text ?? ""}
+        value={fileData.text ?? ""}
         disabled
         readOnly
       />
