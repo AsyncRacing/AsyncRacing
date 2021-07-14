@@ -4,10 +4,19 @@ import React, {
   useState,
 } from 'react';
 
-// Create a file-reader function here.
-const readFileContentString = (file: null | File): null | string => {
-  // Keep track of the file's data, which will be returned.
-  let fileData: string | null = null
+interface fileDataType {
+  file: null | File,
+  text?: undefined | null | string,
+}
+
+// Create a file-reader helper function here.
+const readFileData = (
+  file: null | File,
+  fileData: fileDataType = {file: null},
+  setFileData: (fileData: any) => (void),
+): void => {
+  // Immediately clear the previous value for fileData.
+  setFileData({file})
 
   // Use the "FileReader" JS Web API to read variables with type "File".
   const reader: FileReader = new FileReader()
@@ -21,35 +30,40 @@ const readFileContentString = (file: null | File): null | string => {
     /*
       NOTE: TypeScript is giving an unneeded warning here.
       Because reader.onload will only ever run from reader.readAsText(),
-      fileData will only ever end up being a string or null.
+      fileDataText will only ever end up being a string or null.
     */ // @ts-expect-error
-    fileData = onLoadEvent.target.result
+    const fileDataText: string | null = onLoadEvent.target.result
+
+    // Add the new information to fileData.
+    setFileData({
+      ...fileData,
+      text: fileDataText,
+    })
   }
 
   if (file !== null) {
-    // Use the reader to obtain fileData.
+    // Use the reader to obtain fileData as text.
     reader.readAsText(file)
-    console.log(fileData)
   }
-
-  // Return the fileData obtained from the reader.
-  return fileData
 }
 
-const useFileContentString = (
+const useFileData = (
   defaultFile: null | File = null
 ): [
-  string | null,
+  fileDataType,
   Dispatch<SetStateAction<any>>,
 ] => {
   // Use react state for the hook!
-  // Prepare the proper fileContent from the given file.
-  const [fileContentString, setFile] = useState(readFileContentString(defaultFile))
-  // Prepare the proper setFileContent function from the given setFile function.
-  const setFileContentString = (file: null | File) => setFile(readFileContentString(file))
-  // Return both the starting value and the setting function,
-  // which also both use my custom readFileContentString() function.
-  return [fileContentString, setFileContentString]
+  const [fileData, setFileData] = useState({file: null})
+
+  // Integrate helper function into setState.
+  const setFileDataByReading = (file: File | null) => {
+    return readFileData(file, fileData, setFileData)
+  }
+
+  // // Re-Set the given default file.
+  // setFileDataByReading(defaultFile) // ! Why does this make an error?
+  return [fileData, setFileDataByReading]
 }
 
-export default useFileContentString;
+export default useFileData;
