@@ -17,12 +17,27 @@ const Template: ComponentStory<typeof UploadButton> = (args) => {
 
   return (
     <>
+      <label htmlFor="file-uploader">
+        Upload a File
+      </label>
+
+      <br />
+
       <UploadButton
         {...args}
+        id="file-uploader"
+        name="file"
         setFile={setFile}
       />
+
+      <hr />
+
       <textarea
         value={fileContent ?? ""}
+        style={{
+          width: '100%',
+          height: '500px',
+        }}
         disabled
         readOnly
       />
