@@ -6,12 +6,9 @@ import useFileContent from './useFileContent';
 export default {
   title: 'components/UploadButton',
   component: UploadButton,
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
 } as ComponentMeta<typeof UploadButton>;
 
-const Template: ComponentStory<typeof UploadButton> = (args) => {
+const Template: ComponentStory<typeof UploadButton> = () => {
   const [file, setFile] = useState<File | null>(null)
   const fileContent = useFileContent(file)
 
@@ -24,9 +21,7 @@ const Template: ComponentStory<typeof UploadButton> = (args) => {
       <br />
 
       <UploadButton
-        {...args}
         id="file-uploader"
-        name="file"
         setFile={setFile}
       />
 
