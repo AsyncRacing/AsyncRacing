@@ -60,7 +60,11 @@
     */
     "indent": ["error", 2],
     "react/jsx-props-no-spreading": ["off"],
-    "react/jsx-max-props-per-line": ["error", {"maximum": 1}]
+    "react/jsx-max-props-per-line": ["error", {"maximum": 1}],
+
+    // Rule to
+    "import/prefer-default-export": ["off"],
+    "import/no-default-export": ["error"]
   },
   "settings": {
     "import/resolver": {
