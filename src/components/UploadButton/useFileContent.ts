@@ -1,4 +1,4 @@
-import React, {
+import {
   Dispatch,
   SetStateAction,
   useEffect,
@@ -48,4 +48,4 @@ const useFileContent = (
   return fileContent;
 };
 
-export default useFileContent;
+export { useFileContent };

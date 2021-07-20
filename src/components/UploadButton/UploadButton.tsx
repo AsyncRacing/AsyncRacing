@@ -36,4 +36,4 @@ const UploadButton = ({
   />
 );
 
-export default UploadButton;
+export { UploadButton };

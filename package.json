@@ -8,6 +8,8 @@
     "url": "https://github.com/AsyncRacing/AsyncRacing.git"
   },
   "dependencies": {
+    "@deck.gl/layers": "^8.4.20",
+    "@deck.gl/react": "^8.4.20",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",

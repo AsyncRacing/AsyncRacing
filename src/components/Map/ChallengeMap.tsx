@@ -74,7 +74,7 @@ export function ChallengeMap({ tracks }: IProps) {
       widthMinPixels: 2,
       getPath: (d) => d.path,
       getColor: (d) => d.color,
-      getWidth: (d) => 5,
+      getWidth: 5,
     }),
   ];
 
@@ -115,7 +115,12 @@ export function ChallengeMap({ tracks }: IProps) {
             />
           </Marker>
         </InteractiveMap>
-        <button onClick={goToSF}>San Francisco</button>
+        <button
+          type="button"
+          onClick={goToSF}
+        >
+          San Francisco
+        </button>
       </DeckGL>
     </div>
   );

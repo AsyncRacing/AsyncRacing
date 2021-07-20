@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import UploadButton from './UploadButton';
-import useFileContent from './useFileContent';
+import { UploadButton } from './UploadButton';
+import { useFileContent } from './useFileContent';
 
 export default {
   title: 'components/UploadButton',
