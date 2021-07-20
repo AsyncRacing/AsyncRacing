@@ -11,11 +11,16 @@
   ],
   "overrides": [
     {
+      /*
+        These special exceptions are for storybook.
+      */
       "files": [
         "**/*.stories.*"
       ],
       "rules": {
-        "import/no-anonymous-default-export": "off"
+        // Allow default exports & named exports
+        "import/no-anonymous-default-export": ["off"],
+        "import/no-default-export": ["off"]
       }
     }
   ],
@@ -62,7 +67,7 @@
     "react/jsx-props-no-spreading": ["off"],
     "react/jsx-max-props-per-line": ["error", {"maximum": 1}],
 
-    // Rule to
+    // Prefer named exports
     "import/prefer-default-export": ["off"],
     "import/no-default-export": ["error"]
   },

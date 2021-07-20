@@ -102,4 +102,4 @@ const Page = ({
   </article>
 );
 
-export default Page;
+export { Page };
