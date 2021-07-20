@@ -1,16 +1,16 @@
 import GpxParser from 'gpxparser';
 
 interface TrackPoint {
-  lat: number
-  lon: number
-  time: Date
+  lat: number,
+  lon: number,
+  time: Date,
 }
 
 const parseGpxData = (data: string): TrackPoint[] => {
-  const gpx = new GpxParser();
-  gpx.parse(data);
+  const gpxParser = new GpxParser();
+  gpxParser.parse(data);
 
-  return gpx
+  return gpxParser
     .tracks[0]
     .points
     .map((point) => ({

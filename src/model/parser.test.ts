@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 import { parseGpxData } from './parser';
 
 it('can parse a file', () => {
-  const gpxData = readFileSync(`${__dirname}/../../test/ben/ben1.gpx`, 'utf-8');
+  const gpxData = readFileSync(`${__dirname}/../../src/examples/ben-track01.gpx`, 'utf-8');
 
   const points = parseGpxData(gpxData);
 
