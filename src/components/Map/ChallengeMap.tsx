@@ -1,16 +1,16 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   InteractiveMap,
   FlyToInterpolator,
   WebMercatorViewport,
   Marker,
-} from "react-map-gl";
-import DeckGL from "@deck.gl/react";
-import { PathLayer } from "@deck.gl/layers";
+} from 'react-map-gl';
+import DeckGL from '@deck.gl/react';
+import { PathLayer } from '@deck.gl/layers';
 // 3rd-party easing functions
 // import d3 from 'd3-ease';
-import flatpin from "./assets/images/red-pin.png";
-import { ViewState } from "react-map-gl/src/mapbox/mapbox";
+import { ViewState } from 'react-map-gl/src/mapbox/mapbox';
+import flatpin from './assets/images/red-pin.png';
 
 export interface Track {
   name: string;
@@ -32,16 +32,16 @@ export function ChallengeMap({ tracks }: IProps) {
     (args: { viewState: any }) => {
       setViewState(args.viewState);
     },
-    []
+    [],
   );
 
   const goToSF = React.useCallback(() => {
     setViewState((viewport: ViewState) => {
       // When deck-gl is initialized the viewport contains additional keys width and height
       // which are required to create a WebMercatorViewport and calculate bounds.
-      if ("width" in viewport && "height" in viewport) {
+      if ('width' in viewport && 'height' in viewport) {
         const { longitude, latitude, zoom } = new WebMercatorViewport(
-          viewport as ViewState & { width: number; height: number }
+          viewport as ViewState & { width: number; height: number },
         ).fitBounds(
           [
             [-122.4, 37.7],
@@ -50,7 +50,7 @@ export function ChallengeMap({ tracks }: IProps) {
           {
             padding: 20,
             offset: [0, -100],
-          }
+          },
         );
         return {
           ...viewport,
@@ -61,15 +61,14 @@ export function ChallengeMap({ tracks }: IProps) {
           transitionInterpolator: new FlyToInterpolator(),
           // transitionEasing: d3.easeCubic
         };
-      } else {
-        return viewport;
       }
+      return viewport;
     });
   }, []);
 
   const layers = [
     new PathLayer({
-      id: "path-layer",
+      id: 'path-layer',
       data: tracks,
       pickable: true,
       widthMinPixels: 2,
@@ -89,9 +88,7 @@ export function ChallengeMap({ tracks }: IProps) {
       >
         <InteractiveMap
           {...viewState}
-          mapboxApiAccessToken={
-            "pk.eyJ1IjoiaXJvbmVzOTQiLCJhIjoiY2txenprY2YzMW4yaDJ2bGZrb3ozbXRzMSJ9.DaLs0HwX916WhZ0f3Z9VKw"
-          }
+          mapboxApiAccessToken="pk.eyJ1IjoiaXJvbmVzOTQiLCJhIjoiY2txenprY2YzMW4yaDJ2bGZrb3ozbXRzMSJ9.DaLs0HwX916WhZ0f3Z9VKw"
         >
           <Marker
             latitude={37.68493}
@@ -99,7 +96,11 @@ export function ChallengeMap({ tracks }: IProps) {
             offsetLeft={-20}
             offsetTop={-10}
           >
-            <img style={{ height: "50px" }} src={flatpin} alt="pin" />
+            <img
+              style={{ height: '50px' }}
+              src={flatpin}
+              alt="pin"
+            />
           </Marker>
           <Marker
             latitude={37.7866555224718}
@@ -107,7 +108,11 @@ export function ChallengeMap({ tracks }: IProps) {
             offsetLeft={-20}
             offsetTop={-10}
           >
-            <img style={{ height: "50px" }} src={flatpin} alt="pin" />
+            <img
+              style={{ height: '50px' }}
+              src={flatpin}
+              alt="pin"
+            />
           </Marker>
         </InteractiveMap>
         <button onClick={goToSF}>San Francisco</button>

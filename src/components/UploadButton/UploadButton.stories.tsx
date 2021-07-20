@@ -9,8 +9,8 @@ export default {
 } as ComponentMeta<typeof UploadButton>;
 
 const Template: ComponentStory<typeof UploadButton> = () => {
-  const [file, setFile] = useState<File | null>(null)
-  const fileContent = useFileContent(file)
+  const [file, setFile] = useState<File | null>(null);
+  const fileContent = useFileContent(file);
 
   return (
     <>
@@ -28,7 +28,7 @@ const Template: ComponentStory<typeof UploadButton> = () => {
       <hr />
 
       <textarea
-        value={fileContent ?? ""}
+        value={fileContent ?? ''}
         style={{
           width: '100%',
           height: '500px',
@@ -38,7 +38,7 @@ const Template: ComponentStory<typeof UploadButton> = () => {
       />
     </>
   );
-}
+};
 
 export const Primary = Template.bind({});
 Primary.args = {};
