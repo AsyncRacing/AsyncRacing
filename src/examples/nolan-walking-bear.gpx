@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <gpx version="1.1" creator="GDAL 3.0.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogr="http://osgeo.org/gdal" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
-<metadata><bounds minlat="41.316422820000000" minlon="-81.619793070000000" maxlat="41.319166629999998" maxlon="-81.615316280000002"/></metadata>                
+<metadata><bounds minlat="41.316422820000000" minlon="-81.619793070000000" maxlat="41.319166629999998" maxlon="-81.615316280000002"/></metadata>
 <wpt lat="41.31899842" lon="-81.61643524">
   <name> Point 1</name>
   <extensions>
