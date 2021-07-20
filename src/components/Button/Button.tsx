@@ -14,7 +14,7 @@ interface ButtonProps {
   onClick?: () => void;
 }
 
-/* Primary UI component for user interaction */
+// Primary UI component for user interaction
 const Button = ({
   primary = false,
   size = 'medium',
