@@ -1,4 +1,3 @@
-
 // interface TrackPoint {
 //     latitude: number
 //     longitude: number
@@ -20,14 +19,12 @@ interface TrackPoint {
 }
 
 export function parseGpxData(data: string): TrackPoint[] {
-    var gpx = new gpxParser();
-    gpx.parse(data);
-    
-    return gpx.tracks[0].points
-        .map(point => ({ lat: point.lat, lon: point.lon, time: point.time }));
-        
-}
+  const gpx = new gpxParser();
+  gpx.parse(data);
 
+  return gpx.tracks[0].points
+    .map((point) => ({ lat: point.lat, lon: point.lon, time: point.time }));
+}
 
 const file = fs.readFileSync('./ben1.gpx').toString();
 console.log(parseGpxData(file));
