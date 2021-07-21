@@ -1,17 +1,14 @@
-interface ChallengeConfiguration {
+export interface ChallengeConfiguration {
     start: GPSLine
     finish: GPSLine
 }
 
-interface GPSLine {
+export interface GPSLine {
     firstPoint: Point
     secondPoint: Point
 }
 
-interface Point {
+export interface Point {
     lat: number
     lon: number
 }
-
-
-export { ChallengeConfiguration, GPSLine, Point }
