@@ -14,8 +14,16 @@ import flatpin from './assets/images/red-pin.png';
 
 export interface Track {
   name: string;
-  color: [red: number, green: number, blue: number];
-  path: Array<[lon: number, lat: number]>;
+  color: [
+    red: number,
+    green: number,
+    blue: number
+  ];
+  path: Array<{
+    lon: number,
+    lat: number,
+    dur?: number,
+  }>;
 }
 
 interface IProps {
@@ -72,7 +80,12 @@ export function ChallengeMap({ tracks }: IProps) {
       data: tracks,
       pickable: true,
       widthMinPixels: 2,
-      getPath: (d) => d.path,
+      getPath: (d) => (
+        d.path.map((point) => ([
+          point.lon,
+          point.lat,
+        ]))
+      ),
       getColor: (d) => d.color,
       getWidth: 5,
     }),
