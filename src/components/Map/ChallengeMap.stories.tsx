@@ -5,13 +5,20 @@ import { ChallengeMap } from './ChallengeMap';
 export default {
   title: 'Components/ChallengeMap',
   component: ChallengeMap,
-  argTypes: {
-  },
 } as ComponentMeta<typeof ChallengeMap>;
 
 const Template: ComponentStory<typeof ChallengeMap> = (args) => <ChallengeMap {...args} />;
 
 export const NoTrack = Template.bind({});
+NoTrack.args = {
+  tracks: undefined,
+};
+
+export const EmptyTrack = Template.bind({});
+EmptyTrack.args = {
+  tracks: [],
+};
+
 export const OneRedTrack = Template.bind({});
 OneRedTrack.args = {
   tracks: [
