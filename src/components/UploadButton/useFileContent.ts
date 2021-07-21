@@ -12,7 +12,6 @@ const readFileContent = (
 ) => {
   // Use the "FileReader" JS Web API to read variables with type "File".
   const reader: FileReader = new FileReader();
-
   // Assign properties to various functions to execute onEvent.
   // This will set up the file reader for use.
   reader.onload = (onLoadEvent) => {
