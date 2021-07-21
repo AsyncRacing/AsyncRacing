@@ -14,8 +14,8 @@ interface ButtonProps {
   onClick?: () => void;
 }
 
-// Primary UI component for user interaction
-export const Button = ({
+/* Primary UI component for user interaction */
+const Button = ({
   primary = false,
   size = 'medium',
   backgroundColor,
@@ -34,3 +34,5 @@ export const Button = ({
     </button>
   );
 };
+
+export { Button };
