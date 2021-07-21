@@ -10,6 +10,10 @@ const parseGpxData = (data: string): TrackPoint[] => {
   const gpxParser = new GpxParser();
   gpxParser.parse(data);
 
+  if (gpxParser.tracks.length < 1) {
+    return [];
+  }
+
   return gpxParser
     .tracks[0]
     .points
