@@ -1,3 +1,4 @@
+// module imports
 import * as React from 'react';
 import {
   InteractiveMap,
@@ -7,9 +8,10 @@ import {
 } from 'react-map-gl';
 import DeckGL from '@deck.gl/react';
 import { PathLayer } from '@deck.gl/layers';
-// 3rd-party easing functions
-// import d3 from 'd3-ease';
+// import d3 from 'd3-ease'; // 3rd-party easing functions
 import { ViewState } from 'react-map-gl/src/mapbox/mapbox';
+
+// local imports
 import flatpin from './assets/images/red-pin.png';
 
 export interface Track {
@@ -26,16 +28,19 @@ export interface Track {
   }>;
 }
 
-interface IProps {
+interface PropTypes {
   tracks: Track[];
 }
 
-export function ChallengeMap({ tracks }: IProps) {
-  const [viewState, setViewState] = React.useState<ViewState>({
+const ChallengeMap = ({ tracks }: PropTypes) => {
+  const defaultView: ViewState = {
     latitude: 37.78,
     longitude: -122.45,
     zoom: 14,
-  });
+  };
+
+  const [viewState, setViewState] = React.useState<ViewState>(defaultView);
+
   const handleViewStateChange = React.useCallback(
     (args: { viewState: any }) => {
       setViewState(args.viewState);
@@ -60,6 +65,7 @@ export function ChallengeMap({ tracks }: IProps) {
             offset: [0, -100],
           },
         );
+
         return {
           ...viewport,
           longitude,
@@ -70,6 +76,7 @@ export function ChallengeMap({ tracks }: IProps) {
           // transitionEasing: d3.easeCubic
         };
       }
+
       return viewport;
     });
   }, []);
@@ -87,54 +94,54 @@ export function ChallengeMap({ tracks }: IProps) {
         ]))
       ),
       getColor: (d) => d.color,
-      getWidth: 5,
+      getWidth: () => 5,
     }),
   ];
 
   return (
-    <div>
-      <DeckGL
-        controller
-        layers={layers}
-        viewState={viewState}
-        onViewStateChange={handleViewStateChange}
+    <DeckGL
+      controller
+      layers={layers}
+      viewState={viewState}
+      onViewStateChange={handleViewStateChange}
+    >
+      <InteractiveMap
+        {...viewState}
+        mapboxApiAccessToken="pk.eyJ1IjoiaXJvbmVzOTQiLCJhIjoiY2txenprY2YzMW4yaDJ2bGZrb3ozbXRzMSJ9.DaLs0HwX916WhZ0f3Z9VKw"
       >
-        <InteractiveMap
-          {...viewState}
-          mapboxApiAccessToken="pk.eyJ1IjoiaXJvbmVzOTQiLCJhIjoiY2txenprY2YzMW4yaDJ2bGZrb3ozbXRzMSJ9.DaLs0HwX916WhZ0f3Z9VKw"
+        <Marker
+          latitude={37.68493}
+          longitude={-122.4905}
+          offsetLeft={-20}
+          offsetTop={-10}
         >
-          <Marker
-            latitude={37.68493}
-            longitude={-122.4905}
-            offsetLeft={-20}
-            offsetTop={-10}
-          >
-            <img
-              style={{ height: '50px' }}
-              src={flatpin}
-              alt="pin"
-            />
-          </Marker>
-          <Marker
-            latitude={37.7866555224718}
-            longitude={-122.41737904607598}
-            offsetLeft={-20}
-            offsetTop={-10}
-          >
-            <img
-              style={{ height: '50px' }}
-              src={flatpin}
-              alt="pin"
-            />
-          </Marker>
-        </InteractiveMap>
-        <button
-          type="button"
-          onClick={goToSF}
+          <img
+            style={{ height: '50px' }}
+            src={flatpin}
+            alt="pin"
+          />
+        </Marker>
+        <Marker
+          latitude={37.7866555224718}
+          longitude={-122.41737904607598}
+          offsetLeft={-20}
+          offsetTop={-10}
         >
-          San Francisco
-        </button>
-      </DeckGL>
-    </div>
+          <img
+            style={{ height: '50px' }}
+            src={flatpin}
+            alt="pin"
+          />
+        </Marker>
+      </InteractiveMap>
+      <button
+        type="button"
+        onClick={goToSF}
+      >
+        San Francisco
+      </button>
+    </DeckGL>
   );
-}
+};
+
+export { ChallengeMap };
