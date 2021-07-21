@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import UploadButton from './UploadButton';
-import useFileContent from './useFileContent';
+import { UploadButton } from './UploadButton';
+import { useFileContent } from './useFileContent';
 
 export default {
   title: 'components/UploadButton',
@@ -9,11 +9,12 @@ export default {
 } as ComponentMeta<typeof UploadButton>;
 
 const Template: ComponentStory<typeof UploadButton> = () => {
-  const [file, setFile] = useState<File | null>(null)
-  const fileContent = useFileContent(file)
+  const [file, setFile] = useState<File | null>(null);
+  const fileContent = useFileContent(file);
 
   return (
     <>
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor="file-uploader">
         Upload a File
       </label>
@@ -28,7 +29,7 @@ const Template: ComponentStory<typeof UploadButton> = () => {
       <hr />
 
       <textarea
-        value={fileContent ?? ""}
+        value={fileContent ?? ''}
         style={{
           width: '100%',
           height: '500px',
@@ -38,7 +39,7 @@ const Template: ComponentStory<typeof UploadButton> = () => {
       />
     </>
   );
-}
+};
 
 export const Primary = Template.bind({});
 Primary.args = {};
