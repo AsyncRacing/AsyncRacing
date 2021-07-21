@@ -8,7 +8,7 @@ interface PropTypes {
   // This type comes from a built-in React method.
   // Essentially, its typed to the "setState" function.
   setFile: Dispatch<File | null>,
-};
+}
 
 // Primary UI component for user interaction
 const UploadButton = ({

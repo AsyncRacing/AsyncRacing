@@ -14,6 +14,7 @@ const Template: ComponentStory<typeof UploadButton> = () => {
 
   return (
     <>
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor="file-uploader">
         Upload a File
       </label>
