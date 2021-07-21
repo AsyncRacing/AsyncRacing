@@ -8,12 +8,10 @@ interface GPSLine {
     secondPoint: Point
 }
 
-// interface Point {
-//     lat: number
-//     lon: number
-// }
-
-type Point = [lat:number, lon:number]
+interface Point {
+    lat: number
+    lon: number
+}
 
 
 export { ChallengeConfiguration, GPSLine, Point }
