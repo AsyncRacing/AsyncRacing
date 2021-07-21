@@ -7,6 +7,9 @@ interface TrackPoint extends GPSPoint {
   dur: number, // duration
 }
 
+// A bunch of track points is a track path!
+type TrackPath = Array<TrackPoint>
+
 // For start & finish lines, plus waypoints
 interface GPSLine {
   firstPoint: GPSPoint,
@@ -22,6 +25,7 @@ interface Challenge {
 export type {
   GPSPoint,
   TrackPoint,
+  TrackPath,
   GPSLine,
   Challenge,
 };
