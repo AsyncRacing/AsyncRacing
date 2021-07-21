@@ -1,6 +1,6 @@
-interface Challenge {
-  start: GPSLine,
-  finish: GPSLine,
+interface GPSPoint {
+  lat: number,
+  lon: number,
 }
 
 interface GPSLine {
@@ -8,13 +8,13 @@ interface GPSLine {
   secondPoint: GPSPoint,
 }
 
-interface GPSPoint {
-  lat: number,
-  lon: number,
+interface Challenge {
+  start: GPSLine,
+  finish: GPSLine,
 }
 
 export type {
-  Challenge,
-  GPSLine,
   GPSPoint,
+  GPSLine,
+  Challenge,
 };
