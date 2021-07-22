@@ -27,10 +27,12 @@ OneRedTrack.args = {
         {
           lon: -122.490050,
           lat: 37.68493,
+          time: new Date(),
         },
         {
           lon: -122.41737904607598,
           lat: 37.7866555224718,
+          time: new Date(),
         },
       ],
       name: 'Geary - Daly City',
@@ -47,10 +49,12 @@ TwoTracks.args = {
         {
           lon: -122.490050,
           lat: 37.68493,
+          time: new Date(),
         },
         {
           lon: -122.41737904607598,
           lat: 37.7866555224718,
+          time: new Date(),
         },
       ],
       name: 'Geary - Daly City',
@@ -61,10 +65,12 @@ TwoTracks.args = {
         {
           lon: -122.490569,
           lat: 37.684839,
+          time: new Date(),
         },
         {
           lon: -122.490562,
           lat: 37.684810,
+          time: new Date(),
         },
       ],
       name: 'Daly City',
