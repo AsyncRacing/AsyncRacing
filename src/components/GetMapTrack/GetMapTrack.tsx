@@ -18,7 +18,17 @@ const GetMapTrack = () => {
           },
         ]}
       />
-      <UploadButton setFile={setFile} />
+
+      <div
+        style={{
+          zIndex: 2,
+          position: 'relative',
+        }}
+      >
+        <UploadButton
+          setFile={setFile}
+        />
+      </div>
     </>
   );
 };
