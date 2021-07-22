@@ -1,14 +1,13 @@
 import GpxParser from 'gpxparser';
+import { TrackPath } from './ChallengeConfiguration';
 
-interface TrackPoint {
-  lat: number,
-  lon: number,
-  time: Date,
-}
-
-const parseGpxData = (data: string): TrackPoint[] => {
+const parseGpxData = (data: string): TrackPath => {
   const gpxParser = new GpxParser();
   gpxParser.parse(data);
+
+  if (gpxParser.tracks.length < 1) {
+    return [];
+  }
 
   return gpxParser
     .tracks[0]
