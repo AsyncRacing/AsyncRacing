@@ -13,20 +13,7 @@ import { ViewState } from 'react-map-gl/src/mapbox/mapbox';
 
 // local imports
 import flatpin from './assets/images/red-pin.png';
-
-export interface Track {
-  name: string;
-  color: [
-    red: number,
-    green: number,
-    blue: number
-  ];
-  path: Array<{
-    lon: number,
-    lat: number,
-    dur?: number,
-  }>;
-}
+import { Track } from '../../model/ChallengeConfiguration';
 
 interface PropTypes {
   tracks: Track[];
