@@ -12,7 +12,7 @@ import { PathLayer } from '@deck.gl/layers';
 import { ViewState } from 'react-map-gl/src/mapbox/mapbox';
 
 // local imports
-import flatpin from './assets/images/red-pin.png';
+import flatpin from '../../assets/red-pin.png';
 import { Track } from '../../model/ChallengeConfiguration';
 
 interface PropTypes {
