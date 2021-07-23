@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Try to compile the project.
+npm run build
+BUILD_EXIT="$?"
+
+exit $BUILD_EXIT
