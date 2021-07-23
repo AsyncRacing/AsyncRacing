@@ -8,9 +8,9 @@ npm run build
 BUILD_EXIT="$?"
 
 if [[ "${BUILD_EXIT}" == 0 ]]; then
-  printf "\n\033[42m PASS \033[0m Successfully built with no problems. Continuing..."
+  printf "\n\033[42m PASS \033[0m Successfully built with no problems. Continuing...\n"
 else
-  printf "\n\033[41m FAIL \033[0m Fix project errors and try again."
+  printf "\n\033[41m FAIL \033[0m Fix project errors and try again.\n"
   exit 1
 fi
 
