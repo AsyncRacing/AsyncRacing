@@ -14,7 +14,7 @@ if [[ ! -x "$ESLINT" ]]; then
   exit 1
 fi
 
-STAGED_FILES=($(git diff --cached --name-only --diff-filter=ACM | grep ".jsx\{0,1\}$"))
+STAGED_FILES=($(git diff --cached --name-only --diff-filter=ACM | grep ".tsx\{0,1\}$"))
 
 echo "ESLint'ing ${#STAGED_FILES[@]} files"
 
