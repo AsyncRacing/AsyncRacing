@@ -5,7 +5,7 @@
 # - Author: https://github.com/chamikabm
 # - Published: June 16 2020
 
-# Switch to proper directory via cd
+# Switch to proper directory via cd.
 cd "$(git rev-parse --show-toplevel)"
 
 # Set ESLint script.

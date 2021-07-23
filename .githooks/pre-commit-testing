@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Switch to proper directory via cd.
+cd "$(git rev-parse --show-toplevel)"
+
+# Try running the testing suite.
+npm run test -- --watchAll=false
+TESTING_EXIT="$?"
+
+# Determine if there are testing failures and pass or fail.
+if [[ "${TESTING_EXIT}" == 0]]; then
+  printf "\n\033[42m PASS \033[0m Testing suites all pass. Continuing...\n"
+else
+  printf "\n\033[41m FAIL \033[0m There are failing tests. Fix and try again.\n"
+  exit 1
+fi
+
+exit 0
