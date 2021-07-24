@@ -3,5 +3,7 @@
 # Switch to proper directory via cd.
 cd "$(git rev-parse --show-toplevel)"
 
+bash ./.githooks/pre-commit-typescript
 bash ./.githooks/pre-commit-eslint
 bash ./.githooks/pre-commit-testing
+bash ./.githooks/pre-commit-build
