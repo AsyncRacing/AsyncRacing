@@ -1,19 +1,19 @@
 // module imports
-import * as React from 'react';
+import * as React from "react";
 import {
   InteractiveMap,
   FlyToInterpolator,
   WebMercatorViewport,
-  Marker,
-} from 'react-map-gl';
-import DeckGL from '@deck.gl/react';
-import { PathLayer } from '@deck.gl/layers';
+  // Marker,
+} from "react-map-gl";
+import DeckGL from "@deck.gl/react";
+import { PathLayer } from "@deck.gl/layers";
 // import d3 from 'd3-ease'; // 3rd-party easing functions
-import { ViewState } from 'react-map-gl/src/mapbox/mapbox';
+import { ViewState } from "react-map-gl/src/mapbox/mapbox";
 
 // local imports
-import flatpin from './assets/images/red-pin.png';
-import { Track } from '../../model/ChallengeConfiguration';
+// import flatpin from './assets/images/red-pin.png';
+import { Track } from "../../model/ChallengeConfiguration";
 
 interface PropTypes {
   tracks: Track[];
@@ -23,7 +23,7 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
   const defaultView: ViewState = {
     latitude: 37.78,
     longitude: -122.45,
-    zoom: 14,
+    zoom: 12,
   };
 
   const [viewState, setViewState] = React.useState<ViewState>(defaultView);
@@ -32,16 +32,16 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
     (args: { viewState: any }) => {
       setViewState(args.viewState);
     },
-    [],
+    []
   );
 
   const goToSF = React.useCallback(() => {
     setViewState((viewport: ViewState) => {
       // When deck-gl is initialized the viewport contains additional keys width and height
       // which are required to create a WebMercatorViewport and calculate bounds.
-      if ('width' in viewport && 'height' in viewport) {
+      if ("width" in viewport && "height" in viewport) {
         const { longitude, latitude, zoom } = new WebMercatorViewport(
-          viewport as ViewState & { width: number; height: number },
+          viewport as ViewState & { width: number; height: number }
         ).fitBounds(
           [
             [-122.4, 37.7],
@@ -50,7 +50,7 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
           {
             padding: 20,
             offset: [0, -100],
-          },
+          }
         );
 
         return {
@@ -70,33 +70,29 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
 
   const layers = [
     new PathLayer({
-      id: 'path-layer',
+      id: "path-layer",
       data: tracks,
       pickable: true,
       widthMinPixels: 2,
-      getPath: (d) => (
-        d.path.map((point) => ([
-          point.lon,
-          point.lat,
-        ]))
-      ),
+      getPath: (d) => d.path.map((point) => [point.lon, point.lat]),
       getColor: (d) => d.color,
       getWidth: () => 5,
     }),
   ];
 
   return (
-    <DeckGL
-      controller
-      layers={layers}
-      viewState={viewState}
-      onViewStateChange={handleViewStateChange}
-    >
-      <InteractiveMap
-        {...viewState}
-        mapboxApiAccessToken="pk.eyJ1IjoiaXJvbmVzOTQiLCJhIjoiY2txenprY2YzMW4yaDJ2bGZrb3ozbXRzMSJ9.DaLs0HwX916WhZ0f3Z9VKw"
+    <>
+      <DeckGL
+        controller
+        layers={layers}
+        viewState={viewState}
+        onViewStateChange={handleViewStateChange}
       >
-        <Marker
+        <InteractiveMap
+          {...viewState}
+          mapboxApiAccessToken="pk.eyJ1IjoiaXJvbmVzOTQiLCJhIjoiY2txenprY2YzMW4yaDJ2bGZrb3ozbXRzMSJ9.DaLs0HwX916WhZ0f3Z9VKw"
+        >
+          {/* <Marker
           latitude={37.68493}
           longitude={-122.4905}
           offsetLeft={-20}
@@ -119,15 +115,13 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
             src={flatpin}
             alt="pin"
           />
-        </Marker>
-      </InteractiveMap>
-      <button
-        type="button"
-        onClick={goToSF}
-      >
+        </Marker> */}
+        </InteractiveMap>
+      </DeckGL>
+      <button type="button" onClick={goToSF}>
         San Francisco
       </button>
-    </DeckGL>
+    </>
   );
 };
 
