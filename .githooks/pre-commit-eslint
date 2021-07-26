@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# This code is modified from another source.
+# - Source: https://gist.github.com/chamikabm/85d9aa7eccc595f51a8ceba242214745
+# - Author: https://github.com/chamikabm
+# - Published: June 16 2020
+
+# Switch to proper directory via cd.
+cd "$(git rev-parse --show-toplevel)"
+
+# Set ESLint script.
+ESLINT="node_modules/.bin/eslint"
+
+# Check if ESLint is installed.
+if [[ ! -x "$ESLINT" ]]; then
+  printf "\t\033[41m FAIL \033[0m Please install ESlint and try again. (npm install eslint)\n"
+  exit 1
+fi
+
+STAGED_FILES=($(git diff --cached --name-only --diff-filter=ACM | grep ".tsx\{0,1\}$"))
+echo "ESLint'ing ${#STAGED_FILES[@]} files"
+
+# Pass if there are no matching files staged.
+if [[ "$STAGED_FILES" = "" ]]; then
+  printf "\n\033[42m PASS \033[0m No files need ESLint'ing. Continuing...\n"
+  exit 0
+fi
+
+# Run ESLint on the staged files.
+$ESLINT "${STAGED_FILES[@]}"
+ESLINT_EXIT="$?"
+
+# Determine whether there are linter errors, and pass or fail.
+if [[ "${ESLINT_EXIT}" == 0 ]]; then
+  printf "\n\033[42m PASS \033[0m All ESLint checks pass. Continuing...\n"
+else
+  printf "\n\033[41m FAIL \033[0m Fix ESLint errors and try again.\n"
+  exit 1
+fi
+
+exit 0
