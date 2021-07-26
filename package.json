@@ -51,6 +51,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "prepare": "git config core.hooksPath .githooks",
     "eslint": "npx eslint \"**/*.ts\" \"**/*.tsx\"",
     "eslint-fix": "npx eslint \"**/*.ts\" \"**/*.tsx\" --fix",
     "storybook": "start-storybook -p 6006 -s public",
