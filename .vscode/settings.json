@@ -6,7 +6,6 @@
     "typescript",
     "typescriptreact"
   ],
-  "editor.formatOnSave": true,
-  "prettier.enable": false,
-  "prettier.requireConfig": true
+  "eslint.format.enable": true,
+  "editor.formatOnSave": true
 }
