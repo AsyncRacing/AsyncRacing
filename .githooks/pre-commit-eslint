@@ -34,7 +34,7 @@ ESLINT_EXIT="$?"
 if [[ "${ESLINT_EXIT}" == 0 ]]; then
   printf "\n\033[42m PASS \033[0m All ESLint checks pass. Continuing...\n"
 else
-  printf "\n\033[41m FAIL \033[0m Fix eslint errors and try again.\n"
+  printf "\n\033[41m FAIL \033[0m Fix ESLint errors and try again.\n"
   exit 1
 fi
 
