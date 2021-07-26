@@ -1,9 +1,39 @@
 #!/bin/bash
 
-# Switch to proper directory via cd.
+# switch to proper directory via cd.
 cd "$(git rev-parse --show-toplevel)"
 
-bash ./.githooks/pre-commit-typescript
-bash ./.githooks/pre-commit-eslint
-bash ./.githooks/pre-commit-testing
-bash ./.githooks/pre-commit-build
+# ...determine if there are any unstaged changes left...
+git diff --no-ext-diff --quiet
+HAS_UNSTAGED="$?" # exit code is 0 if no differences
+
+# if there are unstaged changes, stash them for now.
+if [ "$HAS_UNSTAGED" = 1 ]; then
+  echo "THERE ARE UNSTAGED FILES."
+  echo "DOES THIS RUN?"
+  # ...make a temp commit of your staged changes...
+  # this is done to single out the unstaged changes.
+  git commit --allow-empty --no-verify --message "AUTO_COMMIT"
+  # ...stash any unstaged changes for the remainder of the script...
+  git stash push --include-untracked --message "AUTO_STASH"
+  # ...do some cleanup after all this...now un-commit your WIP commit:
+  git reset --soft HEAD^
+fi
+
+# later, after using the hooks, we will have to pop the stash back!
+function popStash {
+  echo "CALLING FUNCTION"
+  if [ "$HAS_UNSTAGED" = 1 ]; then
+    echo "POPS STASH"
+    git stash pop
+  fi
+}
+
+echo "ORDER OF OPERATIONS"
+
+bash ./.githooks/pre-commit-typescript && \
+bash ./.githooks/pre-commit-eslint && \
+bash ./.githooks/pre-commit-testing && \
+bash ./.githooks/pre-commit-build && \
+popStash && exit 0 || \
+popStash && exit 1
