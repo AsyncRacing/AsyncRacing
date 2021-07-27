@@ -1,6 +1,6 @@
-import { ChallengeConfiguration } from "../model/ChallengConfiguration";
+import { Challenge } from '../model/ChallengeConfiguration';
 
-let testData: ChallengeConfiguration = {
+const testData: Challenge = {
   start: {
     firstPoint: {
       lat: -122.45,
@@ -23,4 +23,4 @@ let testData: ChallengeConfiguration = {
   },
 };
 
-
+export { testData };
