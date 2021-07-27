@@ -4,7 +4,7 @@ import {
   InteractiveMap,
   FlyToInterpolator,
   WebMercatorViewport,
-  Marker,
+  // Marker,
 } from 'react-map-gl';
 import DeckGL from '@deck.gl/react';
 import { PathLayer } from '@deck.gl/layers';
@@ -12,7 +12,7 @@ import { PathLayer } from '@deck.gl/layers';
 import { ViewState } from 'react-map-gl/src/mapbox/mapbox';
 
 // local imports
-import flatpin from './assets/images/red-pin.png';
+// import flatpin from './assets/images/red-pin.png';
 import { Track } from '../../model/ChallengeConfiguration';
 
 interface PropTypes {
@@ -23,7 +23,7 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
   const defaultView: ViewState = {
     latitude: 37.78,
     longitude: -122.45,
-    zoom: 14,
+    zoom: 12,
   };
 
   const [viewState, setViewState] = React.useState<ViewState>(defaultView);
@@ -74,60 +74,32 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
       data: tracks,
       pickable: true,
       widthMinPixels: 2,
-      getPath: (d) => (
-        d.path.map((point) => ([
-          point.lon,
-          point.lat,
-        ]))
-      ),
+      getPath: (d) => d.path.map((point) => [point.lon, point.lat]),
       getColor: (d) => d.color,
       getWidth: () => 5,
     }),
   ];
 
   return (
-    <DeckGL
-      controller
-      layers={layers}
-      viewState={viewState}
-      onViewStateChange={handleViewStateChange}
-    >
-      <InteractiveMap
-        {...viewState}
-        mapboxApiAccessToken="pk.eyJ1IjoiaXJvbmVzOTQiLCJhIjoiY2txenprY2YzMW4yaDJ2bGZrb3ozbXRzMSJ9.DaLs0HwX916WhZ0f3Z9VKw"
+    <>
+      <DeckGL
+        controller
+        layers={layers}
+        viewState={viewState}
+        onViewStateChange={handleViewStateChange}
       >
-        <Marker
-          latitude={37.68493}
-          longitude={-122.4905}
-          offsetLeft={-20}
-          offsetTop={-10}
-        >
-          <img
-            style={{ height: '50px' }}
-            src={flatpin}
-            alt="pin"
-          />
-        </Marker>
-        <Marker
-          latitude={37.7866555224718}
-          longitude={-122.41737904607598}
-          offsetLeft={-20}
-          offsetTop={-10}
-        >
-          <img
-            style={{ height: '50px' }}
-            src={flatpin}
-            alt="pin"
-          />
-        </Marker>
-      </InteractiveMap>
+        <InteractiveMap
+          {...viewState}
+          mapboxApiAccessToken="pk.eyJ1IjoiaXJvbmVzOTQiLCJhIjoiY2txenprY2YzMW4yaDJ2bGZrb3ozbXRzMSJ9.DaLs0HwX916WhZ0f3Z9VKw"
+        />
+      </DeckGL>
       <button
         type="button"
         onClick={goToSF}
       >
         San Francisco
       </button>
-    </DeckGL>
+    </>
   );
 };
 
