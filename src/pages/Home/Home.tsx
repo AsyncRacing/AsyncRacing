@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { ChallengeMap } from "../../components/Map/ChallengeMap";
-import "./Home.css";
-import { Track } from "../../model/ChallengeConfiguration";
-import { UploadButton } from "../../components/UploadButton/UploadButton";
-import { useFileContent } from "../../components/UploadButton/useFileContent";
-import { parseGpxData } from "../../model/parser";
+import React, { useState } from 'react';
+import { ChallengeMap } from '../../components/Map/ChallengeMap';
+import './Home.css';
+import { Track } from '../../model/ChallengeConfiguration';
+import { UploadButton } from '../../components/UploadButton/UploadButton';
+import { useFileContent } from '../../components/UploadButton/useFileContent';
+import { parseGpxData } from '../../model/parser';
 
 interface PropTypes {}
 
@@ -14,8 +14,8 @@ const Home = ({}: PropTypes) => {
 
   const tracks: Track[] = [
     {
-      name: file?.name ?? "no track selected",
-      path: parseGpxData(fileContent ?? ""),
+      name: file?.name ?? 'no track selected',
+      path: parseGpxData(fileContent ?? ''),
       color: [0, 0, 255],
     },
   ];
@@ -27,7 +27,7 @@ const Home = ({}: PropTypes) => {
       <section className="home__buttons">
         <UploadButton setFile={setFile} />
       </section>
-      <section className="map__area"></section>
+      <section className="map__area" />
       <ChallengeMap tracks={tracks} />
     </>
   );
