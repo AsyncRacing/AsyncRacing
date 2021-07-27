@@ -1,20 +1,15 @@
-import React, {
-  Dispatch,
-} from 'react';
-import './UploadButton.css';
+import React, { Dispatch } from "react";
+import "./UploadButton.css";
 
 interface PropTypes {
-  id?: string,
+  id?: string;
   // This type comes from a built-in React method.
   // Essentially, its typed to the "setState" function.
-  setFile: Dispatch<File | null>,
+  setFile: Dispatch<File | null>;
 }
 
 // Primary UI component for user interaction
-const UploadButton = ({
-  id,
-  setFile,
-}: PropTypes) => (
+const UploadButton = ({ id, setFile }: PropTypes) => (
   <input
     type="file"
     id={id}

@@ -1,14 +1,9 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from 'react';
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 
 // Create a file-reader helper function here.
 const readFileContent = (
   file: File | null = null,
-  setFileContent: Dispatch<SetStateAction<string | null>>,
+  setFileContent: Dispatch<SetStateAction<string | null>>
 ) => {
   // Use the "FileReader" JS Web API to read variables with type "File".
   const reader: FileReader = new FileReader();
@@ -21,7 +16,9 @@ const readFileContent = (
     }
 
     // Gather the file's text content and then set it.
-    const fileContent: string | null = onLoadEvent.target.result as string | null;
+    const fileContent: string | null = onLoadEvent.target.result as
+      | string
+      | null;
     setFileContent(fileContent);
   };
 
@@ -31,9 +28,7 @@ const readFileContent = (
   }
 };
 
-const useFileContent = (
-  file: File | null = null,
-): string | null => {
+const useFileContent = (file: File | null = null): string | null => {
   // Use react state for the hook!
   const [fileContent, setFileContent] = useState<string | null>(null);
 

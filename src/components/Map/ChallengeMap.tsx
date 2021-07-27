@@ -1,19 +1,19 @@
 // module imports
-import * as React from 'react';
+import * as React from "react";
 import {
   InteractiveMap,
   FlyToInterpolator,
   WebMercatorViewport,
   // Marker,
-} from 'react-map-gl';
-import DeckGL from '@deck.gl/react';
-import { PathLayer } from '@deck.gl/layers';
+} from "react-map-gl";
+import DeckGL from "@deck.gl/react";
+import { PathLayer } from "@deck.gl/layers";
 // import d3 from 'd3-ease'; // 3rd-party easing functions
-import { ViewState } from 'react-map-gl/src/mapbox/mapbox';
+import { ViewState } from "react-map-gl/src/mapbox/mapbox";
 
 // local imports
 // import flatpin from './assets/images/red-pin.png';
-import { Track } from '../../model/ChallengeConfiguration';
+import { Track } from "../../model/ChallengeConfiguration";
 
 interface PropTypes {
   tracks: Track[];
@@ -32,16 +32,16 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
     (args: { viewState: any }) => {
       setViewState(args.viewState);
     },
-    [],
+    []
   );
 
   const goToSF = React.useCallback(() => {
     setViewState((viewport: ViewState) => {
       // When deck-gl is initialized the viewport contains additional keys width and height
       // which are required to create a WebMercatorViewport and calculate bounds.
-      if ('width' in viewport && 'height' in viewport) {
+      if ("width" in viewport && "height" in viewport) {
         const { longitude, latitude, zoom } = new WebMercatorViewport(
-          viewport as ViewState & { width: number; height: number },
+          viewport as ViewState & { width: number; height: number }
         ).fitBounds(
           [
             [-122.4, 37.7],
@@ -50,7 +50,7 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
           {
             padding: 20,
             offset: [0, -100],
-          },
+          }
         );
 
         return {
@@ -70,7 +70,7 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
 
   const layers = [
     new PathLayer({
-      id: 'path-layer',
+      id: "path-layer",
       data: tracks,
       pickable: true,
       widthMinPixels: 2,
@@ -93,10 +93,7 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
           mapboxApiAccessToken="pk.eyJ1IjoiYXN5bmNyYWNpbmciLCJhIjoiY2tybWNrcjZzMWQyNDJwcDh6cHlva2Q1eSJ9._Nazy17wuseOnfKuo3_zCA"
         />
       </DeckGL>
-      <button
-        type="button"
-        onClick={goToSF}
-      >
+      <button type="button" onClick={goToSF}>
         San Francisco
       </button>
     </>
