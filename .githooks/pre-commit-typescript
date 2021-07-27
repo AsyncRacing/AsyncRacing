@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Switch to proper directory via cd.
+cd "$(git rev-parse --show-toplevel)"
+
+# Try running TypeScript Compile.
+npx -p typescript tsc -b
+TYPES_EXIT="$?"
+echo "${TYPES_EXIT}"
+
+# Determine if there are typing issues and pass or fail.
+if [[ "${TYPES_EXIT}" == 0 ]]; then
+  printf "\n\033[42m PASS \033[0m TypeScript types all pass. Continuing...\n"
+else
+  printf "\n\033[41m FAIL \033[0m TypeScript found type issues. Fix and try again.\n"
+  exit 1
+fi
+
+exit 0

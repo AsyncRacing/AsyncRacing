@@ -4,11 +4,22 @@ interface GPSPoint {
 }
 
 interface TrackPoint extends GPSPoint {
-  dur: number, // duration
+  time: Date, // time
 }
 
 // A bunch of track points is a track path!
 type TrackPath = Array<TrackPoint>
+
+// A track has other metadata to be kept, like name and color.
+interface Track {
+  name: string,
+  color: [
+    red: number,
+    green: number,
+    blue: number,
+  ],
+  path: TrackPath
+}
 
 // For start & finish lines, plus waypoints
 interface GPSLine {
@@ -26,6 +37,7 @@ export type {
   GPSPoint,
   TrackPoint,
   TrackPath,
+  Track,
   GPSLine,
   Challenge,
 };
