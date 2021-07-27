@@ -90,7 +90,7 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
       >
         <InteractiveMap
           {...viewState}
-          mapboxApiAccessToken="pk.eyJ1IjoiYXN5bmNyYWNpbmciLCJhIjoiY2tybWNvZ21vMWQ1bzJ1cXJnaW5laWVneiJ9.U8GIv19sfqJUQLZ6yRfFPw"
+          mapboxApiAccessToken="pk.eyJ1IjoiYXN5bmNyYWNpbmciLCJhIjoiY2tybWNrcjZzMWQyNDJwcDh6cHlva2Q1eSJ9._Nazy17wuseOnfKuo3_zCA"
         />
       </DeckGL>
       <button
