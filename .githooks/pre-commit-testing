@@ -4,7 +4,7 @@
 cd "$(git rev-parse --show-toplevel)"
 
 # Try running the testing suite.
-npm run test -- --watchAll=false
+npm run test -- --passWithNoTests --watchAll=false
 TESTING_EXIT="$?"
 
 # Determine if there are testing failures and pass or fail.
