@@ -8,6 +8,5 @@
   ],
   "eslint.format.enable": true,
   "editor.formatOnSave": true,
-  "eslint.trace.server": "off",
-
+  "eslint.trace.server": "off"
 }
