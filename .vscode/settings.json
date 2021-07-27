@@ -7,5 +7,7 @@
     "typescriptreact"
   ],
   "eslint.format.enable": true,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "eslint.trace.server": "off",
+
 }
