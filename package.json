@@ -8,6 +8,7 @@
     "url": "https://github.com/AsyncRacing/AsyncRacing.git"
   },
   "dependencies": {
+    "@craco/craco": "^6.2.0",
     "@deck.gl/layers": "^8.4.20",
     "@deck.gl/react": "^8.4.20",
     "@testing-library/jest-dom": "^5.14.1",
@@ -47,9 +48,9 @@
     "react-test-renderer": "^17.0.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "prepare": "git config core.hooksPath .githooks",
     "eslint": "npx eslint \"**/*.ts\" \"**/*.tsx\"",
