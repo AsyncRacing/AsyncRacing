@@ -2,5 +2,10 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": false
   },
-  "eslint.trace.server": "off"
+  "eslint.trace.server": "off",
+  "prettier.requireConfig": true,
+  "prettier.singleQuote": true,
+  "prettier.semi": false,
+  "prettier.trailingComma": "all",
+  "prettier.tabWidth": 2
 }
