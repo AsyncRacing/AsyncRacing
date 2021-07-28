@@ -14,6 +14,7 @@ import { ViewState } from 'react-map-gl/src/mapbox/mapbox';
 // local imports
 // import flatpin from './assets/images/red-pin.png';
 import { Track } from '../../model/ChallengeConfiguration';
+import { trackBounds } from '../../model/track-bounds';
 
 interface PropTypes {
   tracks: Track[];
@@ -34,6 +35,34 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
     },
     [],
   );
+
+  React.useEffect(() => {
+    if (tracks.length > 0 && tracks[0].path.length > 0) {
+      const bounds = trackBounds(tracks[0]);
+      setViewState((vs) => {
+        if (!('width' in vs) || !('height' in vs)) {
+          console.log('vs as no width or height', vs);
+          return vs;
+        }
+        const newViewState = new WebMercatorViewport(
+          vs as ViewState & { width: number; height: number },
+        ).fitBounds(
+          bounds,
+          {
+            padding: 20,
+            offset: [0, -100],
+          },
+        );
+        const newVS = {
+          ...vs,
+          ...newViewState,
+          transitionDuration: 5000,
+          transitionInterpolator: new FlyToInterpolator(),
+        };
+        return newVS;
+      });
+    }
+  }, [tracks]);
 
   const goToSF = React.useCallback(() => {
     setViewState((viewport: ViewState) => {
