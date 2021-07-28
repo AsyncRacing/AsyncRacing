@@ -3,14 +3,14 @@ import React from 'react';
 import { Marker } from 'react-map-gl';
 
 // local imports
-import { GPSLine } from '../../model/ChallengeConfiguration';
-import flatpin from '../../assets/red-pin.png';
+import { GPSLine } from '../../../model/ChallengeConfiguration';
+import flatpin from '../../../assets/red-pin.png';
 
 interface PropTypes {
-  coordinates: GPSLine
+  line: GPSLine
 }
 
-const Waypoint = ({ coordinates }: PropTypes) => {
+const Waypoint = ({ line: coordinates }: PropTypes) => {
   const { firstPoint, secondPoint } = coordinates;
   return (
     <>
