@@ -22,7 +22,7 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
   const defaultView: ViewState = {
     latitude: 37.78,
     longitude: -122.45,
-    zoom: 14,
+    zoom: 12,
   };
   const [viewState, setViewState] = useState<ViewState>(defaultView);
 
@@ -59,7 +59,7 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
     >
       <InteractiveMap
         {...viewState}
-        mapboxApiAccessToken="pk.eyJ1IjoiaXJvbmVzOTQiLCJhIjoiY2txenprY2YzMW4yaDJ2bGZrb3ozbXRzMSJ9.DaLs0HwX916WhZ0f3Z9VKw"
+        mapboxApiAccessToken="pk.eyJ1IjoiYXN5bmNyYWNpbmciLCJhIjoiY2tybWNrcjZzMWQyNDJwcDh6cHlva2Q1eSJ9._Nazy17wuseOnfKuo3_zCA"
       />
     </DeckGL>
   );
