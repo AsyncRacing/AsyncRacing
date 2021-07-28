@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import { ChallengeMap } from "../Map/ChallengeMap";
-import { UploadButton } from "../UploadButton/UploadButton";
-import { useFileContent } from "../UploadButton/useFileContent";
-import { parseGpxData } from "../../model/parser";
+import React, { useState } from 'react'
+import { ChallengeMap } from '../Map/ChallengeMap'
+import { UploadButton } from '../UploadButton/UploadButton'
+import { useFileContent } from '../UploadButton/useFileContent'
+import { parseGpxData } from '../../model/parser'
 
 const GetMapTrack = () => {
-  const [file, setFile] = useState<File | null>(null);
-  const fileContent = useFileContent(file);
+  const [file, setFile] = useState<File | null>(null)
+  const fileContent = useFileContent(file)
   return (
     <>
       <ChallengeMap
         tracks={[
           {
-            name: file?.name ?? "no track selected",
-            path: parseGpxData(fileContent ?? ""),
+            name: file?.name ?? 'no track selected',
+            path: parseGpxData(fileContent ?? ''),
             color: [0, 0, 255],
           },
         ]}
@@ -22,13 +22,13 @@ const GetMapTrack = () => {
       <div
         style={{
           zIndex: 2,
-          position: "relative",
+          position: 'relative',
         }}
       >
         <UploadButton setFile={setFile} />
       </div>
     </>
-  );
-};
+  )
+}
 
-export { GetMapTrack };
+export { GetMapTrack }

@@ -1,4 +1,4 @@
-import { Challenge } from '../model/ChallengeConfiguration';
+import { Challenge } from '../model/ChallengeConfiguration'
 
 const testData: Challenge = {
   start: {
@@ -21,6 +21,6 @@ const testData: Challenge = {
       lon: -100.4932,
     },
   },
-};
+}
 
-export { testData };
+export { testData }
