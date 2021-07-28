@@ -1,11 +1,5 @@
 {
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": false
-  },
+  "editor.formatOnSave": true,
   "eslint.trace.server": "off",
-  "prettier.requireConfig": true,
-  "prettier.singleQuote": true,
-  "prettier.semi": false,
-  "prettier.trailingComma": "all",
-  "prettier.tabWidth": 2
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

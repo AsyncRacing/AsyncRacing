@@ -62,7 +62,12 @@
       "last 1 safari version"
     ]
   },
-  "prettier": {},
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "all"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
