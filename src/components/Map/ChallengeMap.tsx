@@ -54,7 +54,7 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
           },
         );
         const newVS = {
-          ...vs,
+          vs,
           ...newViewState,
           transitionDuration: 5000,
           transitionInterpolator: new FlyToInterpolator(),
@@ -83,7 +83,7 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
         );
 
         return {
-          ...viewport,
+          viewport,
           longitude,
           latitude,
           zoom,
