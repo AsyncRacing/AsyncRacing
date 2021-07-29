@@ -1,12 +1,5 @@
 {
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
-  "eslint.validate": [
-    "typescript",
-    "typescriptreact"
-  ],
-  "eslint.format.enable": true,
   "editor.formatOnSave": true,
-  "eslint.trace.server": "off"
+  "eslint.trace.server": "off",
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
