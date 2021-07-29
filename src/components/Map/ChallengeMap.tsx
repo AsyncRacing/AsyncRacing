@@ -1,7 +1,7 @@
 /* module imports */
 import DeckGL from '@deck.gl/react'
 import React, { useCallback, useState } from 'react'
-import { InteractiveMap } from 'react-map-gl'
+import ReactMapGL from 'react-map-gl'
 import { PathLayer } from '@deck.gl/layers'
 import { ViewState } from 'react-map-gl/src/mapbox/mapbox'
 
@@ -77,12 +77,12 @@ const ChallengeMap = ({ tracks, challenge = defaultChallenge }: PropTypes) => {
       viewState={viewState}
       onViewStateChange={handleViewStateChange}
     >
-      <InteractiveMap
+      <ReactMapGL
         {...viewState}
         mapboxApiAccessToken="pk.eyJ1IjoiYXN5bmNyYWNpbmciLCJhIjoiY2tybWNrcjZzMWQyNDJwcDh6cHlva2Q1eSJ9._Nazy17wuseOnfKuo3_zCA"
       >
         <ChallengeCourse challenge={challenge} />
-      </InteractiveMap>
+      </ReactMapGL>
     </DeckGL>
   )
 }

@@ -1,5 +1,5 @@
 /* module imports */
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Marker, SVGOverlay } from 'react-map-gl'
 
 /* local imports */
@@ -51,17 +51,17 @@ const getRedrawFx = (line: GPSLine) => {
 /* react components */
 // helper component
 const Pin = ({ point }: PinProps) => {
-  const onDragStart = (event: any) => {
+  const onDragStart = useCallback((event: any) => {
     console.log(event)
-  }
+  }, [])
 
-  const onDrag = (event: any) => {
+  const onDrag = useCallback((event: any) => {
     console.log(event)
-  }
+  }, [])
 
-  const onDragEnd = (event: any) => {
+  const onDragEnd = useCallback((event: any) => {
     console.log(event)
-  }
+  }, [])
 
   return (
     <Marker
@@ -81,7 +81,7 @@ const Pin = ({ point }: PinProps) => {
 
 // helper component
 const Waypoint = ({ line }: WaypointProps) => {
-  const redraw = React.useCallback(getRedrawFx(line), [line])
+  const redraw = useCallback(getRedrawFx(line), [line])
   return (
     <>
       <SVGOverlay redraw={redraw} />
