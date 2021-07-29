@@ -3,10 +3,15 @@ import React from 'react'
 import { SVGOverlay } from 'react-map-gl'
 
 /* local imports */
-import { GPSLine } from '../../../model/ChallengeConfiguration'
+import { Challenge } from '../../model/ChallengeConfiguration'
+import { GPSLine } from '../../model/ChallengeConfiguration'
 
 /* interfaces & types */
-interface PropTypes {
+interface CourseProps {
+  challenge: Challenge
+}
+
+interface WaypointProps {
   line: GPSLine
 }
 
@@ -35,9 +40,22 @@ const getRedrawFx = (line: GPSLine) => {
   return redraw
 }
 
-/* react component */
-const Waypoint = ({ line }: PropTypes) => {
+/* react components */
+// helper component
+const Waypoint = ({ line }: WaypointProps) => {
   const redraw = React.useCallback(getRedrawFx(line), [line])
   return <SVGOverlay redraw={redraw} />
 }
-export { Waypoint }
+
+// exported component
+const ChallengeCourse = ({ challenge }: CourseProps) => {
+  const { start, finish } = challenge
+  return (
+    <>
+      <Waypoint line={start} />
+      <Waypoint line={finish} />
+    </>
+  )
+}
+
+export { ChallengeCourse }

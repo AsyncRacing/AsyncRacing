@@ -7,7 +7,7 @@ import { ViewState } from 'react-map-gl/src/mapbox/mapbox'
 
 /* local imports */
 import { Challenge, Track } from '../../model/ChallengeConfiguration'
-import { Circuit } from '../Circuit/Circuit'
+import { ChallengeCourse } from '../Course/ChallengeCourse'
 
 /* interfaces & types */
 interface PropTypes {
@@ -81,7 +81,7 @@ const ChallengeMap = ({ tracks, challenge = defaultChallenge }: PropTypes) => {
         {...viewState}
         mapboxApiAccessToken="pk.eyJ1IjoiYXN5bmNyYWNpbmciLCJhIjoiY2tybWNrcjZzMWQyNDJwcDh6cHlva2Q1eSJ9._Nazy17wuseOnfKuo3_zCA"
       >
-        <Circuit challenge={challenge} />
+        <ChallengeCourse challenge={challenge} />
       </InteractiveMap>
     </DeckGL>
   )
