@@ -1,30 +1,25 @@
-import React, { useState } from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { UploadButton } from './UploadButton';
-import { useFileContent } from './useFileContent';
+import React, { useState } from 'react'
+import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { UploadButton } from './UploadButton'
+import { useFileContent } from './useFileContent'
 
 export default {
   title: 'components/UploadButton',
   component: UploadButton,
-} as ComponentMeta<typeof UploadButton>;
+} as ComponentMeta<typeof UploadButton>
 
 const Template: ComponentStory<typeof UploadButton> = () => {
-  const [file, setFile] = useState<File | null>(null);
-  const fileContent = useFileContent(file);
+  const [file, setFile] = useState<File | null>(null)
+  const fileContent = useFileContent(file)
 
   return (
     <>
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-      <label htmlFor="file-uploader">
-        Upload a File
-      </label>
+      <label htmlFor="file-uploader">Upload a File</label>
 
       <br />
 
-      <UploadButton
-        id="file-uploader"
-        setFile={setFile}
-      />
+      <UploadButton id="file-uploader" setFile={setFile} />
 
       <hr />
 
@@ -38,8 +33,8 @@ const Template: ComponentStory<typeof UploadButton> = () => {
         readOnly
       />
     </>
-  );
-};
+  )
+}
 
-export const Primary = Template.bind({});
-Primary.args = {};
+export const Primary = Template.bind({})
+Primary.args = {}
