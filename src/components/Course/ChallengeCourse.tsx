@@ -1,12 +1,20 @@
 /* module imports */
 import React from 'react'
-import { SVGOverlay } from 'react-map-gl'
+import { Marker, SVGOverlay } from 'react-map-gl'
 
 /* local imports */
-import { Challenge } from '../../model/ChallengeConfiguration'
-import { GPSLine } from '../../model/ChallengeConfiguration'
+import {
+  Challenge,
+  GPSLine,
+  GPSPoint,
+} from '../../model/ChallengeConfiguration'
+import pinImg from '../../assets/red-pin.png'
 
 /* interfaces & types */
+interface PinProps {
+  point: GPSPoint
+}
+
 interface CourseProps {
   challenge: Challenge
 }
@@ -42,9 +50,45 @@ const getRedrawFx = (line: GPSLine) => {
 
 /* react components */
 // helper component
+const Pin = ({ point }: PinProps) => {
+  const onDragStart = (event: any) => {
+    console.log(event)
+  }
+
+  const onDrag = (event: any) => {
+    console.log(event)
+  }
+
+  const onDragEnd = (event: any) => {
+    console.log(event)
+  }
+
+  return (
+    <Marker
+      longitude={point.lon}
+      latitude={point.lat}
+      offsetTop={-50}
+      offsetLeft={-25}
+      draggable
+      onDragStart={onDragStart}
+      onDrag={onDrag}
+      onDragEnd={onDragEnd}
+    >
+      <img alt="pin" src={pinImg} style={{ height: '50px' }} />
+    </Marker>
+  )
+}
+
+// helper component
 const Waypoint = ({ line }: WaypointProps) => {
   const redraw = React.useCallback(getRedrawFx(line), [line])
-  return <SVGOverlay redraw={redraw} />
+  return (
+    <>
+      <SVGOverlay redraw={redraw} />
+      <Pin point={line.firstPoint} />
+      <Pin point={line.secondPoint} />
+    </>
+  )
 }
 
 // exported component
