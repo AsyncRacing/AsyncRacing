@@ -45,7 +45,10 @@ const getRedrawFx = (line: GPSLine) => {
 };
 
 /* react component */
-const Waypoint = ({ line }: PropTypes) => (
-  <SVGOverlay redraw={getRedrawFx(line)} />
-);
+const Waypoint = ({ line }: PropTypes) => {
+  const redraw = React.useCallback(getRedrawFx(line), [line]);
+  return (
+    <SVGOverlay redraw={redraw} />
+  );
+};
 export { Waypoint };

@@ -18,6 +18,7 @@ import { Circuit } from '../Circuit/Circuit';
 /* interfaces & types */
 interface PropTypes {
   tracks: Track[];
+  challenge?: Challenge,
 }
 
 /* helpers & constants */
@@ -53,7 +54,10 @@ const defaultView: ViewState = {
 };
 
 /* react component */
-const ChallengeMap = ({ tracks }: PropTypes) => {
+const ChallengeMap = ({
+  tracks,
+  challenge = defaultChallenge,
+}: PropTypes) => {
   // Map's viewstate
   const [viewState, setViewState] = useState<ViewState>(defaultView);
   const handleViewStateChange = useCallback(
@@ -62,9 +66,6 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
     },
     [],
   );
-
-  // Challenge's start & finish states
-  const challenge = (defaultChallenge);
 
   const layers = [
     new PathLayer({
