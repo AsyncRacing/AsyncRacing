@@ -1,31 +1,33 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ChallengeMap } from './ChallengeMap';
+import React from 'react'
+import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { ChallengeMap } from './ChallengeMap'
 
 export default {
   title: 'Components/ChallengeMap',
   component: ChallengeMap,
-} as ComponentMeta<typeof ChallengeMap>;
+} as ComponentMeta<typeof ChallengeMap>
 
-const Template: ComponentStory<typeof ChallengeMap> = (args) => <ChallengeMap {...args} />;
+const Template: ComponentStory<typeof ChallengeMap> = (args) => (
+  <ChallengeMap {...args} />
+)
 
-export const NoTrack = Template.bind({});
+export const NoTrack = Template.bind({})
 NoTrack.args = {
   tracks: undefined,
-};
+}
 
-export const EmptyTrack = Template.bind({});
+export const EmptyTrack = Template.bind({})
 EmptyTrack.args = {
   tracks: [],
-};
+}
 
-export const OneRedTrack = Template.bind({});
+export const OneRedTrack = Template.bind({})
 OneRedTrack.args = {
   tracks: [
     {
       path: [
         {
-          lon: -122.490050,
+          lon: -122.49005,
           lat: 37.68493,
           time: new Date(),
         },
@@ -39,15 +41,15 @@ OneRedTrack.args = {
       color: [255, 0, 0],
     },
   ],
-};
+}
 
-export const TwoTracks = Template.bind({});
+export const TwoTracks = Template.bind({})
 TwoTracks.args = {
   tracks: [
     {
       path: [
         {
-          lon: -122.490050,
+          lon: -122.49005,
           lat: 37.68493,
           time: new Date(),
         },
@@ -69,7 +71,7 @@ TwoTracks.args = {
         },
         {
           lon: -122.490562,
-          lat: 37.684810,
+          lat: 37.68481,
           time: new Date(),
         },
       ],
@@ -77,4 +79,4 @@ TwoTracks.args = {
       color: [0, 255, 0],
     },
   ],
-};
+}

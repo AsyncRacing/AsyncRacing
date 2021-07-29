@@ -1,24 +1,18 @@
 /* module imports */
-import DeckGL from '@deck.gl/react';
-import React, {
-  useCallback,
-  useState,
-} from 'react';
-import { InteractiveMap } from 'react-map-gl';
-import { PathLayer } from '@deck.gl/layers';
-import { ViewState } from 'react-map-gl/src/mapbox/mapbox';
+import DeckGL from '@deck.gl/react'
+import React, { useCallback, useState } from 'react'
+import { InteractiveMap } from 'react-map-gl'
+import { PathLayer } from '@deck.gl/layers'
+import { ViewState } from 'react-map-gl/src/mapbox/mapbox'
 
 /* local imports */
-import {
-  Challenge,
-  Track,
-} from '../../model/ChallengeConfiguration';
-import { Circuit } from '../Circuit/Circuit';
+import { Challenge, Track } from '../../model/ChallengeConfiguration'
+import { Circuit } from '../Circuit/Circuit'
 
 /* interfaces & types */
 interface PropTypes {
-  tracks: Track[];
-  challenge?: Challenge,
+  tracks: Track[]
+  challenge?: Challenge
 }
 
 /* helpers & constants */
@@ -44,28 +38,25 @@ const defaultChallenge: Challenge = {
       lat: 37.8,
     },
   },
-};
+}
 
 // This constant defaults to showing San Francisco.
 const defaultView: ViewState = {
   latitude: 37.78,
   longitude: -122.45,
   zoom: 12,
-};
+}
 
 /* react component */
-const ChallengeMap = ({
-  tracks,
-  challenge = defaultChallenge,
-}: PropTypes) => {
+const ChallengeMap = ({ tracks, challenge = defaultChallenge }: PropTypes) => {
   // Map's viewstate
-  const [viewState, setViewState] = useState<ViewState>(defaultView);
+  const [viewState, setViewState] = useState<ViewState>(defaultView)
   const handleViewStateChange = useCallback(
     (args: { viewState: ViewState }) => {
-      setViewState(args.viewState);
+      setViewState(args.viewState)
     },
     [],
-  );
+  )
 
   const layers = [
     new PathLayer({
@@ -73,16 +64,11 @@ const ChallengeMap = ({
       data: tracks,
       pickable: true,
       widthMinPixels: 2,
-      getPath: (d) => (
-        d.path.map((point) => ([
-          point.lon,
-          point.lat,
-        ]))
-      ),
+      getPath: (d) => d.path.map((point) => [point.lon, point.lat]),
       getColor: (d) => d.color,
       getWidth: () => 5,
     }),
-  ];
+  ]
 
   return (
     <DeckGL
@@ -98,7 +84,7 @@ const ChallengeMap = ({
         <Circuit challenge={challenge} />
       </InteractiveMap>
     </DeckGL>
-  );
-};
+  )
+}
 
-export { ChallengeMap };
+export { ChallengeMap }

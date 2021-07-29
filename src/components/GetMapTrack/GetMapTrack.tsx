@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { ChallengeMap } from '../Map/ChallengeMap';
-import { UploadButton } from '../UploadButton/UploadButton';
-import { useFileContent } from '../UploadButton/useFileContent';
-import { parseGpxData } from '../../model/parser';
+import React, { useState } from 'react'
+import { ChallengeMap } from '../Map/ChallengeMap'
+import { UploadButton } from '../UploadButton/UploadButton'
+import { useFileContent } from '../UploadButton/useFileContent'
+import { parseGpxData } from '../../model/parser'
 
 const GetMapTrack = () => {
-  const [file, setFile] = useState<File | null>(null);
-  const fileContent = useFileContent(file);
+  const [file, setFile] = useState<File | null>(null)
+  const fileContent = useFileContent(file)
   return (
     <>
       <ChallengeMap
@@ -25,12 +25,10 @@ const GetMapTrack = () => {
           position: 'relative',
         }}
       >
-        <UploadButton
-          setFile={setFile}
-        />
+        <UploadButton setFile={setFile} />
       </div>
     </>
-  );
-};
+  )
+}
 
-export { GetMapTrack };
+export { GetMapTrack }
