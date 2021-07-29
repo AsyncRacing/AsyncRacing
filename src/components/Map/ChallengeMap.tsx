@@ -38,10 +38,9 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
 
   React.useEffect(() => {
     if (tracks.length > 0 && tracks[0].path.length > 0) {
-      const bounds = trackBounds(tracks[0]);
+      const bounds = trackBounds(tracks[0].path);
       setViewState((vs) => {
         if (!('width' in vs) || !('height' in vs)) {
-          console.log('vs as no width or height', vs);
           return vs;
         }
         const newViewState = new WebMercatorViewport(
@@ -54,7 +53,6 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
           },
         );
         const newVS = {
-          vs,
           ...newViewState,
           transitionDuration: 5000,
           transitionInterpolator: new FlyToInterpolator(),
