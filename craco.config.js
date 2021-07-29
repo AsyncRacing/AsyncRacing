@@ -1,3 +1,4 @@
+// CRACO must use `module.exports = ...`  over `export default ...`
 module.exports = {
   babel: {
     loaderOptions: {
