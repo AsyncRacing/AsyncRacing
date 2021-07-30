@@ -1,7 +1,7 @@
 /* module imports */
 import DeckGL from '@deck.gl/react'
 import React, { useCallback, useState } from 'react'
-import ReactMapGL, { Marker } from 'react-map-gl'
+import ReactMapGL, { Marker, _MapContext } from 'react-map-gl'
 import { PathLayer } from '@deck.gl/layers'
 import { ViewState } from 'react-map-gl/src/mapbox/mapbox'
 
@@ -74,22 +74,11 @@ const ChallengeMap = ({ tracks, challenge = defaultChallenge }: PropTypes) => {
     ...challenge.start.firstPoint,
   })
 
-  const onDragStart = useCallback((event: any) => {
-    alert('gotcha')
-    console.log(event)
-  }, [])
-
   const onDrag = useCallback((event: any) => {
-    alert('gotcha')
-    console.log(event)
-  }, [])
-
-  const onDragEnd = useCallback((event: any) => {
-    alert('gotcha')
     console.log(event)
     setPosition({
-      lat: event.latLon[0],
-      lon: event.latLon[1],
+      lat: event.lngLat[1],
+      lon: event.lngLat[0],
     })
   }, [])
 
@@ -99,29 +88,29 @@ const ChallengeMap = ({ tracks, challenge = defaultChallenge }: PropTypes) => {
       layers={layers}
       viewState={viewState}
       onViewStateChange={handleViewStateChange}
+      ContextProvider={_MapContext.Provider}
     >
       <ReactMapGL
         {...viewState}
         mapStyle="mapbox://styles/mapbox/dark-v9"
         mapboxApiAccessToken="pk.eyJ1IjoiYXN5bmNyYWNpbmciLCJhIjoiY2tybWNrcjZzMWQyNDJwcDh6cHlva2Q1eSJ9._Nazy17wuseOnfKuo3_zCA"
+        width="100%"
+        height="100%"
+      />
+      <Marker
+        longitude={position.lon}
+        latitude={position.lat}
+        offsetTop={-50}
+        offsetLeft={-25}
+        draggable
+        onDrag={onDrag}
       >
-        <Marker
-          longitude={position.lon}
-          latitude={position.lat}
-          offsetTop={-50}
-          offsetLeft={-25}
-          draggable
-          onDragStart={onDragStart}
-          onDrag={onDrag}
-          onDragEnd={onDragEnd}
-        >
-          <img
-            alt="pin"
-            src={pinImg}
-            style={{ width: '50px', height: '50px' }}
-          />
-        </Marker>
-      </ReactMapGL>
+        <img
+          alt="pin"
+          src={pinImg}
+          style={{ width: '50px', height: '50px', pointerEvents: 'none' }}
+        />
+      </Marker>
     </DeckGL>
   )
 }
