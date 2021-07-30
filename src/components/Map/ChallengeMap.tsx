@@ -1,13 +1,13 @@
 /* module imports */
 import DeckGL from '@deck.gl/react'
 import React, { useCallback, useState } from 'react'
-import ReactMapGL from 'react-map-gl'
+import ReactMapGL, { Marker } from 'react-map-gl'
 import { PathLayer } from '@deck.gl/layers'
 import { ViewState } from 'react-map-gl/src/mapbox/mapbox'
 
 /* local imports */
 import { Challenge, Track } from '../../model/ChallengeConfiguration'
-import { ChallengeCourse } from '../Course/ChallengeCourse'
+import pinImg from '../../assets/red-pin.png'
 
 /* interfaces & types */
 interface PropTypes {
@@ -70,6 +70,29 @@ const ChallengeMap = ({ tracks, challenge = defaultChallenge }: PropTypes) => {
     }),
   ]
 
+  const [position, setPosition] = useState<{ lat: number; lon: number }>({
+    ...challenge.start.firstPoint,
+  })
+
+  const onDragStart = useCallback((event: any) => {
+    alert('gotcha')
+    console.log(event)
+  }, [])
+
+  const onDrag = useCallback((event: any) => {
+    alert('gotcha')
+    console.log(event)
+  }, [])
+
+  const onDragEnd = useCallback((event: any) => {
+    alert('gotcha')
+    console.log(event)
+    setPosition({
+      lat: event.latLon[0],
+      lon: event.latLon[1],
+    })
+  }, [])
+
   return (
     <DeckGL
       controller
@@ -79,9 +102,25 @@ const ChallengeMap = ({ tracks, challenge = defaultChallenge }: PropTypes) => {
     >
       <ReactMapGL
         {...viewState}
+        mapStyle="mapbox://styles/mapbox/dark-v9"
         mapboxApiAccessToken="pk.eyJ1IjoiYXN5bmNyYWNpbmciLCJhIjoiY2tybWNrcjZzMWQyNDJwcDh6cHlva2Q1eSJ9._Nazy17wuseOnfKuo3_zCA"
       >
-        <ChallengeCourse challenge={challenge} />
+        <Marker
+          longitude={position.lon}
+          latitude={position.lat}
+          offsetTop={-50}
+          offsetLeft={-25}
+          draggable
+          onDragStart={onDragStart}
+          onDrag={onDrag}
+          onDragEnd={onDragEnd}
+        >
+          <img
+            alt="pin"
+            src={pinImg}
+            style={{ width: '50px', height: '50px' }}
+          />
+        </Marker>
       </ReactMapGL>
     </DeckGL>
   )
