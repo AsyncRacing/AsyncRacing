@@ -13,14 +13,17 @@ import pinImg from '../../assets/red-pin.png'
 /* interfaces & types */
 interface PinProps {
   point: GPSPoint
+  setPoint: any
 }
 
 interface CourseProps {
   challenge: Challenge
+  setChallenge: any
 }
 
 interface WaypointProps {
   line: GPSLine
+  setLine: any
 }
 
 /* helpers & constants */
@@ -50,18 +53,16 @@ const getRedrawFx = (line: GPSLine) => {
 
 /* react components */
 // helper component
-const Pin = ({ point }: PinProps) => {
-  const onDragStart = useCallback((event: any) => {
-    console.log(event)
-  }, [])
-
-  const onDrag = useCallback((event: any) => {
-    console.log(event)
-  }, [])
-
-  const onDragEnd = useCallback((event: any) => {
-    console.log(event)
-  }, [])
+const Pin = ({ point, setPoint }: PinProps) => {
+  const onDrag = useCallback(
+    (event: any) => {
+      setPoint({
+        lon: event.lngLat[0],
+        lat: event.lngLat[1],
+      })
+    },
+    [setPoint],
+  )
 
   return (
     <Marker
@@ -70,34 +71,49 @@ const Pin = ({ point }: PinProps) => {
       offsetTop={-50}
       offsetLeft={-25}
       draggable
-      onDragStart={onDragStart}
       onDrag={onDrag}
-      onDragEnd={onDragEnd}
     >
-      <img alt="pin" src={pinImg} style={{ height: '50px' }} />
+      <img
+        alt="pin"
+        src={pinImg}
+        style={{ height: '50px', pointerEvents: 'none' }}
+      />
     </Marker>
   )
 }
 
 // helper component
-const Waypoint = ({ line }: WaypointProps) => {
+const Waypoint = ({ line, setLine }: WaypointProps) => {
   const redraw = useCallback(getRedrawFx(line), [line])
+
+  const getSetPointOf = useCallback(
+    (name: string) => (point: GPSPoint) => setLine({ ...line, [name]: point }),
+    [line, setLine],
+  )
+
   return (
     <>
       <SVGOverlay redraw={redraw} />
-      <Pin point={line.firstPoint} />
-      <Pin point={line.secondPoint} />
+      <Pin point={line.firstPoint} setPoint={getSetPointOf('firstPoint')} />
+      <Pin point={line.secondPoint} setPoint={getSetPointOf('secondPoint')} />
     </>
   )
 }
 
 // exported component
-const ChallengeCourse = ({ challenge }: CourseProps) => {
+const ChallengeCourse = ({ challenge, setChallenge }: CourseProps) => {
   const { start, finish } = challenge
+
+  const getSetLineOf = useCallback(
+    (name: string) => (line: GPSLine) =>
+      setChallenge({ ...challenge, [name]: line }),
+    [challenge, setChallenge],
+  )
+
   return (
     <>
-      <Waypoint line={start} />
-      <Waypoint line={finish} />
+      <Waypoint line={start} setLine={getSetLineOf('start')} />
+      <Waypoint line={finish} setLine={getSetLineOf('finish')} />
     </>
   )
 }
