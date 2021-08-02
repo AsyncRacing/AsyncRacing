@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
-import { ChallengeMap } from '../Map/ChallengeMap'
+import React from 'react'
 import { UploadButton } from '../UploadButton/UploadButton'
-import { useFileContent } from '../UploadButton/useFileContent'
-import { parseGpxData } from '../../model/parser'
+import { useStateFiles } from '../UploadButton/useStateFiles'
 
 const GetMapTrack = () => {
-  const [file, setFile] = useState<File | null>(null)
-  const fileContent = useFileContent(file)
+  const [files, , addFiles, clearFiles] = useStateFiles()
+  // // file upload manipulation
+  // const fileContent = useFileContent(file)
   return (
     <>
+      {/*
       <ChallengeMap
         tracks={[
           {
@@ -18,6 +18,7 @@ const GetMapTrack = () => {
           },
         ]}
       />
+      */}
 
       <div
         style={{
@@ -25,7 +26,12 @@ const GetMapTrack = () => {
           position: 'relative',
         }}
       >
-        <UploadButton setFile={setFile} />
+        <UploadButton
+          files={files}
+          addFiles={addFiles}
+          // setFiles={setFiles}
+          clearFiles={clearFiles}
+        />
       </div>
     </>
   )
