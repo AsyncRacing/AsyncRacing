@@ -87,7 +87,7 @@ const Waypoint = ({ line, setLine }: WaypointProps) => {
 
   return (
     <>
-      <SVGOverlay redraw={redraw} />
+      <SVGOverlay redraw={redraw} style={{ 'pointer-events': 'none' }} />
       <Pin point={line.firstPoint} setPoint={getSetPointOf('firstPoint')} />
       <Pin point={line.secondPoint} setPoint={getSetPointOf('secondPoint')} />
     </>
