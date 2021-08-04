@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { UploadButton } from './UploadButton'
 import { useFilesToTextMap } from './useFileToText'
@@ -11,11 +11,7 @@ export default {
 
 const Template: ComponentStory<typeof UploadButton> = () => {
   const [files, , addFiles, clearFiles] = useStateFiles()
-  const filesToTextMap = useFilesToTextMap(files)
-  let text = useRef('')
-  useEffect(() => {
-    text.current = [...filesToTextMap.values()].join(',\n\n')
-  }, [filesToTextMap])
+  const fileTextMap = useFilesToTextMap(files)
 
   return (
     <>
@@ -34,7 +30,7 @@ const Template: ComponentStory<typeof UploadButton> = () => {
       <hr />
 
       <textarea
-        value={text.current}
+        value={[...fileTextMap.values()].join(',\n\n')}
         style={{
           width: '100%',
           height: '500px',
