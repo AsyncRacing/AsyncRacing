@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from 'react'
 
-const useStateFiles = (
+const useFiles = (
   initialFiles = [],
 ): [
   Array<File>,
@@ -26,4 +26,4 @@ const useStateFiles = (
   return [files, setFiles, addFiles, clearFiles]
 }
 
-export { useStateFiles }
+export { useFiles }

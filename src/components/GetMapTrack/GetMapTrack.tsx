@@ -1,9 +1,9 @@
 import React from 'react'
 import { UploadButton } from '../UploadButton/UploadButton'
-import { useStateFiles } from '../UploadButton/useStateFiles'
+import { useFiles } from '../../model/useFiles'
 
 const GetMapTrack = () => {
-  const [files, , addFiles, clearFiles] = useStateFiles()
+  const [files, , addFiles, clearFiles] = useFiles()
   // // file upload manipulation
   // const fileText = useFileToText(file)
   return (

@@ -1,8 +1,8 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { UploadButton } from './UploadButton'
-import { useFilesToTextMap } from './useFileToText'
-import { useStateFiles } from './useStateFiles'
+import { useFiles } from '../../model/useFiles'
+import { useFilesToTextMap } from '../../model/useFileToText'
 
 export default {
   title: 'components/UploadButton',
@@ -10,7 +10,7 @@ export default {
 } as ComponentMeta<typeof UploadButton>
 
 const Template: ComponentStory<typeof UploadButton> = () => {
-  const [files, , addFiles, clearFiles] = useStateFiles()
+  const [files, , addFiles, clearFiles] = useFiles()
   const fileTextMap = useFilesToTextMap(files)
 
   return (
