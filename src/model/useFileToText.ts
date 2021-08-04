@@ -42,9 +42,9 @@ const useFileToText = (file: File): string => {
   return fileText
 }
 
-const useFilesToTextMap = (files: Array<File>): Map<File, String> => {
+const useFilesToTextMap = (files: Array<File>): Map<File, string> => {
   // Use react state for the hook!
-  const [fileTextMap, setFileTextMap] = useState<Map<File, String>>(new Map())
+  const [fileTextMap, setFileTextMap] = useState<Map<File, string>>(new Map())
 
   // Use react effect hooks as well for watching changes.
   // This enables more declaritive programming styles.
