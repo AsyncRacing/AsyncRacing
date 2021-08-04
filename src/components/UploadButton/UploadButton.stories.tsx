@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { UploadButton } from './UploadButton'
-import { useFileContent } from './useFileContent'
+import { useFilesToTextMap } from './useFileContent'
 import { useStateFiles } from './useStateFiles'
 
 export default {
@@ -10,8 +10,12 @@ export default {
 } as ComponentMeta<typeof UploadButton>
 
 const Template: ComponentStory<typeof UploadButton> = () => {
-  const [files, setFiles, addFiles, clearFiles] = useStateFiles()
-  // const fileContent = useFileContent(files[0])
+  const [files, , addFiles, clearFiles] = useStateFiles()
+  const filesToTextMap = useFilesToTextMap(files)
+  let text = useRef('')
+  useEffect(() => {
+    text.current = [...filesToTextMap.values()].join(',\n\n')
+  }, [filesToTextMap])
 
   return (
     <>
@@ -29,9 +33,8 @@ const Template: ComponentStory<typeof UploadButton> = () => {
 
       <hr />
 
-      {/*
       <textarea
-        value={fileContent ?? ''}
+        value={text.current}
         style={{
           width: '100%',
           height: '500px',
@@ -39,7 +42,6 @@ const Template: ComponentStory<typeof UploadButton> = () => {
         disabled
         readOnly
       />
-    */}
     </>
   )
 }

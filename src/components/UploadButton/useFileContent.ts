@@ -1,12 +1,10 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // Create a file-reader helper function here.
-const readFileContent = (
-  file: File | null = null,
-  setFileContent: Dispatch<SetStateAction<string | null>>,
-) => {
+const readFileToText = (file: File, callback: (fileText: string) => any) => {
   // Use the "FileReader" JS Web API to read variables with type "File".
   const reader: FileReader = new FileReader()
+
   // Assign properties to various functions to execute onEvent.
   // This will set up the file reader for use.
   reader.onload = (onLoadEvent) => {
@@ -16,10 +14,8 @@ const readFileContent = (
     }
 
     // Gather the file's text content and then set it.
-    const fileContent: string | null = onLoadEvent.target.result as
-      | string
-      | null
-    setFileContent(fileContent)
+    const fileText: string = onLoadEvent.target.result as string
+    callback(fileText)
   }
 
   if (file !== null) {
@@ -28,18 +24,45 @@ const readFileContent = (
   }
 }
 
-const useFileContent = (file: File | null = null): string | null => {
+const useFileToText = (file: File): string => {
   // Use react state for the hook!
-  const [fileContent, setFileContent] = useState<string | null>(null)
+  const [fileText, setFileText] = useState<string>('')
 
   // Use react effect hooks as well for watching changes.
   // This enables more declaritive programming styles.
   useEffect(() => {
-    readFileContent(file, setFileContent)
+    readFileToText(file, setFileText)
   }, [file])
 
-  // Return the fileContent value only, as its hooked into useEffect.
-  return fileContent
+  // Return the fileText value only, as its hooked into useEffect.
+  return fileText
 }
 
-export { useFileContent }
+const useFilesToTextMap = (files: Array<File>): Map<File, String> => {
+  // Use react state for the hook!
+  const [fileTextMap, setFileTextMap] = useState<Map<File, String>>(new Map())
+
+  // Use react effect hooks as well for watching changes.
+  // This enables more declaritive programming styles.
+  useEffect(() => {
+    const newFileTextMap = new Map()
+    files.forEach((file) => {
+      // The callback here is adding to the map via map.set().
+      const setFileText = (fileText: string) => {
+        newFileTextMap.set(file, fileText)
+      }
+      readFileToText(file, setFileText)
+    })
+
+    // 🔧 FIXME:
+    //    The stateful setFileTextMap gets called before the callbacks are finished calling!
+    //    The callback, setFileText, doesn't have a chance to get called in readFileToText.
+    //    This is because it takes time for readFileToText to run (FileReader is asyncronous).
+    setFileTextMap(newFileTextMap)
+  }, [files])
+
+  // Return the fileText value only, as its hooked into useEffect.
+  return fileTextMap
+}
+
+export { useFileToText, useFilesToTextMap }

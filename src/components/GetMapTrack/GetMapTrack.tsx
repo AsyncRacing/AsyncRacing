@@ -5,7 +5,7 @@ import { useStateFiles } from '../UploadButton/useStateFiles'
 const GetMapTrack = () => {
   const [files, , addFiles, clearFiles] = useStateFiles()
   // // file upload manipulation
-  // const fileContent = useFileContent(file)
+  // const fileText = useFileToText(file)
   return (
     <>
       {/*
