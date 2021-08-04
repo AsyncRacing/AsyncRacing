@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { UploadButton } from './UploadButton'
-import { useFilesToTextMap } from './useFileContent'
+import { useFilesToTextMap } from './useFileToText'
 import { useStateFiles } from './useStateFiles'
 
 export default {
