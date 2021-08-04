@@ -3,20 +3,29 @@ import { ChallengeMap } from '../Map/ChallengeMap'
 import { UploadButton } from '../UploadButton/UploadButton'
 import { useFiles } from '../../model/useFiles'
 import { useFilesToTextMap } from '../../model/useFileToText'
-import { parseGpxData } from '../../model/useTextToPath'
+import { useFilesToTrackMap } from '../../model/useTextToPath'
 
 const GetMapTrack = () => {
   const [files, , addFiles, clearFiles] = useFiles()
   // file upload manipulation
   const fileTextMap = useFilesToTextMap(files)
+  const filePathMap = useFilesToTrackMap(files, fileTextMap)
   return (
     <>
       <ChallengeMap
-        tracks={[...fileTextMap.entries()].map(([file, fileText]) => ({
-          name: file.name,
-          path: parseGpxData(fileText ?? ''),
-          color: [0, 0, 255],
-        }))}
+        tracks={[...filePathMap.entries()]
+          .map(([file, trackPaths]) => {
+            return trackPaths.map((trackPath) => ({
+              name: file.name,
+              path: trackPath,
+              color: [
+                255 * Math.random(),
+                255 * Math.random(),
+                255 * Math.random(),
+              ] as [red: number, green: number, blue: number],
+            }))
+          })
+          .flat(1)}
       />
 
       <div
