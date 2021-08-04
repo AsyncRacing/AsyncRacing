@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 
 // Helper function: loosely determine if two files are equivalent.
 const isSameFile = (file01: File, file02: File) => {

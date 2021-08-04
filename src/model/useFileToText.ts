@@ -49,21 +49,31 @@ const useFilesToTextMap = (files: Array<File>): Map<File, string> => {
   // Use react effect hooks as well for watching changes.
   // This enables more declaritive programming styles.
   useEffect(() => {
-    // Initialize the returnable map.
-    const newFileTextMap: Map<File, string | Promise<string>> = new Map()
+    // Initializes a data-collector for the new files.
+    const newFileTextMap: Map<File, string> = new Map()
+    // 🔩 NOTE: We will populate this map with promises.
+    //    We'll ensure all the promises resolve before setting any data.
+    const newFileTextMapAdditions: Map<File, Promise<string>> = new Map()
+    // When the promises resolve to strings, they will be added to newFileTextMap.
 
     // Loop through all the given files.
     files.forEach((file) => {
-      // 🔩 NOTE: This populates our map with promises.
-      //    We'll ensure all the promises resolve before setting the map.
-      const fileTextPromise: Promise<string> = readFileToText(file)
-      newFileTextMap.set(file, fileTextPromise)
+      // Get the fileText if the file exists in the old map
+      if (fileTextMap.has(file)) {
+        const fileText = fileTextMap.get(file) as string
+        newFileTextMap.set(file, fileText)
+      }
+      // Otherwise, we'll have to set a promise and resolve it later.
+      else {
+        const fileTextPromise: Promise<string> = readFileToText(file)
+        newFileTextMapAdditions.set(file, fileTextPromise)
+      }
     })
 
     // Resolve the promises within the map values.
     // Can't use Promise.all because the map is not an array!
     ;(async () => {
-      for (const [file, fileTextPromise] of [...newFileTextMap.entries()]) {
+      for (const [file, fileTextPromise] of newFileTextMapAdditions) {
         const fileText = await fileTextPromise
         newFileTextMap.set(file, fileText)
       }
@@ -71,7 +81,7 @@ const useFilesToTextMap = (files: Array<File>): Map<File, string> => {
       // When all the promises resolve, setFileTextMap can finally be called.
       setFileTextMap(newFileTextMap as Map<File, string>)
     })()
-  }, [files])
+  }, [files, fileTextMap])
 
   // Return the fileText value only, as its hooked into useEffect.
   return fileTextMap
