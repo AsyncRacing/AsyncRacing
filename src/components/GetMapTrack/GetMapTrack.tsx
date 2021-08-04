@@ -1,9 +1,9 @@
 import React from 'react'
 import { ChallengeMap } from '../Map/ChallengeMap'
 import { UploadButton } from '../UploadButton/UploadButton'
-import { parseGpxData } from '../../model/parser'
 import { useFiles } from '../../model/useFiles'
 import { useFilesToTextMap } from '../../model/useFileToText'
+import { parseGpxData } from '../../model/useTextToPath'
 
 const GetMapTrack = () => {
   const [files, , addFiles, clearFiles] = useFiles()
