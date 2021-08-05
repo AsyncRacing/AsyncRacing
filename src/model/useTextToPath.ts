@@ -41,7 +41,7 @@ const useFilesToTrackMap = (
 
     // Set the state using this newly parsed track data!
     setFileTracksMap(newFileTracksMap)
-  }, [files, fileTextMap])
+  }, [fileTextMap.size])
 
   return fileTracksMap
 }

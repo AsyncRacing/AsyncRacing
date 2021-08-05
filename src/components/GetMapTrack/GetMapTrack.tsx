@@ -12,6 +12,24 @@ const GetMapTrack = () => {
   // file upload manipulation
   const fileTextMap = useFilesToTextMap(files)
   const filePathMap = useFilesToTrackMap(files, fileTextMap)
+
+  // Testing. This should console.log only when filePathMap changes.
+  useEffect(() => {
+    console.log('FILES HAVE CHANGED')
+    console.log(files)
+  }, [files.length])
+
+  useEffect(() => {
+    console.log('TEXT MAP HAS CHANGED')
+    console.log(fileTextMap)
+  }, [fileTextMap.size])
+
+  useEffect(() => {
+    console.log('PATH MAP HAS ALSO CHANGED')
+    console.log(filePathMap)
+  }, [filePathMap.size])
+
+  /*
   const [tracks, setTracks] = useState<Array<Track>>([])
   useEffect(() => {
     console.log('TRANSFORMING STEP!')
@@ -28,9 +46,11 @@ const GetMapTrack = () => {
         .flat(1),
     )
   }, [filePathMap])
+  */
+
   return (
     <>
-      <ChallengeMap tracks={tracks} />
+      {/* <ChallengeMap tracks={tracks} /> */}
 
       <div
         style={{

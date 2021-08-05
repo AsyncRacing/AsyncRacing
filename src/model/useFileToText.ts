@@ -81,7 +81,7 @@ const useFilesToTextMap = (files: Array<File>): Map<File, string> => {
       // When all the promises resolve, setFileTextMap can finally be called.
       setFileTextMap(newFileTextMap as Map<File, string>)
     })()
-  }, [files, fileTextMap])
+  }, [files.length])
 
   // Return the fileText value only, as its hooked into useEffect.
   return fileTextMap
