@@ -9,7 +9,9 @@ import { ViewState } from 'react-map-gl/src/mapbox/mapbox'
 import { Challenge, Track } from '../../model/ChallengeConfiguration'
 import { Circuit } from '../Circuit/Circuit'
 import { trackBounds } from '../../model/track-bounds'
-import { WebMercatorViewport } from '@deck.gl/core'
+import { FlyToInterpolator } from '@deck.gl/core'
+import { WebMercatorViewport } from 'react-map-gl'
+//import { trackBounds2 } from '../../model/track-bounds'
 
 /* interfaces & types */
 interface PropTypes {
@@ -43,8 +45,8 @@ const defaultChallenge: Challenge = {
 
 // This constant defaults to showing San Francisco.
 const defaultView: ViewState = {
-  latitude: 37.78,
   longitude: -122.45,
+  latitude: 37.78,
   zoom: 12,
 }
 
@@ -66,14 +68,16 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
         if (!('width' in vs) || !('height' in vs)) {
           return vs
         }
-        const newViewState = new WebMercatorViewport(
+        const { longitude, latitude, zoom } = new WebMercatorViewport(
           vs as ViewState & { width: number; height: number },
         ).fitBounds(bounds, {
           padding: 20,
           offset: [0, -100],
         })
         const newVS = {
-          ...newViewState,
+          longitude,
+          latitude,
+          zoom,
           transitionDuration: 5000,
           transitionInterpolator: new FlyToInterpolator(),
         }

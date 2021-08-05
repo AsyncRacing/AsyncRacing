@@ -1,49 +1,65 @@
-import { TrackPath } from './ChallengeConfiguration';
+import { TrackPath } from './ChallengeConfiguration'
 
-// eslint-disable-next-line max-len
-
-export const trackBounds = (path: TrackPath): [northEastCorner: [number, number],
-southWestCorner: [number, number]] => {
+export const trackBounds = (
+  path: TrackPath,
+): [northEastCorner: [number, number], southWestCorner: [number, number]] => {
   if (path.length > 0) {
-    // eslint-disable-next-line no-shadow
     const eastPoint = path.reduce((accumulator, currentPoint) => {
-      const currentValue = currentPoint.lat;
-      const accumulatorValue = accumulator.lat;
+      const currentValue = currentPoint.lat
+      const accumulatorValue = accumulator.lat
       if (accumulatorValue > currentValue) {
-        return accumulator;
+        return accumulator
       }
-      return currentPoint;
-    });
+      return currentPoint
+    })
     const westPoint = path.reduce((accumulator, currentPoint) => {
-      const currentValue = currentPoint.lat;
-      const accumulatorValue = accumulator.lat;
+      const currentValue = currentPoint.lat
+      const accumulatorValue = accumulator.lat
       if (accumulatorValue < currentValue) {
-        return accumulator;
+        return accumulator
       }
-      return currentPoint;
-    });
+      return currentPoint
+    })
     const northPoint = path.reduce((accumulator, currentPoint) => {
-      const currentValue = currentPoint.lon;
-      const accumulatorValue = accumulator.lon;
+      const currentValue = currentPoint.lon
+      const accumulatorValue = accumulator.lon
       if (accumulatorValue > currentValue) {
-        return accumulator;
+        return accumulator
       }
-      return currentPoint;
-    });
+      return currentPoint
+    })
     const southPoint = path.reduce((accumulator, currentPoint) => {
-      const currentValue = currentPoint.lon;
-      const accumulatorValue = accumulator.lon;
+      const currentValue = currentPoint.lon
+      const accumulatorValue = accumulator.lon
       if (accumulatorValue < currentValue) {
-        return accumulator;
+        return accumulator
       }
-      return currentPoint;
-    });
+      return currentPoint
+    })
 
-    const northEastCorner = [eastPoint.lat, northPoint.lon] as [number, number];
-    const southWestCorner = [westPoint.lat, southPoint.lon] as [number, number];
+    const northEastCorner = [northPoint.lon, eastPoint.lat] as [number, number]
+    const southWestCorner = [southPoint.lon, westPoint.lat] as [number, number]
 
-    return [northEastCorner, southWestCorner];
+    return [northEastCorner, southWestCorner]
   }
 
-  throw new Error('invalid: track is empty');
-};
+  throw new Error('invalid: track is empty')
+}
+
+export const trackBounds2 = (
+  points: TrackPath,
+): [ne: [number, number], sw: [number, number]] => {
+  const lon = points.map((point) => point.lon)
+  const lat = points.map((point) => point.lat)
+
+  const north = Math.max(...lat)
+  const south = Math.max(...lon)
+
+  const east = Math.max(...lon)
+  const west = Math.max(...lat)
+
+  const ne = [north, east] as [number, number]
+  const sw = [south, west] as [number, number]
+
+  return [ne, sw]
+}
