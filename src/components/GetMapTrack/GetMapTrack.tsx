@@ -8,32 +8,16 @@ import { Track } from '../../model/ChallengeConfiguration'
 import { useEffect } from 'react'
 
 const GetMapTrack = () => {
+  // File upload manipulation
   const [files, , addFiles, clearFiles] = useFiles()
-  // file upload manipulation
+  // Map data to different types so our app can understand
   const fileTextMap = useFilesToTextMap(files)
   const filePathMap = useFilesToTrackMap(files, fileTextMap)
-
-  // Testing. This should console.log only when filePathMap changes.
-  useEffect(() => {
-    console.log('FILES HAVE CHANGED')
-    console.log(files)
-  }, [files.length])
-
-  useEffect(() => {
-    console.log('TEXT MAP HAS CHANGED')
-    console.log(fileTextMap)
-  }, [fileTextMap.size])
-
-  useEffect(() => {
-    console.log('PATH MAP HAS ALSO CHANGED')
-    console.log(filePathMap)
-  }, [filePathMap.size])
-
-  /*
   const [tracks, setTracks] = useState<Array<Track>>([])
   useEffect(() => {
-    console.log('TRANSFORMING STEP!')
-    console.log(filePathMap)
+    // This useEffect maps the changes to a type that our app understands.
+    // For example, "tracks" in ChallengeMap need to be formatted differently
+    //   than "tracks" in the default GeoJSON format or the GpxParser format.
     setTracks(
       [...filePathMap.entries()]
         .map(([file, trackPaths]) => {
@@ -45,12 +29,11 @@ const GetMapTrack = () => {
         })
         .flat(1),
     )
-  }, [filePathMap])
-  */
+  }, [filePathMap.size])
 
   return (
     <>
-      {/* <ChallengeMap tracks={tracks} /> */}
+      <ChallengeMap tracks={tracks} />
 
       <div
         style={{
