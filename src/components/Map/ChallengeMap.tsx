@@ -60,25 +60,32 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
     },
     [],
   )
-
   React.useEffect(() => {
     if (tracks.length > 0 && tracks[0].path.length > 0) {
       const bounds = trackBounds(tracks[0].path)
+      console.log(bounds)
       setViewState((vs) => {
-        if (!('width' in vs) || !('height' in vs)) {
-          return vs
-        }
+        console.log(vs)
+        // if (!('width' in vs) || !('height' in vs)) {
+        //   vs.width = 100
+        //   vs.height = 800
+        // }
         const { longitude, latitude, zoom } = new WebMercatorViewport(
-          vs as ViewState & { width: number; height: number },
+          {
+            ...vs,
+            width: 800,
+            height: 800,
+          } /*as ViewState & { width: number; height: number }*/,
         ).fitBounds(bounds, {
           padding: 20,
           offset: [0, -100],
         })
+        console.log(longitude, latitude)
         const newVS = {
           longitude,
           latitude,
           zoom,
-          transitionDuration: 5000,
+          transitionDuration: 1000,
           transitionInterpolator: new FlyToInterpolator(),
         }
         return newVS
