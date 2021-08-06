@@ -1,13 +1,42 @@
-import React, { useState } from 'react'
+/* module imports */
+import React, { useState, useEffect } from 'react'
+
+/* local imports */
 import { ChallengeMap } from '../Map/ChallengeMap'
 import { UploadButton } from '../UploadButton/UploadButton'
 import { useFiles } from '../../model/useFiles'
 import { useFilesToTextMap } from '../../model/useFileToText'
 import { useFilesToPathMap } from '../../model/useTextToPath'
-import { Track, TrackPath } from '../../model/ChallengeConfiguration'
-import { useEffect } from 'react'
+import { Challenge, Track, TrackPath } from '../../model/ChallengeConfiguration'
 
+/* helpers & constants */
+// This will initialize a challenge from a couple of lines.
+const defaultChallenge: Challenge = {
+  start: {
+    firstPoint: {
+      lon: -122.4,
+      lat: 37.7,
+    },
+    secondPoint: {
+      lon: -122.4,
+      lat: 37.8,
+    },
+  },
+  finish: {
+    firstPoint: {
+      lon: -122.5,
+      lat: 37.7,
+    },
+    secondPoint: {
+      lon: -122.5,
+      lat: 37.8,
+    },
+  },
+}
+
+/* react components */
 const GetMapTrack = () => {
+  const [challenge, setChallenge] = useState<Challenge>(defaultChallenge)
   // File upload manipulation
   const [files, , addFiles, clearFiles] = useFiles()
   // Map data to different types so our app can understand
@@ -36,7 +65,11 @@ const GetMapTrack = () => {
 
   return (
     <>
-      <ChallengeMap tracks={tracks} />
+      <ChallengeMap
+        challenge={challenge}
+        setChallenge={setChallenge}
+        tracks={tracks}
+      />
 
       <div
         style={{
