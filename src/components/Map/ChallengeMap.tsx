@@ -7,7 +7,6 @@ import { ViewState } from 'react-map-gl/src/mapbox/mapbox'
 
 /* local imports */
 import { Challenge, Track } from '../../model/ChallengeConfiguration'
-import { Circuit } from '../Circuit/Circuit'
 import { trackBounds } from '../../model/track-bounds'
 import { FlyToInterpolator } from '@deck.gl/core'
 import { WebMercatorViewport } from 'react-map-gl'
