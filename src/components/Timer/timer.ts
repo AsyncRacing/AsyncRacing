@@ -33,7 +33,7 @@ function getTimes({ path, challenge }: Props) {
   ])
   let startTime: Date
   let endTime: Date
-  for (let i = 0; i < path.length; i++) {
+  for (let i = 0; i < path.length - 1; i++) {
     // Defining the points that make up the line as the current point, and the next point
     const segmentEndpoints = [
       [path[i].lat, path[i].lon],
@@ -41,18 +41,14 @@ function getTimes({ path, challenge }: Props) {
     ]
     // Convert into a line
     const lineToCheck = turf.lineString(segmentEndpoints)
-    // if (turf.lineIntersect(lineToCheck, startLineTurf) > 0) {
-    //   startTime = path[i].time
-    // } else if (turf.lineIntersect(lineToCheck, endLineTurf).length > 0) {
-    //   endTime = path[i].time
-    // }
-    console.log(turf.lineIntersect(lineToCheck, startLineTurf))
+    if (turf.lineIntersect(lineToCheck, startLineTurf).features.length > 0) {
+      startTime = path[i].time
+      console.log(startTime)
+    }
+    if (turf.lineIntersect(lineToCheck, endLineTurf).features.length > 0) {
+      endTime = path[i].time
+    }
   }
-  // return (
-  //   <ul>
-  //     <li>Start Time: {startTime}</li>
-  //     <li>End Time: {endTime}</li>
-  //   </ul>
-  // )
+  // return { startTime, endTime }
 }
 export { getTimes }
