@@ -11,11 +11,6 @@ const Template: ComponentStory<typeof ChallengeMap> = (args) => (
   <ChallengeMap {...args} />
 )
 
-export const NoTrack = Template.bind({})
-NoTrack.args = {
-  tracks: undefined,
-}
-
 export const EmptyTrack = Template.bind({})
 EmptyTrack.args = {
   tracks: [],
