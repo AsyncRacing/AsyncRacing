@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-// Create a file-reader helper function here.
+/* HELPERS */
 const readFileToText = (file: File): Promise<string> => {
   // Use the "FileReader" JS Web API to read variables with type "File".
   const reader: FileReader = new FileReader()
@@ -25,6 +25,60 @@ const readFileToText = (file: File): Promise<string> => {
   })
 }
 
+/* CUSTOM HOOKS */
+const useFilesToTextMap = (files: Array<File>): Map<File, string> => {
+  // Use react state for the hook!
+  const [filesToTextMap, setFilesToTextMap] = useState<Map<File, string>>(
+    new Map(),
+  )
+
+  // Use react effect hooks as well for watching changes.
+  // This enables more declaritive programming styles.
+  useEffect(() => {
+    // Initializes a data-collector for the new files.
+    const newFilesToTextMap: Map<File, string> = new Map()
+    // 🔩 NOTE: We will populate the following map with promises.
+    //    We'll ensure all the promises resolve before setting any data.
+    const newFilesToTextMapAdditions: Map<File, Promise<string>> = new Map()
+    // When the promises resolve to strings, they will be added to newFilesToTextMap.
+
+    // Loop through all the given files.
+    files.forEach((file) => {
+      // Get the fileText if the file exists in the old map
+      if (filesToTextMap.has(file)) {
+        const fileText = filesToTextMap.get(file) as string
+        newFilesToTextMap.set(file, fileText)
+      }
+      // Otherwise, we'll have to set a promise and resolve it later.
+      else {
+        const fileTextPromise: Promise<string> = readFileToText(file)
+        newFilesToTextMapAdditions.set(file, fileTextPromise)
+      }
+    })
+
+    // Resolve the promises within the map values.
+    // Can't use Promise.all because the map is not an array!
+    ;(async () => {
+      for (const [file, fileTextPromise] of newFilesToTextMapAdditions) {
+        const fileText = await fileTextPromise
+        newFilesToTextMap.set(file, fileText)
+      }
+
+      // When all the promises resolve, setFilesToTextMap can finally be called.
+      setFilesToTextMap(newFilesToTextMap as Map<File, string>)
+    })()
+  }, [files.length])
+
+  // Return the fileText value only, as its hooked into useEffect.
+  return filesToTextMap
+}
+
+const useFilesToText = (files: Array<File>): Array<string> => {
+  // Re-use our other custom hooks!!
+  const filesToTextMap = useFilesToTextMap(files)
+  return [...filesToTextMap.values()]
+}
+
 const useFileToText = (file: File): string => {
   // Use react state for the hook!
   const [fileText, setFileText] = useState<string>('')
@@ -42,49 +96,4 @@ const useFileToText = (file: File): string => {
   return fileText
 }
 
-const useFilesToTextMap = (files: Array<File>): Map<File, string> => {
-  // Use react state for the hook!
-  const [fileTextMap, setFileTextMap] = useState<Map<File, string>>(new Map())
-
-  // Use react effect hooks as well for watching changes.
-  // This enables more declaritive programming styles.
-  useEffect(() => {
-    // Initializes a data-collector for the new files.
-    const newFileTextMap: Map<File, string> = new Map()
-    // 🔩 NOTE: We will populate this map with promises.
-    //    We'll ensure all the promises resolve before setting any data.
-    const newFileTextMapAdditions: Map<File, Promise<string>> = new Map()
-    // When the promises resolve to strings, they will be added to newFileTextMap.
-
-    // Loop through all the given files.
-    files.forEach((file) => {
-      // Get the fileText if the file exists in the old map
-      if (fileTextMap.has(file)) {
-        const fileText = fileTextMap.get(file) as string
-        newFileTextMap.set(file, fileText)
-      }
-      // Otherwise, we'll have to set a promise and resolve it later.
-      else {
-        const fileTextPromise: Promise<string> = readFileToText(file)
-        newFileTextMapAdditions.set(file, fileTextPromise)
-      }
-    })
-
-    // Resolve the promises within the map values.
-    // Can't use Promise.all because the map is not an array!
-    ;(async () => {
-      for (const [file, fileTextPromise] of newFileTextMapAdditions) {
-        const fileText = await fileTextPromise
-        newFileTextMap.set(file, fileText)
-      }
-
-      // When all the promises resolve, setFileTextMap can finally be called.
-      setFileTextMap(newFileTextMap as Map<File, string>)
-    })()
-  }, [files.length])
-
-  // Return the fileText value only, as its hooked into useEffect.
-  return fileTextMap
-}
-
-export { useFileToText, useFilesToTextMap }
+export { useFilesToTextMap, useFilesToText, useFileToText }

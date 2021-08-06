@@ -1,7 +1,8 @@
-import GpxParser, { Track as GpxTrack } from 'gpxparser'
+import GpxParser from 'gpxparser'
 import { useEffect, useState } from 'react'
-import { Track, TrackPath } from './ChallengeConfiguration'
+import { TrackPath } from './ChallengeConfiguration'
 
+/* HELPERS */
 // Create a string-parser helper function here.
 const parseGpxText = (textData: string): Array<TrackPath> => {
   const gpx = new GpxParser()
@@ -15,13 +16,10 @@ const parseGpxText = (textData: string): Array<TrackPath> => {
   )
 }
 
-// Create custom hooks here.
-const useFilesToTrackMap = (
-  files: Array<File>,
-  fileTextMap: Map<File, string>,
-) => {
+/* CUSTOM HOOKS */
+const useFilesToPathMap = (filesToTextMap: Map<File, string>) => {
   // Use react state for the hook!
-  const [fileTracksMap, setFileTracksMap] = useState<
+  const [filesToPathMap, setFilesToPathMap] = useState<
     Map<File, Array<TrackPath>>
   >(new Map())
 
@@ -30,20 +28,20 @@ const useFilesToTrackMap = (
   useEffect(() => {
     // Our file data maps to an array of track paths.
     // A single file can have multiple tracks!!!
-    const newFileTracksMap: Map<File, Array<TrackPath>> = new Map()
+    const newFilesToPathMap: Map<File, Array<TrackPath>> = new Map()
 
     // We'll have to loop over every file that we have to get its text data.
-    fileTextMap.forEach((fileText, file) => {
+    filesToTextMap.forEach((fileText, file) => {
       // Now, we parse the file text with the GpxParser library.
-      const tracks = parseGpxText(fileText)
-      newFileTracksMap.set(file, tracks)
+      const fileTracks = parseGpxText(fileText)
+      newFilesToPathMap.set(file, fileTracks)
     })
 
     // Set the state using this newly parsed track data!
-    setFileTracksMap(newFileTracksMap)
-  }, [fileTextMap.size])
+    setFilesToPathMap(newFilesToPathMap)
+  }, [filesToTextMap.size])
 
-  return fileTracksMap
+  return filesToPathMap
 }
 
-export { useFilesToTrackMap }
+export { useFilesToPathMap }
