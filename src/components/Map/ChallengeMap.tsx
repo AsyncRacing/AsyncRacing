@@ -11,7 +11,6 @@ import { Circuit } from '../Circuit/Circuit'
 import { trackBounds } from '../../model/track-bounds'
 import { FlyToInterpolator } from '@deck.gl/core'
 import { WebMercatorViewport } from 'react-map-gl'
-//import { trackBounds2 } from '../../model/track-bounds'
 
 /* interfaces & types */
 interface PropTypes {
@@ -63,29 +62,20 @@ const ChallengeMap = ({ tracks }: PropTypes) => {
   React.useEffect(() => {
     if (tracks.length > 0 && tracks[0].path.length > 0) {
       const bounds = trackBounds(tracks[0].path)
-      console.log(bounds)
       setViewState((vs) => {
-        console.log(vs)
-        // if (!('width' in vs) || !('height' in vs)) {
-        //   vs.width = 100
-        //   vs.height = 800
-        // }
-        const { longitude, latitude, zoom } = new WebMercatorViewport(
-          {
-            ...vs,
-            width: 800,
-            height: 800,
-          } /*as ViewState & { width: number; height: number }*/,
-        ).fitBounds(bounds, {
+        const { longitude, latitude, zoom } = new WebMercatorViewport({
+          ...vs,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        }).fitBounds(bounds, {
           padding: 20,
           offset: [0, -100],
         })
-        console.log(longitude, latitude)
         const newVS = {
           longitude,
           latitude,
           zoom,
-          transitionDuration: 1000,
+          transitionDuration: 2000,
           transitionInterpolator: new FlyToInterpolator(),
         }
         return newVS
