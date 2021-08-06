@@ -31,6 +31,7 @@ const GetMapTrack = () => {
         })
         .flat(1),
     )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filesToPathMap.size])
 
   return (

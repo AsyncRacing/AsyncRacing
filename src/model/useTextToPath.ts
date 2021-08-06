@@ -39,6 +39,7 @@ const useFilesToPathMap = (filesToTextMap: Map<File, string>) => {
 
     // Set the state using this newly parsed track data!
     setFilesToPathMap(newFilesToPathMap)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filesToTextMap.size])
 
   return filesToPathMap

@@ -67,6 +67,7 @@ const useFilesToTextMap = (files: Array<File>): Map<File, string> => {
       // When all the promises resolve, setFilesToTextMap can finally be called.
       setFilesToTextMap(newFilesToTextMap as Map<File, string>)
     })()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [files.length])
 
   // Return the fileText value only, as its hooked into useEffect.
