@@ -39,7 +39,7 @@ const ChallengeMap = ({ tracks, challenge, setChallenge }: PropTypes) => {
   )
   React.useEffect(() => {
     if (tracks.length > 0 && tracks[0].path.length > 0) {
-      const bounds = trackBounds(tracks[0].path)
+      const bounds = trackBounds(tracks.map((track) => track.path).flat(1))
       setViewState((vs) => {
         const { longitude, latitude, zoom } = new WebMercatorViewport({
           ...vs,

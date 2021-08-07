@@ -1,10 +1,10 @@
-import { TrackPath } from './ChallengeConfiguration'
+import { GPSPoint } from './ChallengeConfiguration'
 
 export const trackBounds = (
-  path: TrackPath,
+  points: Array<GPSPoint>,
 ): [northEastCorner: [number, number], southWestCorner: [number, number]] => {
-  if (path.length > 0) {
-    const eastPoint = path.reduce((accumulator, currentPoint) => {
+  if (points.length > 0) {
+    const eastPoint = points.reduce((accumulator, currentPoint) => {
       const currentValue = currentPoint.lat
       const accumulatorValue = accumulator.lat
       if (accumulatorValue > currentValue) {
@@ -12,7 +12,7 @@ export const trackBounds = (
       }
       return currentPoint
     })
-    const westPoint = path.reduce((accumulator, currentPoint) => {
+    const westPoint = points.reduce((accumulator, currentPoint) => {
       const currentValue = currentPoint.lat
       const accumulatorValue = accumulator.lat
       if (accumulatorValue < currentValue) {
@@ -20,7 +20,7 @@ export const trackBounds = (
       }
       return currentPoint
     })
-    const northPoint = path.reduce((accumulator, currentPoint) => {
+    const northPoint = points.reduce((accumulator, currentPoint) => {
       const currentValue = currentPoint.lon
       const accumulatorValue = accumulator.lon
       if (accumulatorValue > currentValue) {
@@ -28,7 +28,7 @@ export const trackBounds = (
       }
       return currentPoint
     })
-    const southPoint = path.reduce((accumulator, currentPoint) => {
+    const southPoint = points.reduce((accumulator, currentPoint) => {
       const currentValue = currentPoint.lon
       const accumulatorValue = accumulator.lon
       if (accumulatorValue < currentValue) {
