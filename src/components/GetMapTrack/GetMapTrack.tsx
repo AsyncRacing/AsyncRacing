@@ -14,22 +14,22 @@ import { Challenge, Track, TrackPath } from '../../model/ChallengeConfiguration'
 const defaultChallenge: Challenge = {
   start: [
     {
-      lon: -122.4,
-      lat: 37.7,
+      longitude: -122.4,
+      latitude: 37.7,
     },
     {
-      lon: -122.4,
-      lat: 37.8,
+      longitude: -122.4,
+      latitude: 37.8,
     },
   ],
   finish: [
     {
-      lon: -122.5,
-      lat: 37.7,
+      longitude: -122.5,
+      latitude: 37.7,
     },
     {
-      lon: -122.5,
-      lat: 37.8,
+      longitude: -122.5,
+      latitude: 37.8,
     },
   ],
 }

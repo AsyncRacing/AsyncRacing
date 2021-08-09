@@ -5,40 +5,46 @@ export const trackBounds = (
 ): [northEastCorner: [number, number], southWestCorner: [number, number]] => {
   if (path.length > 0) {
     const eastPoint = path.reduce((accumulator, currentPoint) => {
-      const currentValue = currentPoint.lat
-      const accumulatorValue = accumulator.lat
+      const currentValue = currentPoint.latitude
+      const accumulatorValue = accumulator.latitude
       if (accumulatorValue > currentValue) {
         return accumulator
       }
       return currentPoint
     })
     const westPoint = path.reduce((accumulator, currentPoint) => {
-      const currentValue = currentPoint.lat
-      const accumulatorValue = accumulator.lat
+      const currentValue = currentPoint.latitude
+      const accumulatorValue = accumulator.latitude
       if (accumulatorValue < currentValue) {
         return accumulator
       }
       return currentPoint
     })
     const northPoint = path.reduce((accumulator, currentPoint) => {
-      const currentValue = currentPoint.lon
-      const accumulatorValue = accumulator.lon
+      const currentValue = currentPoint.longitude
+      const accumulatorValue = accumulator.longitude
       if (accumulatorValue > currentValue) {
         return accumulator
       }
       return currentPoint
     })
     const southPoint = path.reduce((accumulator, currentPoint) => {
-      const currentValue = currentPoint.lon
-      const accumulatorValue = accumulator.lon
+      const currentValue = currentPoint.longitude
+      const accumulatorValue = accumulator.longitude
       if (accumulatorValue < currentValue) {
         return accumulator
       }
       return currentPoint
     })
 
-    const northEastCorner = [northPoint.lon, eastPoint.lat] as [number, number]
-    const southWestCorner = [southPoint.lon, westPoint.lat] as [number, number]
+    const northEastCorner = [northPoint.longitude, eastPoint.latitude] as [
+      number,
+      number,
+    ]
+    const southWestCorner = [southPoint.longitude, westPoint.latitude] as [
+      number,
+      number,
+    ]
 
     return [northEastCorner, southWestCorner]
   }

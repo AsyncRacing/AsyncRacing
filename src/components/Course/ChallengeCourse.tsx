@@ -35,8 +35,8 @@ const Pin = ({ point, setPoint }: PinProps) => {
   const onDrag = useCallback(
     (event: any) => {
       setPoint({
-        lon: event.lngLat[0],
-        lat: event.lngLat[1],
+        longitude: event.lngLat[0],
+        latitude: event.lngLat[1],
       })
     },
     [setPoint],
@@ -44,8 +44,8 @@ const Pin = ({ point, setPoint }: PinProps) => {
 
   return (
     <Marker
-      longitude={point.lon}
-      latitude={point.lat}
+      longitude={point.longitude}
+      latitude={point.latitude}
       offsetTop={-50}
       offsetLeft={-25}
       draggable
@@ -68,8 +68,8 @@ const Waypoint = ({ line, setLine }: WaypointProps) => {
     //   passes in as a parameter to the redraw function.
     // Given an input of lon/lat coords on the globe,
     //   it converts it to HTML-readable X/Y coords on the page.
-    const [x1, y1] = project([line[0].lon, line[0].lat])
-    const [x2, y2] = project([line[1].lon, line[1].lat])
+    const [x1, y1] = project([line[0].longitude, line[0].latitude])
+    const [x2, y2] = project([line[1].longitude, line[1].latitude])
 
     // The app expects redraw to return SVG-compatible JSX elements.
     return (

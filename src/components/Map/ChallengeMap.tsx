@@ -67,7 +67,7 @@ const ChallengeMap = ({ tracks, challenge, setChallenge }: PropTypes) => {
       data: tracks,
       pickable: true,
       widthMinPixels: 2,
-      getPath: (d) => d.path.map((point) => [point.lon, point.lat]),
+      getPath: (d) => d.path.map((point) => [point.longitude, point.latitude]),
       getColor: (d) => d.color,
       getWidth: () => 5,
     }),

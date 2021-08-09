@@ -1,6 +1,6 @@
 interface GPSPoint {
-  lat: number // latitude
-  lon: number // longitude
+  latitude: number // 90° > latitude > -90°
+  longitude: number // 180° > longitude > -180°
 }
 
 interface TrackPoint extends GPSPoint {
