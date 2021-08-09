@@ -18,10 +18,7 @@ interface Track {
 }
 
 // For start & finish lines, plus waypoints
-interface GPSLine {
-  firstPoint: GPSPoint
-  secondPoint: GPSPoint
-}
+type GPSLine = [GPSPoint, GPSPoint]
 
 // The configuration for a race or challenge
 interface Challenge {
