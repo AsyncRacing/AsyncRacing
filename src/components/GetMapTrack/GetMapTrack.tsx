@@ -8,31 +8,10 @@ import { useFiles } from '../../model/useFiles'
 import { useFilesToTextMap } from '../../model/useFileToText'
 import { useFilesToPathMap } from '../../model/useTextToPath'
 import { Challenge, Track, TrackPath } from '../../model/ChallengeConfiguration'
+import { defaultChallenge } from '../../examples/default-challenge'
 
 /* helpers & constants */
 // This will initialize a challenge from a couple of lines.
-const defaultChallenge: Challenge = {
-  start: [
-    {
-      longitude: -122.4,
-      latitude: 37.7,
-    },
-    {
-      longitude: -122.4,
-      latitude: 37.8,
-    },
-  ],
-  finish: [
-    {
-      longitude: -122.5,
-      latitude: 37.7,
-    },
-    {
-      longitude: -122.5,
-      latitude: 37.8,
-    },
-  ],
-}
 
 /* react components */
 const GetMapTrack = () => {
