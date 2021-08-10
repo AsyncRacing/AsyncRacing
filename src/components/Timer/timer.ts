@@ -1,15 +1,6 @@
 import { TrackPath, Challenge } from '../../model/ChallengeConfiguration'
 import * as turf from '@turf/turf'
-interface TrackPoint {
-  lat: Number
-  lon: Number
-  time: Date
-}
-// type TrackPath = TrackPoint[]
-interface StartStopLine {
-  firstPoint: TrackPath
-  endPoint: TrackPath
-}
+
 // interface Challenge {
 //   start: StartStopLine
 //   finish: StartStopLine
@@ -18,26 +9,24 @@ interface Props {
   path: TrackPath
   challenge: Challenge
 }
-{
-  /* <LineIntersect path={pathfromUploadedFile} challenge={defaultChallenge} /> */
-}
+
 function getTimes({ path, challenge }: Props) {
   // Convert from an array of points -> the format that Turf.js wants
   const startLineTurf = turf.lineString([
-    [challenge.start.firstPoint.lat, challenge.start.firstPoint.lon],
-    [challenge.start.secondPoint.lat, challenge.start.secondPoint.lon],
+    [challenge.start[0].latitude, challenge.start[0].longitude],
+    [challenge.start[1].latitude, challenge.start[1].longitude],
   ])
   const endLineTurf = turf.lineString([
-    [challenge.finish.firstPoint.lat, challenge.finish.firstPoint.lon],
-    [challenge.finish.secondPoint.lat, challenge.finish.secondPoint.lon],
+    [challenge.finish[0].latitude, challenge.finish[0].longitude],
+    [challenge.finish[1].latitude, challenge.finish[1].longitude],
   ])
   let startTime: Date
   let endTime: Date
   for (let i = 0; i < path.length - 1; i++) {
     // Defining the points that make up the line as the current point, and the next point
     const segmentEndpoints = [
-      [path[i].lat, path[i].lon],
-      [path[i + 1].lat, path[i + 1].lon],
+      [path[i].latitude, path[i].longitude],
+      [path[i + 1].latitude, path[i + 1].longitude],
     ]
     // Convert into a line
     const lineToCheck = turf.lineString(segmentEndpoints)
@@ -49,6 +38,6 @@ function getTimes({ path, challenge }: Props) {
       endTime = path[i].time
     }
   }
-  // return { startTime, endTime }
+  return { startTime, endTime }
 }
 export { getTimes }
