@@ -9,6 +9,7 @@ import { useFilesToTextMap } from '../../model/useFileToText'
 import { useFilesToPathMap } from '../../model/useTextToPath'
 import { Challenge, Track, TrackPath } from '../../model/ChallengeConfiguration'
 import { defaultChallenge } from '../../examples/default-challenge'
+import { Timer } from '../Timer/Timer'
 
 /* helpers & constants */
 // This will initialize a challenge from a couple of lines.
