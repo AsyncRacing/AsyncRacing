@@ -27,13 +27,13 @@ OneRedTrack.args = {
     {
       path: [
         {
-          lon: -122.49005,
-          lat: 37.68493,
+          longitude: -122.49005,
+          latitude: 37.68493,
           time: new Date(),
         },
         {
-          lon: -122.41737904607598,
-          lat: 37.7866555224718,
+          longitude: -122.41737904607598,
+          latitude: 37.7866555224718,
           time: new Date(),
         },
       ],
@@ -49,13 +49,13 @@ TwoTracks.args = {
     {
       path: [
         {
-          lon: -122.49005,
-          lat: 37.68493,
+          longitude: -122.49005,
+          latitude: 37.68493,
           time: new Date(),
         },
         {
-          lon: -122.41737904607598,
-          lat: 37.7866555224718,
+          longitude: -122.41737904607598,
+          latitude: 37.7866555224718,
           time: new Date(),
         },
       ],
@@ -65,13 +65,13 @@ TwoTracks.args = {
     {
       path: [
         {
-          lon: -122.490569,
-          lat: 37.684839,
+          longitude: -122.490569,
+          latitude: 37.684839,
           time: new Date(),
         },
         {
-          lon: -122.490562,
-          lat: 37.68481,
+          longitude: -122.490562,
+          latitude: 37.68481,
           time: new Date(),
         },
       ],

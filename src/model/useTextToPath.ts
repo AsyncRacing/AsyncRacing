@@ -9,8 +9,8 @@ const parseGpxText = (textData: string): Array<TrackPath> => {
   gpx.parse(textData)
   return gpx.tracks.map((track) =>
     track.points.map((point) => ({
-      lat: point.lat,
-      lon: point.lon,
+      latitude: point.lat,
+      longitude: point.lon,
       time: point.time,
     })),
   )
