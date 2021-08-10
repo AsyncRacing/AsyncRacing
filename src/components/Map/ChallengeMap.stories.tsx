@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Challenge } from '../../model/ChallengeConfiguration'
+import { defaultChallenge } from '../../examples/default-challenge'
 import { ChallengeMap } from './ChallengeMap'
 
 export default {
@@ -7,13 +9,11 @@ export default {
   component: ChallengeMap,
 } as ComponentMeta<typeof ChallengeMap>
 
-const Template: ComponentStory<typeof ChallengeMap> = (args) => (
-  <ChallengeMap {...args} />
-)
-
-export const NoTrack = Template.bind({})
-NoTrack.args = {
-  tracks: undefined,
+const Template: ComponentStory<typeof ChallengeMap> = (args) => {
+  const [challenge, setChallenge] = useState<Challenge>(defaultChallenge)
+  return (
+    <ChallengeMap {...args} challenge={challenge} setChallenge={setChallenge} />
+  )
 }
 
 export const EmptyTrack = Template.bind({})
@@ -27,13 +27,13 @@ OneRedTrack.args = {
     {
       path: [
         {
-          lon: -122.49005,
-          lat: 37.68493,
+          longitude: -122.49005,
+          latitude: 37.68493,
           time: new Date(),
         },
         {
-          lon: -122.41737904607598,
-          lat: 37.7866555224718,
+          longitude: -122.41737904607598,
+          latitude: 37.7866555224718,
           time: new Date(),
         },
       ],
@@ -49,13 +49,13 @@ TwoTracks.args = {
     {
       path: [
         {
-          lon: -122.49005,
-          lat: 37.68493,
+          longitude: -122.49005,
+          latitude: 37.68493,
           time: new Date(),
         },
         {
-          lon: -122.41737904607598,
-          lat: 37.7866555224718,
+          longitude: -122.41737904607598,
+          latitude: 37.7866555224718,
           time: new Date(),
         },
       ],
@@ -65,13 +65,13 @@ TwoTracks.args = {
     {
       path: [
         {
-          lon: -122.490569,
-          lat: 37.684839,
+          longitude: -122.490569,
+          latitude: 37.684839,
           time: new Date(),
         },
         {
-          lon: -122.490562,
-          lat: 37.68481,
+          longitude: -122.490562,
+          latitude: 37.68481,
           time: new Date(),
         },
       ],

@@ -52,6 +52,7 @@
     "prepare": "git config core.hooksPath .githooks",
     "eslint": "npx eslint \"**/*.ts\" \"**/*.tsx\"",
     "eslint-fix": "npx eslint \"**/*.ts\" \"**/*.tsx\" --fix",
+    "typescript": "npx -p typescript tsc -b",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
   },
