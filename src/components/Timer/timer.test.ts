@@ -3,12 +3,12 @@ import { getTimes } from './timer'
 import { DateTime } from 'luxon'
 import { defaultChallenge } from '../../examples/default-challenge'
 
-test('returns time from component', () => {
+test('returns the milliseconds between start and end points for default challenge', () => {
   const result = getTimes({
     path: track.map(({ time, ...track }) => {
       return { ...track, time: DateTime.fromISO(time).toJSDate() }
     }),
     challenge: defaultChallenge,
   })
-  console.log(result)
+  expect(result).toBe(60363000)
 })
