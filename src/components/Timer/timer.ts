@@ -1,16 +1,13 @@
 import { TrackPath, Challenge } from '../../model/ChallengeConfiguration'
 import * as turf from '@turf/turf'
+import { DateTime as LuxonDate } from 'luxon'
 
-// interface Challenge {
-//   start: StartStopLine
-//   finish: StartStopLine
-// }
 interface Props {
   path: TrackPath
   challenge: Challenge
 }
 
-function getTimes({ path, challenge }: Props) {
+const getTimes = ({ path, challenge }: Props): number | null => {
   // Convert from an array of points -> the format that Turf.js wants
   const startLineTurf = turf.lineString([
     [challenge.start[0].latitude, challenge.start[0].longitude],
@@ -20,8 +17,8 @@ function getTimes({ path, challenge }: Props) {
     [challenge.finish[0].latitude, challenge.finish[0].longitude],
     [challenge.finish[1].latitude, challenge.finish[1].longitude],
   ])
-  let startTime: Date
-  let endTime: Date
+  let startLuxonTime: LuxonDate | null = null
+  let endLuxonTime: LuxonDate | null = null
   for (let i = 0; i < path.length - 1; i++) {
     // Defining the points that make up the line as the current point, and the next point
     const segmentEndpoints = [
@@ -30,14 +27,21 @@ function getTimes({ path, challenge }: Props) {
     ]
     // Convert into a line
     const lineToCheck = turf.lineString(segmentEndpoints)
+    const sentinelLuxonTime = LuxonDate.fromJSDate(path[i].time)
     if (turf.lineIntersect(lineToCheck, startLineTurf).features.length > 0) {
-      startTime = path[i].time
-      console.log(startTime)
+      if (startLuxonTime === null) startLuxonTime = sentinelLuxonTime
+      else if (startLuxonTime < sentinelLuxonTime)
+        startLuxonTime = sentinelLuxonTime
     }
     if (turf.lineIntersect(lineToCheck, endLineTurf).features.length > 0) {
-      endTime = path[i].time
+      if (endLuxonTime === null) endLuxonTime = sentinelLuxonTime
+      else if (endLuxonTime > sentinelLuxonTime)
+        endLuxonTime = sentinelLuxonTime
     }
   }
-  return { startTime, endTime }
+  if (startLuxonTime === null || endLuxonTime === null) {
+    return null
+  }
+  return endLuxonTime.toMillis() - startLuxonTime.toMillis()
 }
 export { getTimes }
