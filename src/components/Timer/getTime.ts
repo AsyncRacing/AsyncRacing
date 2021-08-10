@@ -29,6 +29,8 @@ const getTimes = ({ path, challenge }: Props): number | null => {
     const lineToCheck = turf.lineString(segmentEndpoints)
     const sentinelLuxonTime = LuxonDate.fromJSDate(path[i].time)
     if (turf.lineIntersect(lineToCheck, startLineTurf).features.length > 0) {
+      // BUG: sentinelLuxonTime is logging an invalid input from path[i].time -> Date
+      console.log('path:', path[i].time)
       if (startLuxonTime === null) startLuxonTime = sentinelLuxonTime
       else if (startLuxonTime < sentinelLuxonTime)
         startLuxonTime = sentinelLuxonTime
@@ -42,6 +44,7 @@ const getTimes = ({ path, challenge }: Props): number | null => {
   if (startLuxonTime === null || endLuxonTime === null) {
     return null
   }
+
   return endLuxonTime.toMillis() - startLuxonTime.toMillis()
 }
 export { getTimes }

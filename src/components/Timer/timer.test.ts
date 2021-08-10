@@ -1,5 +1,5 @@
 import track from '../../examples/ian-motorcycle-ride-path'
-import { getTimes } from './timer'
+import { getTimes } from './getTime'
 import { DateTime } from 'luxon'
 import { defaultChallenge } from '../../examples/default-challenge'
 

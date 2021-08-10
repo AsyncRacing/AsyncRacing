@@ -1,6 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { getTimes } from './getTime'
 
-const Timer = () => {
+const Timer = ({ path, challenge }: any) => {
   const [time, setTime] = useState<number | null>(null)
-  return <div></div>
+  useEffect(() => {
+    setTime(getTimes({ path, challenge }))
+  }, [path, challenge])
+  return <div>{time}</div>
 }
+
+export { Timer }
