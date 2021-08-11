@@ -8,7 +8,7 @@ interface Props {
   challenge: Challenge
 }
 
-const getTimes = ({ path, challenge }: Props): number | null | string => {
+const getTimes = ({ path, challenge }: Props): null | string => {
   // Convert from an array of points -> the format that Turf.js wants
   const startLineTurf = turf.lineString([
     [challenge.start[0].latitude, challenge.start[0].longitude],
