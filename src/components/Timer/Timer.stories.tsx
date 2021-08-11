@@ -1,6 +1,7 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import path from '../../examples/ian-motorcycle-ride-path'
+import { DateTime } from 'luxon'
 
 import { Timer } from './Timer'
 import { defaultChallenge } from '../../examples/default-challenge'
@@ -11,7 +12,14 @@ export default {
 } as ComponentMeta<typeof Timer>
 
 const Template: ComponentStory<typeof Timer> = () => {
-  return <Timer path={path} challenge={defaultChallenge} />
+  return (
+    <Timer
+      path={path.map(({ time, ...path }) => {
+        return { ...path, time: DateTime.fromISO(time).toJSDate() }
+      })}
+      challenge={defaultChallenge}
+    />
+  )
 }
 
 export const Primary = Template.bind({})
