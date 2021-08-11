@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { getTimes } from './getTime'
 
 const Timer = ({ path, challenge }: any) => {
-  const [time, setTime] = useState<number | null>(null)
+  const [time, setTime] = useState<number | null | string>(null)
   useEffect(() => {
     setTime(getTimes({ path, challenge }))
   }, [path, challenge])
