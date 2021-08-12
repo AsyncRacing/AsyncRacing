@@ -8,6 +8,9 @@ interface Props {
 }
 
 const getTimes = ({ path, challenge }: Props): number | null => {
+  if (challenge.start === null || challenge.finish === null) {
+    return null
+  }
   // Convert from an array of points -> the format that Turf.js wants
   const startLineTurf = turf.lineString([
     [challenge.start[0].latitude, challenge.start[0].longitude],

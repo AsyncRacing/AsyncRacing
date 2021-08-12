@@ -107,8 +107,14 @@ const ChallengeCourse = ({ challenge, setChallenge }: CourseProps) => {
 
   return (
     <>
-      <Waypoint line={start} setLine={getSetLineOf('start')} />
-      <Waypoint line={finish} setLine={getSetLineOf('finish')} />
+      {(() => {
+        if (start !== null) {
+          return <Waypoint line={start} setLine={getSetLineOf('start')} />
+        }
+        if (finish !== null) {
+          return <Waypoint line={finish} setLine={getSetLineOf('finish')} />
+        }
+      })()}
     </>
   )
 }
