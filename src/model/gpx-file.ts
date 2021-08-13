@@ -2,6 +2,7 @@ import GPXParser from 'gpxparser'
 
 class GPXFile extends File {
   #gpx: GPXParser | null = null
+  #text: string | null = null
 
   static areSame(file1: File, file2: File) {
     const properties: Array<keyof File> = [
