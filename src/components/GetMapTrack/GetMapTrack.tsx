@@ -63,6 +63,15 @@ const GetMapTrack = () => {
           // setFiles={setFiles}
           clearFiles={clearFiles}
         />
+        {tracks.map((path, id) => {
+          return (
+            <ul>
+              <li key={id}>
+                <Timer path={path} challenge={challenge} />
+              </li>
+            </ul>
+          )
+        })}
       </div>
     </>
   )
