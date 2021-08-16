@@ -7,7 +7,7 @@ import { UploadButton } from '../UploadButton/UploadButton'
 import { useFiles } from '../../model/useFiles'
 import { GPXFile } from '../../model/gpx-file'
 import { Challenge, Track } from '../../model/ChallengeConfiguration'
-import { defaultChallenge } from '../../examples/default-challenge'
+import { Timer } from '../Timer/Timer'
 
 /* helpers & constants */
 // This will initialize a challenge from a couple of lines.
@@ -15,7 +15,11 @@ type color = [red: number, green: number, blue: number]
 
 /* react components */
 const GetMapTrack = () => {
-  const [challenge, setChallenge] = useState<Challenge>(defaultChallenge)
+  const emptyChallenge: Challenge = {
+    start: null,
+    finish: null,
+  }
+  const [challenge, setChallenge] = useState<Challenge>(emptyChallenge)
   // File upload manipulation
   const [files, , addFiles, clearFiles] = useFiles()
   const [tracks, setTracks] = useState<Array<Track>>([])
@@ -53,6 +57,36 @@ const GetMapTrack = () => {
     [files.length],
   )
 
+  // When tracks changes, and start and finish are null,
+  //  the Challenge will automatically update to the track's start and finish point.
+  useEffect(() => {
+    let { start, finish } = challenge
+    if (tracks.length > 0) {
+      if (start === null) {
+        const startPoint = tracks[0].path[0]
+        const startLatNudge = startPoint.latitude - 1 / 64
+        start = {
+          points: [
+            { ...startPoint },
+            { ...startPoint, latitude: startLatNudge },
+          ],
+        }
+      }
+      if (finish === null) {
+        const finishPoint = tracks[0].path[tracks[0].path.length - 1]
+        const finishLatNudge = finishPoint.latitude + 1 / 64
+        finish = {
+          points: [
+            { ...finishPoint },
+            { ...finishPoint, latitude: finishLatNudge },
+          ],
+        }
+      }
+    }
+    setChallenge({ ...challenge, start, finish })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tracks.length])
+
   return (
     <>
       <ChallengeMap
@@ -60,7 +94,7 @@ const GetMapTrack = () => {
         setChallenge={setChallenge}
         tracks={tracks}
       />
-
+      {/* Need to fix width and spacing for p tag and Timer tag and Upload Button div */}
       <div
         style={{
           zIndex: 2,
@@ -73,6 +107,17 @@ const GetMapTrack = () => {
           // setFiles={setFiles}
           clearFiles={clearFiles}
         />
+        <p>Track Times</p>
+        <ul>
+          {tracks.map((track, id) => {
+            return (
+              <li key={id}>
+                <p>{track.name}</p>
+                <Timer track={track} challenge={challenge} />
+              </li>
+            )
+          })}
+        </ul>
       </div>
     </>
   )

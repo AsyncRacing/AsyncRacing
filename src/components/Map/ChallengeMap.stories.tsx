@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Challenge } from '../../model/ChallengeConfiguration'
-import { defaultChallenge } from '../../examples/default-challenge'
 import { ChallengeMap } from './ChallengeMap'
 
 export default {
@@ -10,7 +9,11 @@ export default {
 } as ComponentMeta<typeof ChallengeMap>
 
 const Template: ComponentStory<typeof ChallengeMap> = (args) => {
-  const [challenge, setChallenge] = useState<Challenge>(defaultChallenge)
+  const emptyChallenge: Challenge = {
+    start: null,
+    finish: null,
+  }
+  const [challenge, setChallenge] = useState<Challenge>(emptyChallenge)
   return (
     <ChallengeMap {...args} challenge={challenge} setChallenge={setChallenge} />
   )

@@ -34,9 +34,9 @@ interface Waypoint {
 
 // The configuration for a race or challenge
 interface Challenge {
-  start: Waypoint
+  start: Waypoint | null
   checkpoints?: Array<Waypoint>
-  finish: Waypoint
+  finish: Waypoint | null
 }
 
 export type { Challenge, Path, Point, Step, Track, Waypoint }
