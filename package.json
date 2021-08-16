@@ -25,6 +25,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-map-gl": "^6.1.16",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "typescript": "^4.3.5",
     "web-vitals": "^1.1.2"
@@ -37,6 +38,7 @@
     "@storybook/node-logger": "^6.3.3",
     "@storybook/preset-create-react-app": "^3.2.0",
     "@storybook/react": "^6.3.3",
+    "@types/react-router-dom": "^5.1.8",
     "eslint-plugin-prettier": "^3.4.0",
     "react-test-renderer": "^17.0.2"
   },

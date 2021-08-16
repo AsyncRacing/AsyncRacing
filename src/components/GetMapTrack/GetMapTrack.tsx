@@ -7,6 +7,7 @@ import { UploadButton } from '../UploadButton/UploadButton'
 import { useFileContent } from '../UploadButton/useFileContent'
 import { Challenge } from '../../model/ChallengeConfiguration'
 import { parseGpxData } from '../../model/parser'
+import { Link } from 'react-router-dom'
 
 /* helpers & constants */
 // This will initialize a challenge from a couple of lines.
@@ -59,6 +60,7 @@ const GetMapTrack = () => {
         }}
       >
         <UploadButton setFile={setFile} />
+        <Link to="/">Back</Link>
       </div>
     </>
   )
