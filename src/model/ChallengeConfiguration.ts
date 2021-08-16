@@ -22,8 +22,8 @@ type GPSLine = [GPSPoint, GPSPoint]
 
 // The configuration for a race or challenge
 interface Challenge {
-  start: GPSLine
-  finish: GPSLine
+  start: GPSLine | null
+  finish: GPSLine | null
 }
 
 export type { GPSPoint, TrackPoint, TrackPath, Track, GPSLine, Challenge }

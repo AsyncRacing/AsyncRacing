@@ -24,6 +24,7 @@ interface CourseProps {
 interface WaypointProps {
   line: GPSLine
   setLine: any
+  color: any
 }
 
 /* helpers & constants */
@@ -61,7 +62,7 @@ const Pin = ({ point, setPoint }: PinProps) => {
 }
 
 // helper component
-const Waypoint = ({ line, setLine }: WaypointProps) => {
+const Waypoint = ({ line, setLine, color }: WaypointProps) => {
   // This function must be updated with our line points every time it changes.
   const redraw = ({ project }: { project: any }) => {
     // The `project()` function is sort of a "magic" function that ReactMapGL
@@ -73,7 +74,7 @@ const Waypoint = ({ line, setLine }: WaypointProps) => {
 
     // The app expects redraw to return SVG-compatible JSX elements.
     return (
-      <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="blue" strokeWidth="15" />
+      <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth="15" />
     )
   }
 
@@ -107,8 +108,30 @@ const ChallengeCourse = ({ challenge, setChallenge }: CourseProps) => {
 
   return (
     <>
-      <Waypoint line={start} setLine={getSetLineOf('start')} />
-      <Waypoint line={finish} setLine={getSetLineOf('finish')} />
+      {(() => {
+        if (start !== null) {
+          return (
+            <Waypoint
+              key="start"
+              line={start}
+              setLine={getSetLineOf('start')}
+              color="green"
+            />
+          )
+        }
+      })()}
+      {(() => {
+        if (finish !== null) {
+          return (
+            <Waypoint
+              key="finish"
+              line={finish}
+              setLine={getSetLineOf('finish')}
+              color="red"
+            />
+          )
+        }
+      })()}
     </>
   )
 }

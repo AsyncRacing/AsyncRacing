@@ -8,7 +8,6 @@ import { useFiles } from '../../model/useFiles'
 import { useFilesToTextMap } from '../../model/useFileToText'
 import { useFilesToPathMap } from '../../model/useTextToPath'
 import { Challenge, Track, TrackPath } from '../../model/ChallengeConfiguration'
-import { defaultChallenge } from '../../examples/default-challenge'
 import { Timer } from '../Timer/Timer'
 
 /* helpers & constants */
@@ -16,7 +15,11 @@ import { Timer } from '../Timer/Timer'
 
 /* react components */
 const GetMapTrack = () => {
-  const [challenge, setChallenge] = useState<Challenge>(defaultChallenge)
+  const emptyChallenge: Challenge = {
+    start: null,
+    finish: null,
+  }
+  const [challenge, setChallenge] = useState<Challenge>(emptyChallenge)
   // File upload manipulation
   const [files, , addFiles, clearFiles] = useFiles()
   // Map data to different types so our app can understand
@@ -42,6 +45,29 @@ const GetMapTrack = () => {
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filesToPathMap.size])
+
+  // When tracks changes, and start and finish are null,
+  //  the Challenge will automatically update to the track's start and finish point.
+  useEffect(() => {
+    let { start, finish } = challenge
+    if (tracks.length > 0) {
+      if (challenge.start === null) {
+        const startPoint = tracks[0].path[0]
+        const startLatNudge = startPoint.latitude - 1 / 64
+        start = [{ ...startPoint }, { ...startPoint, latitude: startLatNudge }]
+      }
+      if (challenge.finish === null) {
+        const finishPoint = tracks[0].path[tracks[0].path.length - 1]
+        const finishLatNudge = finishPoint.latitude + 1 / 64
+        finish = [
+          { ...finishPoint },
+          { ...finishPoint, latitude: finishLatNudge },
+        ]
+      }
+    }
+    setChallenge({ ...challenge, start, finish })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tracks.length])
 
   return (
     <>

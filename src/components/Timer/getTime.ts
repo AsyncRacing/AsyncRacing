@@ -8,7 +8,10 @@ interface Props {
   challenge: Challenge
 }
 
-const getTimes = ({ path, challenge }: Props): null | number => {
+const getTimes = ({ path, challenge }: Props): number | null => {
+  if (challenge.start === null || challenge.finish === null) {
+    return null
+  }
   // Convert from an array of points -> the format that Turf.js wants
   const startLineTurf = turf.lineString([
     [challenge.start[0].latitude, challenge.start[0].longitude],
@@ -30,8 +33,6 @@ const getTimes = ({ path, challenge }: Props): null | number => {
     const lineToCheck = turf.lineString(segmentEndpoints)
     const sentinelLuxonTime = LuxonDate.fromJSDate(path[i].time)
     if (turf.lineIntersect(lineToCheck, startLineTurf).features.length > 0) {
-      // BUG: sentinelLuxonTime is logging an invalid input from path[i].time -> Date
-      console.log('path:', path[i].time)
       if (startLuxonTime === null) startLuxonTime = sentinelLuxonTime
       else if (startLuxonTime < sentinelLuxonTime)
         startLuxonTime = sentinelLuxonTime
