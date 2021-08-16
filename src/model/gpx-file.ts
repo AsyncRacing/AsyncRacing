@@ -2,7 +2,6 @@ import GPXParser from 'gpxparser'
 
 class GPXFile extends File {
   #gpx: GPXParser | null = null
-  #text: string | null = null
 
   static areSame(file1: File, file2: File) {
     const properties: Array<keyof File> = [
@@ -21,6 +20,8 @@ class GPXFile extends File {
 
   static createFromFile(file: File) {
     const { name, type, lastModified } = file
+    // CHECKME: Test if this is running correctly.
+    // It could be that [file] mismatches type. Maybe.
     return new GPXFile([file], name, { type, lastModified })
   }
 
@@ -33,10 +34,9 @@ class GPXFile extends File {
   async gpx(): Promise<GPXParser> {
     if (this.#gpx === null) {
       const gpxString = await this.text()
-      return GPXFile.loadStringParser(gpxString)
-    } else {
-      return this.#gpx
+      this.#gpx = GPXFile.loadStringParser(gpxString)
     }
+    return this.#gpx
   }
 }
 
