@@ -127,7 +127,7 @@ const ChallengeCourse = ({ challenge, setChallenge }: CourseProps) => {
               key="finish"
               line={finish}
               setLine={getSetLineOf('finish')}
-              color="blue"
+              color="red"
             />
           )
         }
