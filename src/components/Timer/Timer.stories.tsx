@@ -14,9 +14,13 @@ export default {
 const Template: ComponentStory<typeof Timer> = () => {
   return (
     <Timer
-      path={path.map(({ time, ...path }) => {
-        return { ...path, time: DateTime.fromISO(time).toJSDate() }
-      })}
+      track={{
+        name: 'New Track',
+        path: path.map(({ time, ...path }) => {
+          return { ...path, time: DateTime.fromISO(time).toJSDate() }
+        }),
+        color: [0, 250, 250],
+      }}
       challenge={defaultChallenge}
     />
   )
