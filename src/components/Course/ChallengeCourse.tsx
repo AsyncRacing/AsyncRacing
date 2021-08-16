@@ -3,16 +3,12 @@ import React, { useCallback } from 'react'
 import { Marker, SVGOverlay } from 'react-map-gl'
 
 /* local imports */
-import {
-  Challenge,
-  GPSLine,
-  GPSPoint,
-} from '../../model/ChallengeConfiguration'
+import { Challenge, Point, Waypoint } from '../../model/ChallengeConfiguration'
 import pinImg from '../../assets/red-pin.png'
 
 /* interfaces & types */
 interface PinProps {
-  point: GPSPoint
+  point: Point
   setPoint: any
 }
 
@@ -21,9 +17,9 @@ interface CourseProps {
   setChallenge: any
 }
 
-interface WaypointProps {
-  line: GPSLine
-  setLine: any
+interface LineProps {
+  waypoint: Waypoint
+  setWaypoint: any
 }
 
 /* helpers & constants */
@@ -61,15 +57,21 @@ const Pin = ({ point, setPoint }: PinProps) => {
 }
 
 // helper component
-const Waypoint = ({ line, setLine }: WaypointProps) => {
-  // This function must be updated with our line points every time it changes.
+const Line = ({ waypoint, setWaypoint }: LineProps) => {
+  // This function must be updated with our waypoint points every time it changes.
   const redraw = ({ project }: { project: any }) => {
     // The `project()` function is sort of a "magic" function that ReactMapGL
     //   passes in as a parameter to the redraw function.
     // Given an input of lon/lat coords on the globe,
     //   it converts it to HTML-readable X/Y coords on the page.
-    const [x1, y1] = project([line[0].longitude, line[0].latitude])
-    const [x2, y2] = project([line[1].longitude, line[1].latitude])
+    const [x1, y1] = project([
+      waypoint.points[0].longitude,
+      waypoint.points[0].latitude,
+    ])
+    const [x2, y2] = project([
+      waypoint.points[1].longitude,
+      waypoint.points[1].latitude,
+    ])
 
     // The app expects redraw to return SVG-compatible JSX elements.
     return (
@@ -78,19 +80,20 @@ const Waypoint = ({ line, setLine }: WaypointProps) => {
   }
 
   const getSetPointAt = useCallback(
-    (index: number) => (point: GPSPoint) => {
-      const newLine = [...line]
-      newLine[index] = point
-      return setLine(newLine)
+    (index: number) => (point: Point) => {
+      // Modify waypoint
+      waypoint.points[index] = point
+      // Set waypoint state
+      return setWaypoint(waypoint)
     },
-    [line, setLine],
+    [waypoint, setWaypoint],
   )
 
   return (
     <>
       <SVGOverlay redraw={redraw} style={{ 'pointer-events': 'none' }} />
-      <Pin point={line[0]} setPoint={getSetPointAt(0)} />
-      <Pin point={line[1]} setPoint={getSetPointAt(1)} />
+      <Pin point={waypoint.points[0]} setPoint={getSetPointAt(0)} />
+      <Pin point={waypoint.points[1]} setPoint={getSetPointAt(1)} />
     </>
   )
 }
@@ -99,16 +102,16 @@ const Waypoint = ({ line, setLine }: WaypointProps) => {
 const ChallengeCourse = ({ challenge, setChallenge }: CourseProps) => {
   const { start, finish } = challenge
 
-  const getSetLineOf = useCallback(
-    (name: string) => (line: GPSLine) =>
-      setChallenge({ ...challenge, [name]: line }),
+  const getSetWaypointOf = useCallback(
+    (name: string) => (waypoint: Waypoint) =>
+      setChallenge({ ...challenge, [name]: waypoint }),
     [challenge, setChallenge],
   )
 
   return (
     <>
-      <Waypoint line={start} setLine={getSetLineOf('start')} />
-      <Waypoint line={finish} setLine={getSetLineOf('finish')} />
+      <Line waypoint={start} setWaypoint={getSetWaypointOf('start')} />
+      <Line waypoint={finish} setWaypoint={getSetWaypointOf('finish')} />
     </>
   )
 }

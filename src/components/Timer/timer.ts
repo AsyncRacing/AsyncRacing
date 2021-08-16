@@ -1,21 +1,21 @@
-import { TrackPath, Challenge } from '../../model/ChallengeConfiguration'
+import { Challenge, Path } from '../../model/ChallengeConfiguration'
 import * as turf from '@turf/turf'
 import { DateTime as LuxonDate } from 'luxon'
 
 interface Props {
-  path: TrackPath
+  path: Path
   challenge: Challenge
 }
 
 const getTimes = ({ path, challenge }: Props): number | null => {
   // Convert from an array of points -> the format that Turf.js wants
   const startLineTurf = turf.lineString([
-    [challenge.start[0].latitude, challenge.start[0].longitude],
-    [challenge.start[1].latitude, challenge.start[1].longitude],
+    [challenge.start.points[0].latitude, challenge.start.points[0].longitude],
+    [challenge.start.points[1].latitude, challenge.start.points[1].longitude],
   ])
   const endLineTurf = turf.lineString([
-    [challenge.finish[0].latitude, challenge.finish[0].longitude],
-    [challenge.finish[1].latitude, challenge.finish[1].longitude],
+    [challenge.finish.points[0].latitude, challenge.finish.points[0].longitude],
+    [challenge.finish.points[1].latitude, challenge.finish.points[1].longitude],
   ])
   let startLuxonTime: LuxonDate | null = null
   let endLuxonTime: LuxonDate | null = null
