@@ -44,6 +44,8 @@ const getTimes = ({ path, challenge }: Props): null | string => {
   }
   if (startLuxonTime === null || endLuxonTime === null) {
     return null
+  } else if (endLuxonTime.toMillis() - startLuxonTime.toMillis() < 0) {
+    return null
   }
   let luxonMilliseconds = endLuxonTime.toMillis() - startLuxonTime.toMillis()
   return Duration.fromObject({ milliseconds: luxonMilliseconds }).toFormat(
