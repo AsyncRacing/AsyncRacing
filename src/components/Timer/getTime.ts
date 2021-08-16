@@ -8,7 +8,7 @@ interface Props {
   challenge: Challenge
 }
 
-const getTimes = ({ path, challenge }: Props): null | string => {
+const getTimes = ({ path, challenge }: Props): null | number => {
   // Convert from an array of points -> the format that Turf.js wants
   const startLineTurf = turf.lineString([
     [challenge.start[0].latitude, challenge.start[0].longitude],
@@ -48,8 +48,11 @@ const getTimes = ({ path, challenge }: Props): null | string => {
     return null
   }
   let luxonMilliseconds = endLuxonTime.toMillis() - startLuxonTime.toMillis()
-  return Duration.fromObject({ milliseconds: luxonMilliseconds }).toFormat(
-    'hh:mm:ss',
-  )
+  return luxonMilliseconds
 }
-export { getTimes }
+
+const formatMilliseconds = (milliseconds: number | null): string | null => {
+  if (milliseconds === null) return null
+  return Duration.fromObject({ milliseconds }).toFormat('hh:mm:ss')
+}
+export { getTimes, formatMilliseconds }

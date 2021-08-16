@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Challenge, Track } from '../../model/ChallengeConfiguration'
-import { getTimes } from './getTime'
+import { formatMilliseconds, getTimes } from './getTime'
 
 interface Props {
   track: Track
@@ -10,7 +10,7 @@ interface Props {
 const Timer = ({ track, challenge }: Props) => {
   const [time, setTime] = useState<null | string>(null)
   useEffect(() => {
-    setTime(getTimes({ path: track.path, challenge }))
+    setTime(formatMilliseconds(getTimes({ path: track.path, challenge })))
   }, [track, challenge])
   return <div>{time}</div>
 }
