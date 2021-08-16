@@ -1,13 +1,14 @@
 import { TrackPath, Challenge } from '../../model/ChallengeConfiguration'
 import * as turf from '@turf/turf'
 import { DateTime as LuxonDate } from 'luxon'
+import { Duration } from 'luxon'
 
 interface Props {
   path: TrackPath
   challenge: Challenge
 }
 
-const getTimes = ({ path, challenge }: Props): number | null => {
+const getTimes = ({ path, challenge }: Props): null | number => {
   // Convert from an array of points -> the format that Turf.js wants
   const startLineTurf = turf.lineString([
     [challenge.start[0].latitude, challenge.start[0].longitude],
@@ -29,6 +30,8 @@ const getTimes = ({ path, challenge }: Props): number | null => {
     const lineToCheck = turf.lineString(segmentEndpoints)
     const sentinelLuxonTime = LuxonDate.fromJSDate(path[i].time)
     if (turf.lineIntersect(lineToCheck, startLineTurf).features.length > 0) {
+      // BUG: sentinelLuxonTime is logging an invalid input from path[i].time -> Date
+      console.log('path:', path[i].time)
       if (startLuxonTime === null) startLuxonTime = sentinelLuxonTime
       else if (startLuxonTime < sentinelLuxonTime)
         startLuxonTime = sentinelLuxonTime
@@ -41,7 +44,15 @@ const getTimes = ({ path, challenge }: Props): number | null => {
   }
   if (startLuxonTime === null || endLuxonTime === null) {
     return null
+  } else if (endLuxonTime.toMillis() - startLuxonTime.toMillis() < 0) {
+    return null
   }
-  return endLuxonTime.toMillis() - startLuxonTime.toMillis()
+  let luxonMilliseconds = endLuxonTime.toMillis() - startLuxonTime.toMillis()
+  return luxonMilliseconds
 }
-export { getTimes }
+
+const formatMilliseconds = (milliseconds: number | null): string | null => {
+  if (milliseconds === null) return null
+  return Duration.fromObject({ milliseconds }).toFormat('hh:mm:ss')
+}
+export { getTimes, formatMilliseconds }
