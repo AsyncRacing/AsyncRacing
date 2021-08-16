@@ -1,6 +1,7 @@
 import { TrackPath, Challenge } from '../../model/ChallengeConfiguration'
 import * as turf from '@turf/turf'
 import { DateTime as LuxonDate } from 'luxon'
+import { Duration } from 'luxon'
 
 interface Props {
   path: TrackPath
@@ -44,7 +45,15 @@ const getTimes = ({ path, challenge }: Props): number | null => {
   }
   if (startLuxonTime === null || endLuxonTime === null) {
     return null
+  } else if (endLuxonTime.toMillis() - startLuxonTime.toMillis() < 0) {
+    return null
   }
-  return endLuxonTime.toMillis() - startLuxonTime.toMillis()
+  let luxonMilliseconds = endLuxonTime.toMillis() - startLuxonTime.toMillis()
+  return luxonMilliseconds
 }
-export { getTimes }
+
+const formatMilliseconds = (milliseconds: number | null): string | null => {
+  if (milliseconds === null) return null
+  return Duration.fromObject({ milliseconds }).toFormat('hh:mm:ss')
+}
+export { getTimes, formatMilliseconds }

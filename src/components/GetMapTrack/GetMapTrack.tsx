@@ -8,6 +8,7 @@ import { useFiles } from '../../model/useFiles'
 import { useFilesToTextMap } from '../../model/useFileToText'
 import { useFilesToPathMap } from '../../model/useTextToPath'
 import { Challenge, Track, TrackPath } from '../../model/ChallengeConfiguration'
+import { Timer } from '../Timer/Timer'
 
 /* helpers & constants */
 // This will initialize a challenge from a couple of lines.
@@ -75,7 +76,7 @@ const GetMapTrack = () => {
         setChallenge={setChallenge}
         tracks={tracks}
       />
-
+      {/* Need to fix width and spacing for p tag and Timer tag and Upload Button div */}
       <div
         style={{
           zIndex: 2,
@@ -88,6 +89,17 @@ const GetMapTrack = () => {
           // setFiles={setFiles}
           clearFiles={clearFiles}
         />
+        <p>Track Times</p>
+        <ul>
+          {tracks.map((track, id) => {
+            return (
+              <li key={id}>
+                <p>{track.name}</p>
+                <Timer track={track} challenge={challenge} />
+              </li>
+            )
+          })}
+        </ul>
       </div>
     </>
   )
