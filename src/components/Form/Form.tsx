@@ -38,6 +38,14 @@ export function Form() {
           <label>
             <p>Select a track by selecting the choose file button</p>
           </label>
+          <label>
+            <p>Description</p>
+            <input name="description" />
+          </label>
+          <label>
+            <p>Share Track</p>
+            <input name="phoneNumber" />
+          </label>
           <button type="submit">Save</button>
         </fieldset>
       </form>
