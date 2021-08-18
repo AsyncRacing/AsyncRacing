@@ -8,6 +8,7 @@ import { useFileContent } from '../UploadButton/useFileContent'
 import { Challenge } from '../../model/ChallengeConfiguration'
 import { parseGpxData } from '../../model/parser'
 import { Link } from 'react-router-dom'
+import { Form } from '../Form/Form'
 
 /* helpers & constants */
 // This will initialize a challenge from a couple of lines.
@@ -60,7 +61,11 @@ const GetMapTrack = () => {
         }}
       >
         <UploadButton setFile={setFile} />
+        <Form />
         <Link to="/">Back</Link>
+      </div>
+      <div>
+        <Form />
       </div>
     </>
   )
