@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 /* local imports */
 import { ChallengeMap } from '../Map/ChallengeMap'
-import { UploadButton } from '../UploadButton/UploadButton'
+//import { UploadButton } from '../UploadButton/UploadButton'
 import { useFileContent } from '../UploadButton/useFileContent'
 import { Challenge } from '../../model/ChallengeConfiguration'
 import { parseGpxData } from '../../model/parser'
@@ -60,8 +60,7 @@ const GetMapTrack = () => {
           position: 'relative',
         }}
       >
-        <UploadButton setFile={setFile} />
-        <Form />
+        <Form setFile={setFile} />
         <Link to="/">Back</Link>
       </div>
     </>

@@ -2,8 +2,13 @@ import React, { useState } from 'react'
 import './Form.css'
 //import { useForm } from 'react-hook-form'
 import { db } from '../../pages/Home/Home'
+import { UploadButton } from '../UploadButton/UploadButton'
 
-export const Form = () => {
+interface FormProps {
+  setFile: (file: any) => void
+}
+
+export const Form = ({ setFile }: FormProps) => {
   const [Name, setName] = useState('')
   const [challengeName, setChallengeName] = useState('')
   const [description, setDescription] = useState('')
@@ -55,6 +60,7 @@ export const Form = () => {
           </label>
           <label>
             <p>Select a track by selecting the choose file button</p>
+            <UploadButton setFile={setFile} />
           </label>
           <label>
             <p>Description</p>

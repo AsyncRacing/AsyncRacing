@@ -11,6 +11,7 @@
     "@craco/craco": "^6.2.0",
     "@deck.gl/layers": "^8.4.20",
     "@deck.gl/react": "^8.4.20",
+    "@react-firebase/database": "^0.3.11",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",

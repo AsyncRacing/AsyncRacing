@@ -4,6 +4,8 @@ import { GetMapTrack } from '../../components/GetMapTrack/GetMapTrack'
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 import { Title } from './Title'
 import firebase from 'firebase'
+// import { FirebaseDatabaseProvider } from '@react-firebase/database'
+// import { render } from '@testing-library/react'
 
 var firebaseConfig = {
   apiKey: 'AIzaSyCiT4b8_qyC2ZxF95aRAdE8j4Kej3Dt9kk',
