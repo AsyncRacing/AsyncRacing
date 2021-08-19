@@ -19,6 +19,9 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig)
 firebase.analytics()
+var db = firebase.firestore()
+
+export { db }
 
 // Initialize React
 
@@ -40,6 +43,9 @@ export function Home() {
           <li>
             <Link to="/map4">Challenge4</Link>
           </li>
+          <li>
+            <Link to="/map4">Add New Challenge</Link>
+          </li>
         </ul>
         <Switch>
           <Route path="/map1">
@@ -52,6 +58,9 @@ export function Home() {
             <GetMapTrack />
           </Route>
           <Route path="/map4">
+            <GetMapTrack />
+          </Route>
+          <Route path="/map5">
             <GetMapTrack />
           </Route>
         </Switch>

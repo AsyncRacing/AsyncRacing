@@ -64,9 +64,6 @@ const GetMapTrack = () => {
         <Form />
         <Link to="/">Back</Link>
       </div>
-      <div>
-        <Form />
-      </div>
     </>
   )
 }
