@@ -1,6 +1,6 @@
 interface GPSPoint {
-  lat: number // latitude
-  lon: number // longitude
+  latitude: number // 90° > latitude > -90°
+  longitude: number // 180° > longitude > -180°
 }
 
 interface TrackPoint extends GPSPoint {
@@ -18,15 +18,12 @@ interface Track {
 }
 
 // For start & finish lines, plus waypoints
-interface GPSLine {
-  firstPoint: GPSPoint
-  secondPoint: GPSPoint
-}
+type GPSLine = [GPSPoint, GPSPoint]
 
 // The configuration for a race or challenge
 interface Challenge {
-  start: GPSLine
-  finish: GPSLine
+  start: GPSLine | null
+  finish: GPSLine | null
 }
 
 export type { GPSPoint, TrackPoint, TrackPath, Track, GPSLine, Challenge }

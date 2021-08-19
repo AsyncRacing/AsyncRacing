@@ -5,10 +5,12 @@ import { db } from '../../pages/Home/Home'
 import { UploadButton } from '../UploadButton/UploadButton'
 
 interface FormProps {
-  setFile: (file: any) => void
+  addFiles: (file: any) => void
+  clearFiles: () => void
+  files: Array<File>
 }
 
-export const Form = ({ setFile }: FormProps) => {
+export const Form = ({ addFiles, clearFiles, files }: FormProps) => {
   const [Name, setName] = useState('')
   const [challengeName, setChallengeName] = useState('')
   const [description, setDescription] = useState('')
@@ -60,7 +62,11 @@ export const Form = ({ setFile }: FormProps) => {
           </label>
           <label>
             <p>Select a track by selecting the choose file button</p>
-            <UploadButton setFile={setFile} />
+            <UploadButton
+              files={files}
+              addFiles={addFiles}
+              clearFiles={clearFiles}
+            />
           </label>
           <label>
             <p>Description</p>

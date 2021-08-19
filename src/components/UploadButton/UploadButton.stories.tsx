@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { UploadButton } from './UploadButton'
-import { useFileContent } from './useFileContent'
+import { useFiles } from '../../model/useFiles'
+import { useFilesToTextMap } from '../../model/useFileToText'
 
 export default {
   title: 'components/UploadButton',
@@ -9,8 +10,8 @@ export default {
 } as ComponentMeta<typeof UploadButton>
 
 const Template: ComponentStory<typeof UploadButton> = () => {
-  const [file, setFile] = useState<File | null>(null)
-  const fileContent = useFileContent(file)
+  const [files, , addFiles, clearFiles] = useFiles()
+  const fileTextMap = useFilesToTextMap(files)
 
   return (
     <>
@@ -19,12 +20,17 @@ const Template: ComponentStory<typeof UploadButton> = () => {
 
       <br />
 
-      <UploadButton id="file-uploader" setFile={setFile} />
+      <UploadButton
+        id="file-uploader"
+        files={files}
+        addFiles={addFiles}
+        clearFiles={clearFiles}
+      />
 
       <hr />
 
       <textarea
-        value={fileContent ?? ''}
+        value={[...fileTextMap.values()].join(',\n\n')}
         style={{
           width: '100%',
           height: '500px',
