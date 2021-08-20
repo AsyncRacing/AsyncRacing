@@ -3,16 +3,12 @@ import React, { useCallback } from 'react'
 import { Marker, SVGOverlay } from 'react-map-gl'
 
 /* local imports */
-import {
-  Challenge,
-  GPSLine,
-  GPSPoint,
-} from '../../model/ChallengeConfiguration'
+import { Challenge, Point, Waypoint } from '../../model/ChallengeConfiguration'
 import pinImg from '../../assets/red-pin.png'
 
 /* interfaces & types */
 interface PinProps {
-  point: GPSPoint
+  point: Point
   setPoint: any
 }
 
@@ -21,9 +17,9 @@ interface CourseProps {
   setChallenge: any
 }
 
-interface WaypointProps {
-  line: GPSLine
-  setLine: any
+interface LineProps {
+  waypoint: Waypoint
+  setWaypoint: any
   color: any
 }
 
@@ -62,15 +58,15 @@ const Pin = ({ point, setPoint }: PinProps) => {
 }
 
 // helper component
-const Waypoint = ({ line, setLine, color }: WaypointProps) => {
-  // This function must be updated with our line points every time it changes.
+const Line = ({ waypoint, setWaypoint, color }: LineProps) => {
+  // This function must be updated with our waypoint points every time it changes.
   const redraw = ({ project }: { project: any }) => {
     // The `project()` function is sort of a "magic" function that ReactMapGL
     //   passes in as a parameter to the redraw function.
     // Given an input of lon/lat coords on the globe,
     //   it converts it to HTML-readable X/Y coords on the page.
-    const [x1, y1] = project([line[0].longitude, line[0].latitude])
-    const [x2, y2] = project([line[1].longitude, line[1].latitude])
+    const [x1, y1] = project([waypoint[0].longitude, waypoint[0].latitude])
+    const [x2, y2] = project([waypoint[1].longitude, waypoint[1].latitude])
 
     // The app expects redraw to return SVG-compatible JSX elements.
     return (
@@ -79,30 +75,37 @@ const Waypoint = ({ line, setLine, color }: WaypointProps) => {
   }
 
   const getSetPointAt = useCallback(
-    (index: number) => (point: GPSPoint) => {
-      const newLine = [...line]
-      newLine[index] = point
-      return setLine(newLine)
+    (index: number) => (point: Point) => {
+      // Modify waypoint
+      waypoint[index] = point
+      // Set waypoint state
+      return setWaypoint(waypoint)
     },
-    [line, setLine],
+    [waypoint, setWaypoint],
   )
 
   return (
     <>
       <SVGOverlay redraw={redraw} style={{ 'pointer-events': 'none' }} />
-      <Pin point={line[0]} setPoint={getSetPointAt(0)} />
-      <Pin point={line[1]} setPoint={getSetPointAt(1)} />
+      <Pin point={waypoint[0]} setPoint={getSetPointAt(0)} />
+      <Pin point={waypoint[1]} setPoint={getSetPointAt(1)} />
     </>
   )
 }
 
 // exported component
 const ChallengeCourse = ({ challenge, setChallenge }: CourseProps) => {
-  const { start, finish } = challenge
+  const { start, finish } = challenge.course
 
-  const getSetLineOf = useCallback(
-    (name: string) => (line: GPSLine) =>
-      setChallenge({ ...challenge, [name]: line }),
+  const getSetWaypointOf = useCallback(
+    (name: string) => (waypoint: Waypoint) =>
+      setChallenge({
+        ...challenge,
+        course: {
+          ...challenge.course,
+          [name]: waypoint,
+        },
+      }),
     [challenge, setChallenge],
   )
 
@@ -111,10 +114,10 @@ const ChallengeCourse = ({ challenge, setChallenge }: CourseProps) => {
       {(() => {
         if (start !== null) {
           return (
-            <Waypoint
+            <Line
               key="start"
-              line={start}
-              setLine={getSetLineOf('start')}
+              waypoint={start}
+              setWaypoint={getSetWaypointOf('start')}
               color="green"
             />
           )
@@ -123,10 +126,10 @@ const ChallengeCourse = ({ challenge, setChallenge }: CourseProps) => {
       {(() => {
         if (finish !== null) {
           return (
-            <Waypoint
+            <Line
               key="finish"
-              line={finish}
-              setLine={getSetLineOf('finish')}
+              waypoint={finish}
+              setWaypoint={getSetWaypointOf('finish')}
               color="red"
             />
           )
