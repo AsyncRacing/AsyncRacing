@@ -1,4 +1,5 @@
 import React from 'react'
+import { GPXFile } from '../../model/gpx-file'
 
 interface PropTypes {
   id?: string
@@ -30,8 +31,14 @@ const UploadButton = ({ id, files, addFiles, clearFiles }: PropTypes) => (
         // It can be converted into a normal array by using the spread operator.
         const selectedFiles: FileList = fileUploader.files
 
+        // Our application uses the custom GPXFile class over the built-in File class.
+        // To convert the files, use the static method GPXFile.createFromFile.
+        const convertedFiles: Array<GPXFile> = [...selectedFiles].map((file) =>
+          GPXFile.createFromFile(file),
+        )
+
         // Set the selected files.
-        addFiles(...selectedFiles)
+        addFiles(...convertedFiles)
       }}
     />
 

@@ -10,8 +10,12 @@ export default {
 
 const Template: ComponentStory<typeof ChallengeMap> = (args) => {
   const emptyChallenge: Challenge = {
-    start: null,
-    finish: null,
+    course: {
+      start: null,
+      finish: null,
+    },
+    tracks: [],
+    metadata: {},
   }
   const [challenge, setChallenge] = useState<Challenge>(emptyChallenge)
   return (
@@ -40,8 +44,10 @@ OneRedTrack.args = {
           time: new Date(),
         },
       ],
-      name: 'Geary - Daly City',
-      color: [255, 0, 0],
+      metadata: {
+        title: 'Geary - Daly City',
+        color: [255, 0, 0],
+      },
     },
   ],
 }
@@ -62,8 +68,10 @@ TwoTracks.args = {
           time: new Date(),
         },
       ],
-      name: 'Geary - Daly City',
-      color: [255, 0, 0],
+      metadata: {
+        title: 'Geary - Daly City',
+        color: [255, 0, 0],
+      },
     },
     {
       path: [
@@ -78,8 +86,10 @@ TwoTracks.args = {
           time: new Date(),
         },
       ],
-      name: 'Daly City',
-      color: [0, 255, 0],
+      metadata: {
+        title: 'Daly City',
+        color: [0, 255, 0],
+      },
     },
   ],
 }
