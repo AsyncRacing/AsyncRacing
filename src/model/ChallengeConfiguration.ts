@@ -70,7 +70,6 @@ interface Challenge {
     description?: string
     creator?: string
     uploadDate?: Date
-    color?: [red: number, green: number, blue: number]
   }
 }
 // FOOTNOTE:

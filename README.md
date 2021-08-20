@@ -51,21 +51,26 @@
       },
       "tracks": {
         "<trackID>": {
-          "creator": "",
-          "title": "testTrack",
-          "color": [0, 0, 255],
           "path": [
             {
               "latitude": 0,
               "longitude": 0,
               "time": "<JS Date>"
             }
-          ]
+          ],
+          "metadata": {
+            "title": "testTrack",
+            "creator": "",
+            "uploadDate": "",
+            "color": [0, 0, 255]
+          }
         }
       },
       "metadata": {
+        "title": "Cool Challenge",
+        "description": "This challenge is very cool.",
         "creator": "Ben",
-        "title": "Cool Challenge"
+        "uploadDate": "<JS Date>"
       }
     }
   }
