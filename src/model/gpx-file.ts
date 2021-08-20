@@ -21,7 +21,7 @@ class GPXFile extends File {
   static createFromFile(file: File) {
     const { name, type, lastModified } = file
     // CHECKME: Test if this is running correctly.
-    // It could be that [file] mismatches type. Maybe.
+    // It could be that "[file]" mismatches "type". Maybe.
     return new GPXFile([file], name, { type, lastModified })
   }
 

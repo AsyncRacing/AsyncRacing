@@ -65,14 +65,8 @@ const Line = ({ waypoint, setWaypoint, color }: LineProps) => {
     //   passes in as a parameter to the redraw function.
     // Given an input of lon/lat coords on the globe,
     //   it converts it to HTML-readable X/Y coords on the page.
-    const [x1, y1] = project([
-      waypoint.points[0].longitude,
-      waypoint.points[0].latitude,
-    ])
-    const [x2, y2] = project([
-      waypoint.points[1].longitude,
-      waypoint.points[1].latitude,
-    ])
+    const [x1, y1] = project([waypoint[0].longitude, waypoint[0].latitude])
+    const [x2, y2] = project([waypoint[1].longitude, waypoint[1].latitude])
 
     // The app expects redraw to return SVG-compatible JSX elements.
     return (
@@ -83,7 +77,7 @@ const Line = ({ waypoint, setWaypoint, color }: LineProps) => {
   const getSetPointAt = useCallback(
     (index: number) => (point: Point) => {
       // Modify waypoint
-      waypoint.points[index] = point
+      waypoint[index] = point
       // Set waypoint state
       return setWaypoint(waypoint)
     },
@@ -93,19 +87,25 @@ const Line = ({ waypoint, setWaypoint, color }: LineProps) => {
   return (
     <>
       <SVGOverlay redraw={redraw} style={{ 'pointer-events': 'none' }} />
-      <Pin point={waypoint.points[0]} setPoint={getSetPointAt(0)} />
-      <Pin point={waypoint.points[1]} setPoint={getSetPointAt(1)} />
+      <Pin point={waypoint[0]} setPoint={getSetPointAt(0)} />
+      <Pin point={waypoint[1]} setPoint={getSetPointAt(1)} />
     </>
   )
 }
 
 // exported component
 const ChallengeCourse = ({ challenge, setChallenge }: CourseProps) => {
-  const { start, finish } = challenge
+  const { start, finish } = challenge.course
 
   const getSetWaypointOf = useCallback(
     (name: string) => (waypoint: Waypoint) =>
-      setChallenge({ ...challenge, [name]: waypoint }),
+      setChallenge({
+        ...challenge,
+        course: {
+          ...challenge.course,
+          [name]: waypoint,
+        },
+      }),
     [challenge, setChallenge],
   )
 

@@ -9,17 +9,17 @@ interface Props {
 }
 
 const getTimes = ({ path, challenge }: Props): number | null => {
-  if (challenge.start === null || challenge.finish === null) {
+  if (challenge.course.start === null || challenge.course.finish === null) {
     return null
   }
   // Convert from an array of points -> the format that Turf.js wants
   const startLineTurf = turf.lineString([
-    [challenge.start.points[0].latitude, challenge.start.points[0].longitude],
-    [challenge.start.points[1].latitude, challenge.start.points[1].longitude],
+    [challenge.course.start[0].latitude, challenge.course.start[0].longitude],
+    [challenge.course.start[1].latitude, challenge.course.start[1].longitude],
   ])
   const endLineTurf = turf.lineString([
-    [challenge.finish.points[0].latitude, challenge.finish.points[0].longitude],
-    [challenge.finish.points[1].latitude, challenge.finish.points[1].longitude],
+    [challenge.course.finish[0].latitude, challenge.course.finish[0].longitude],
+    [challenge.course.finish[1].latitude, challenge.course.finish[1].longitude],
   ])
   let startLuxonTime: LuxonDate | null = null
   let endLuxonTime: LuxonDate | null = null
