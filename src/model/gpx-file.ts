@@ -1,6 +1,8 @@
 import GPXParser from 'gpxparser'
 import { Track } from './ChallengeConfiguration'
 
+type color = [red: number, green: number, blue: number]
+
 class GPXFile extends File {
   #gpx: GPXParser | null = null
 
@@ -56,7 +58,7 @@ class GPXFile extends File {
         metadata: {
           title: this.name,
           uploadDate: new Date(Date.now()),
-          color: [255, 0, 0] as [red: number, green: number, blue: number],
+          color: [255, 0, 0] as color,
         },
       })
     })

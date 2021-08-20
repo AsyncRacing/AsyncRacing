@@ -9,10 +9,6 @@ import { GPXFile } from '../../model/gpx-file'
 import { Challenge, Track } from '../../model/ChallengeConfiguration'
 import { Timer } from '../Timer/Timer'
 
-/* helpers & constants */
-// This will initialize a challenge from a couple of lines.
-type color = [red: number, green: number, blue: number]
-
 /* react components */
 const GetMapTrack = () => {
   const emptyChallenge: Challenge = {
