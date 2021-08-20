@@ -47,7 +47,28 @@
             "longitude": 0
           }
         ],
-        "checkpoints": []
+        "checkpoints": [
+          [
+            {
+              "latitude": 0,
+              "longitude": 0
+            },
+            {
+              "latitude": 0,
+              "longitude": 0
+            }
+          ],
+          [
+            {
+              "latitude": 0,
+              "longitude": 0
+            },
+            {
+              "latitude": 0,
+              "longitude": 0
+            }
+          ]
+        ]
       },
       "tracks": {
         "<trackID>": {
