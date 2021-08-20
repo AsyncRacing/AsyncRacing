@@ -1,7 +1,7 @@
-import { GPSPoint } from './ChallengeConfiguration'
+import { Point } from './ChallengeConfiguration'
 
 export const trackBounds = (
-  points: Array<GPSPoint>,
+  points: Array<Point>,
 ): [northEastCorner: [number, number], southWestCorner: [number, number]] => {
   if (points.length > 0) {
     const eastPoint = points.reduce((accumulator, currentPoint) => {

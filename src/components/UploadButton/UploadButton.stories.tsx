@@ -2,7 +2,7 @@ import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { UploadButton } from './UploadButton'
 import { useFiles } from '../../model/useFiles'
-import { useFilesToTextMap } from '../../model/useFileToText'
+import { useEffect, useState } from 'react'
 
 export default {
   title: 'components/UploadButton',
@@ -11,7 +11,15 @@ export default {
 
 const Template: ComponentStory<typeof UploadButton> = () => {
   const [files, , addFiles, clearFiles] = useFiles()
-  const fileTextMap = useFilesToTextMap(files)
+  const [text, setText] = useState('')
+  useEffect(() => {
+    ;(async () => {
+      const textPromises = files.map((file) => file.text())
+      const textArray = await Promise.all(textPromises)
+      const newText = textArray.join('\n------------\n\n')
+      setText(newText)
+    })()
+  }, [files.length])
 
   return (
     <>
@@ -30,7 +38,7 @@ const Template: ComponentStory<typeof UploadButton> = () => {
       <hr />
 
       <textarea
-        value={[...fileTextMap.values()].join(',\n\n')}
+        value={text}
         style={{
           width: '100%',
           height: '500px',
