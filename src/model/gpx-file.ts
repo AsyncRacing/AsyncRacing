@@ -1,4 +1,5 @@
 import GPXParser from 'gpxparser'
+import { Track } from './ChallengeConfiguration'
 
 class GPXFile extends File {
   #gpx: GPXParser | null = null
@@ -37,6 +38,30 @@ class GPXFile extends File {
       this.#gpx = GPXFile.loadStringParser(gpxString)
     }
     return this.#gpx
+  }
+
+  async tracks(): Promise<Array<Track>> {
+    const cleanedTracks: Array<Track> = []
+    const gpx = await this.gpx()
+
+    // A file can have more than one track, or no tracks.
+    // Clean each existant track, even if there's just one.
+    gpx.tracks.forEach((track) => {
+      cleanedTracks.push({
+        path: track.points.map((point) => ({
+          latitude: point.lat,
+          longitude: point.lon,
+          time: point.time,
+        })),
+        metadata: {
+          title: this.name,
+          uploadDate: new Date(Date.now()),
+          color: [255, 0, 0] as [red: number, green: number, blue: number],
+        },
+      })
+    })
+
+    return cleanedTracks
   }
 }
 

@@ -30,34 +30,9 @@ const GetMapTrack = () => {
   useEffect(
     () => {
       ;(async () => {
-        const gpxPromises = files.map((file: GPXFile) => file.gpx())
-        const gpxParsers = await Promise.all(gpxPromises)
-
-        // Get all the tracks from the parsers now.
-        const newTracks: Array<Track> = []
-        gpxParsers.forEach((gpx, index) => {
-          const file = files[index]
-
-          // A file can have more than one track.
-          // Add each one, even if there is only one.
-          gpx.tracks.forEach((track) => {
-            newTracks.push({
-              path: track.points.map((point) => ({
-                latitude: point.lat,
-                longitude: point.lon,
-                time: point.time,
-              })),
-              metadata: {
-                title: file.name,
-                uploadDate: new Date(Date.now()),
-                color: [255, 0, 0] as color,
-              },
-            })
-          })
-        })
-
-        // Set the tracks
-        setTracks(newTracks)
+        const trackListPromises = files.map((file: GPXFile) => file.tracks())
+        const trackList = await Promise.all(trackListPromises)
+        setTracks(trackList.flat())
       })()
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
