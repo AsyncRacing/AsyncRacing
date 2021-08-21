@@ -70,6 +70,7 @@ interface Challenge {
     description?: string
     creator?: string
     uploadDate?: Date
+    phoneNumber?: string
   }
 }
 // FOOTNOTE:
