@@ -1,7 +1,6 @@
 import React from 'react'
+import { GetMapTrack } from '../../components/GetMapTrack/GetMapTrack'
 
-const NewChallenge = () => {
-  return <h2>New Challenge</h2>
-}
+const NewChallenge = () => <GetMapTrack />
 
 export { NewChallenge }
