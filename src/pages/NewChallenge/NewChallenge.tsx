@@ -7,7 +7,7 @@ import { Form } from '../../components/Form/Form'
 import { Timer } from '../../components/Timer/Timer'
 
 /* helper imports */
-import { useFiles } from '../../model/useFiles'
+import { useFiles, useTracks } from '../../model/useFiles'
 import { GPXFile } from '../../model/gpx-file'
 import { Challenge, Track } from '../../model/ChallengeConfiguration'
 
@@ -24,18 +24,7 @@ const NewChallenge = () => {
   const [challenge, setChallenge] = useState<Challenge>(emptyChallenge)
   // File upload manipulation
   const [files, , addFiles, clearFiles] = useFiles()
-  const [tracks, setTracks] = useState<Array<Track>>([])
-  useEffect(
-    () => {
-      ;(async () => {
-        const trackListPromises = files.map((file: GPXFile) => file.tracks())
-        const trackList = await Promise.all(trackListPromises)
-        setTracks(trackList.flat())
-      })()
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [files.length],
-  )
+  const tracks = useTracks(files)
 
   // When tracks changes, and start and finish are null,
   //  the Challenge will automatically update to the track's start and finish point.
