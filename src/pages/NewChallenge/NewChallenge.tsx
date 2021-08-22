@@ -1,15 +1,15 @@
 /* module imports */
 import React, { useState, useEffect } from 'react'
 
-/* local imports */
+/* component imports */
 import { ChallengeMap } from '../../components/Map/ChallengeMap'
-import { useFiles } from '../../model/useFiles'
-import { UploadButton } from '../../components/UploadButton/UploadButton'
-import { Link } from 'react-router-dom'
 import { Form } from '../../components/Form/Form'
+import { Timer } from '../../components/Timer/Timer'
+
+/* helper imports */
+import { useFiles } from '../../model/useFiles'
 import { GPXFile } from '../../model/gpx-file'
 import { Challenge, Track } from '../../model/ChallengeConfiguration'
-import { Timer } from '../../components/Timer/Timer'
 
 /* react components */
 const NewChallenge = () => {
@@ -63,6 +63,15 @@ const NewChallenge = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tracks.length])
 
+  // HERE IS WHAT WE WANT TO RETURN:
+  // ===============================
+  // Map
+  // - Track Lines
+  // - Track Times
+  // - Challenge Checkpoints
+  // Form
+  // - Upload Button for tracks
+
   return (
     <>
       <ChallengeMap
@@ -78,13 +87,6 @@ const NewChallenge = () => {
         }}
       >
         <Form files={files} addFiles={addFiles} clearFiles={clearFiles} />
-        <Link to="/">Back</Link>
-        <UploadButton
-          files={files}
-          addFiles={addFiles}
-          // setFiles={setFiles}
-          clearFiles={clearFiles}
-        />
         <p>Track Times</p>
         <ul>
           {tracks.map((track, id) => {
