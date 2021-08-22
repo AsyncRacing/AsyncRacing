@@ -1,12 +1,40 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
-import { Home } from './pages/Home/Home'
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom'
+
+import { IndexChallenges } from './pages/IndexChallenges/IndexChallenges'
+import { NewChallenge } from './pages/NewChallenge/NewChallenge'
+import { ShowChallenge } from './pages/ShowChallenge/ShowChallenge'
 import { reportWebVitals } from './reportWebVitals'
+import './index.css'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home />
+    {/* 👮 I will help redirect URL traffic! 🚥 */}
+    <Router>
+      <Switch>
+        <Route path="/challenges/new">
+          <NewChallenge />
+        </Route>
+
+        <Route path="/challenges/:challengeID">
+          <ShowChallenge />
+        </Route>
+
+        <Route path="/challenges">
+          <Redirect to="/" />
+        </Route>
+
+        <Route path="/">
+          <IndexChallenges />
+        </Route>
+      </Switch>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root'),
 )
