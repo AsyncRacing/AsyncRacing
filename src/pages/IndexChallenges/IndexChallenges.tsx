@@ -20,38 +20,15 @@ const IndexChallenges = () => {
 
   console.log(challengeDB)
 
-  //   challengeDBRef.on('challenge added', (challenge) => {
-  //     const key: string = challenge.key as string
-  //     const cRef = firebaseDB.ref(`challenges/${key}`)
-  //     cRef.on('value', (snap) => {
-  //       setChallengeDB((metadata) => {
-  //         return { ...metadata, [key]: snap.val() }
-  //       })
-  //     })
-  //   })
-  //   return () => {
-  //     list.forEach((ref) => ref.off())
-  //   }
-  // }, [])
-  const challenges: Array<any> = [
-    'test challenge 1',
-    'challenge 2',
-    'other challenge',
-  ]
   return (
     <>
       <h2>Home</h2>
-      <p>
-        {Object.keys(challengeDB).map((challengeID) => (
-          <p>{challengeID}</p>
-        ))}
-      </p>
       <ul>
-        {challenges.map((challenge, challengeID) => {
+        {Object.entries(challengeDB).map(([challengeID, challenge]) => {
           return (
             <li>
               <Link to={`/challenges/${challengeID}`}>
-                Challenge: {challenge}
+                Challenge: {challenge.metadata.title}
               </Link>
             </li>
           )
