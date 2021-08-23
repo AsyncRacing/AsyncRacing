@@ -26,9 +26,8 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
       <form
         onSubmit={async (e) => {
           e.preventDefault()
-          const challengeRef = firebaseDB.ref('challenges')
-          const challenge = await challengeRef.get()
-          const newChallengeRef = challengeRef.push({
+          const challengesRef = firebaseDB.ref('challenges')
+          const newChallengeRef = challengesRef.push({
             course: {
               start: null,
               finish: null,
@@ -36,18 +35,13 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
             tracks: [],
             metadata: {},
           })
-          console.log(e)
           newChallengeRef.set({
-            ...challenge.val(),
             tracks: tracks,
             course: course,
             metadata: {
-              ...(challenge.val()?.metadata ?? {}),
               title: title,
               description: metadata.description,
               creator: metadata.creator,
-              //uploadDate: metadata.uploadDate,
-              // phoneNumber: metadata.phoneNumber,
             },
           })
         }}
