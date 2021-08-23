@@ -1,50 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './Form.css'
 import { UploadButton } from '../UploadButton/UploadButton'
-import { Challenge, Course, Track } from '../../model/ChallengeConfiguration'
+import { Challenge, Course } from '../../model/ChallengeConfiguration'
 import { GPXFile } from '../../model/gpx-file'
 import { title } from 'process'
-import firebase from 'firebase'
+import { firebaseDB } from '../../model/firebase-config'
+import { useTracks } from '../../model/useFiles'
 
 interface FormProps {
   addFiles: (file: any) => void
   clearFiles: () => void
   files: Array<GPXFile>
-}
-var firebaseConfig = {
-  apiKey: 'AIzaSyCiT4b8_qyC2ZxF95aRAdE8j4Kej3Dt9kk',
-  authDomain: 'asyncracing-d5302.firebaseapp.com',
-  databaseURL: 'https://asyncracing-d5302-default-rtdb.firebaseio.com',
-  projectId: 'asyncracing-d5302',
-  storageBucket: 'asyncracing-d5302.appspot.com',
-  messagingSenderId: '468547346614',
-  appId: '1:468547346614:web:0a5a388705b91b5b088617',
-  measurementId: 'G-199TR40228',
+  course: Course
 }
 
-firebase.initializeApp(firebaseConfig)
-
-firebase.analytics()
-
-const db = firebase.database()
-
-export const Form = ({ addFiles, clearFiles, files }: FormProps) => {
+export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
+  const tracks = useTracks(files)
   const [metadata, setMetadata] = useState<Challenge['metadata']>({})
-  const [course, setCourse] = useState<Course>({ start: null, finish: null })
-  const [tracks, setTracks] = useState<Array<Track>>([])
-
-  useEffect(() => {
-    ;(async () => {
-      const newTracksPromises = files.map((file: GPXFile) => {
-        return file.tracks()
-      })
-      const newTracks = await Promise.all(newTracksPromises)
-
-      //do this
-      setTracks(newTracks.flat())
-    })()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [files.length])
 
   return (
     <div className="wrapper">
@@ -54,9 +26,8 @@ export const Form = ({ addFiles, clearFiles, files }: FormProps) => {
       <form
         onSubmit={async (e) => {
           e.preventDefault()
-          const challengeRef = db.ref('challenges')
-          const challenge = await challengeRef.get()
-          const newChallengeRef = challengeRef.push({
+          const challengesRef = firebaseDB.ref('challenges')
+          const newChallengeRef = challengesRef.push({
             course: {
               start: null,
               finish: null,
@@ -64,18 +35,13 @@ export const Form = ({ addFiles, clearFiles, files }: FormProps) => {
             tracks: [],
             metadata: {},
           })
-          console.log(e)
           newChallengeRef.set({
-            ...challenge.val(),
             tracks: tracks,
             course: course,
             metadata: {
-              ...(challenge.val()?.metadata ?? {}),
               title: title,
               description: metadata.description,
               creator: metadata.creator,
-              //uploadDate: metadata.uploadDate,
-              phoneNumber: metadata.phoneNumber,
             },
           })
         }}
@@ -127,20 +93,6 @@ export const Form = ({ addFiles, clearFiles, files }: FormProps) => {
                 setMetadata({
                   ...metadata,
                   description,
-                })
-              }}
-            />
-          </label>
-          <label>
-            <p>Share Track</p>
-            <input
-              name="phoneNumber"
-              value={metadata.phoneNumber}
-              onChange={(e) => {
-                const phoneNumber = e.target.value
-                setMetadata({
-                  ...metadata,
-                  phoneNumber,
                 })
               }}
             />

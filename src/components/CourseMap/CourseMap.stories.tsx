@@ -1,26 +1,20 @@
 import React, { useState } from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Challenge } from '../../model/ChallengeConfiguration'
-import { ChallengeMap } from './ChallengeMap'
+import { Course } from '../../model/ChallengeConfiguration'
+import { CourseMap } from './CourseMap'
 
 export default {
   title: 'Components/ChallengeMap',
-  component: ChallengeMap,
-} as ComponentMeta<typeof ChallengeMap>
+  component: CourseMap,
+} as ComponentMeta<typeof CourseMap>
 
-const Template: ComponentStory<typeof ChallengeMap> = (args) => {
-  const emptyChallenge: Challenge = {
-    course: {
-      start: null,
-      finish: null,
-    },
-    tracks: [],
-    metadata: {},
+const Template: ComponentStory<typeof CourseMap> = (args) => {
+  const emptyCourse: Course = {
+    start: null,
+    finish: null,
   }
-  const [challenge, setChallenge] = useState<Challenge>(emptyChallenge)
-  return (
-    <ChallengeMap {...args} challenge={challenge} setChallenge={setChallenge} />
-  )
+  const [course, setCourse] = useState<Course>(emptyCourse)
+  return <CourseMap {...args} course={course} setCourse={setCourse} />
 }
 
 export const EmptyTrack = Template.bind({})

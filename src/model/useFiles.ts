@@ -1,5 +1,6 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useState, useEffect } from 'react'
 import { GPXFile } from './gpx-file'
+import { Track } from './ChallengeConfiguration'
 
 // Primary react hook.
 const useFiles = (
@@ -39,4 +40,20 @@ const useFiles = (
   return [files, setFiles, addFiles, clearFiles]
 }
 
-export { useFiles }
+const useTracks = (files: Array<GPXFile>) => {
+  const [tracks, setTracks] = useState<Array<Track>>([])
+  useEffect(
+    () => {
+      ;(async () => {
+        const trackListPromises = files.map((file: GPXFile) => file.tracks())
+        const trackList = await Promise.all(trackListPromises)
+        setTracks(trackList.flat())
+      })()
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [files.length],
+  )
+  return tracks
+}
+
+export { useFiles, useTracks }

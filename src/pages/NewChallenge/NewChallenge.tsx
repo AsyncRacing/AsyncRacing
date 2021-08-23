@@ -1,46 +1,30 @@
 /* module imports */
 import React, { useState, useEffect } from 'react'
 
-/* local imports */
-import { ChallengeMap } from '../Map/ChallengeMap'
-import { useFiles } from '../../model/useFiles'
-import { UploadButton } from '../UploadButton/UploadButton'
-import { Link } from 'react-router-dom'
-import { Form } from '../Form/Form'
-import { GPXFile } from '../../model/gpx-file'
-import { Challenge, Track } from '../../model/ChallengeConfiguration'
-import { Timer } from '../Timer/Timer'
+/* component imports */
+import { CourseMap } from '../../components/CourseMap/CourseMap'
+import { Form } from '../../components/Form/Form'
+import { Timer } from '../../components/Timer/Timer'
+
+/* helper imports */
+import { useFiles, useTracks } from '../../model/useFiles'
+import { Course } from '../../model/ChallengeConfiguration'
 
 /* react components */
-const GetMapTrack = () => {
-  const emptyChallenge: Challenge = {
-    course: {
-      start: null,
-      finish: null,
-    },
-    tracks: [],
-    metadata: {},
+const NewChallenge = () => {
+  const emptyCourse: Course = {
+    start: null,
+    finish: null,
   }
-  const [challenge, setChallenge] = useState<Challenge>(emptyChallenge)
+  const [course, setCourse] = useState<Course>(emptyCourse)
   // File upload manipulation
   const [files, , addFiles, clearFiles] = useFiles()
-  const [tracks, setTracks] = useState<Array<Track>>([])
-  useEffect(
-    () => {
-      ;(async () => {
-        const trackListPromises = files.map((file: GPXFile) => file.tracks())
-        const trackList = await Promise.all(trackListPromises)
-        setTracks(trackList.flat())
-      })()
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [files.length],
-  )
+  const tracks = useTracks(files)
 
   // When tracks changes, and start and finish are null,
   //  the Challenge will automatically update to the track's start and finish point.
   useEffect(() => {
-    let { start, finish } = challenge.course
+    let { start, finish } = course
     if (tracks.length > 0) {
       if (start === null) {
         const startPoint = tracks[0].path[0]
@@ -56,20 +40,26 @@ const GetMapTrack = () => {
         ]
       }
     }
-    setChallenge({
-      ...challenge,
-      course: { ...challenge.course, start, finish },
+    setCourse({
+      ...course,
+      start,
+      finish,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tracks.length])
 
+  // HERE IS WHAT WE WANT TO RETURN:
+  // ===============================
+  // Map
+  // - Track Lines
+  // - Track Times
+  // - Challenge Checkpoints
+  // Form
+  // - Upload Button for tracks
+
   return (
     <>
-      <ChallengeMap
-        challenge={challenge}
-        setChallenge={setChallenge}
-        tracks={tracks}
-      />
+      <CourseMap course={course} setCourse={setCourse} tracks={tracks} />
       {/* Need to fix width and spacing for p tag and Timer tag and Upload Button div */}
       <div
         style={{
@@ -77,12 +67,10 @@ const GetMapTrack = () => {
           position: 'relative',
         }}
       >
-        <Form files={files} addFiles={addFiles} clearFiles={clearFiles} />
-        <Link to="/">Back</Link>
-        <UploadButton
+        <Form
+          course={course}
           files={files}
           addFiles={addFiles}
-          // setFiles={setFiles}
           clearFiles={clearFiles}
         />
         <p>Track Times</p>
@@ -91,7 +79,7 @@ const GetMapTrack = () => {
             return (
               <li key={id}>
                 <p>{track.metadata.title}</p>
-                <Timer track={track} challenge={challenge} />
+                <Timer track={track} course={course} />
               </li>
             )
           })}
@@ -101,4 +89,4 @@ const GetMapTrack = () => {
   )
 }
 
-export { GetMapTrack }
+export { NewChallenge }

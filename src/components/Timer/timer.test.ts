@@ -8,7 +8,7 @@ test('returns milliseconds', () => {
     path: path.map(({ time, ...path }) => {
       return { ...path, time: DateTime.fromISO(time).toJSDate() }
     }),
-    challenge: defaultChallenge,
+    course: defaultChallenge.course,
   })
   expect(result).toBe(60363000)
 })
@@ -18,7 +18,7 @@ test('returns hour,minutes and seconds between start and end points for default 
     path: path.map(({ time, ...path }) => {
       return { ...path, time: DateTime.fromISO(time).toJSDate() }
     }),
-    challenge: defaultChallenge,
+    course: defaultChallenge.course,
   })
   expect(formatMilliseconds(result)).toBe('16:46:03')
 })

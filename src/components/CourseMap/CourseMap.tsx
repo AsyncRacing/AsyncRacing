@@ -6,17 +6,17 @@ import { PathLayer } from '@deck.gl/layers'
 import { ViewState } from 'react-map-gl/src/mapbox/mapbox'
 
 /* local imports */
-import { Challenge, Track } from '../../model/ChallengeConfiguration'
+import { Course, Track } from '../../model/ChallengeConfiguration'
 import { trackBounds } from '../../model/track-bounds'
 import { FlyToInterpolator } from '@deck.gl/core'
 import { WebMercatorViewport } from 'react-map-gl'
-import { ChallengeCourse } from '../Course/ChallengeCourse'
+import { CourseSlider } from '../CourseSlider/CourseSlider'
 
 /* interfaces & types */
 interface PropTypes {
   tracks: Track[]
-  challenge: Challenge
-  setChallenge: any
+  course: Course
+  setCourse: any
 }
 
 /* helpers & constants */
@@ -28,7 +28,7 @@ const defaultView: ViewState = {
 }
 
 /* react component */
-const ChallengeMap = ({ tracks, challenge, setChallenge }: PropTypes) => {
+const CourseMap = ({ tracks, course, setCourse }: PropTypes) => {
   // Map's viewstate
   const [viewState, setViewState] = useState<ViewState>(defaultView)
   const handleViewStateChange = useCallback(
@@ -87,9 +87,9 @@ const ChallengeMap = ({ tracks, challenge, setChallenge }: PropTypes) => {
         width="100%"
         height="100%"
       />
-      <ChallengeCourse challenge={challenge} setChallenge={setChallenge} />
+      <CourseSlider course={course} setCourse={setCourse} />
     </DeckGL>
   )
 }
 
-export { ChallengeMap }
+export { CourseMap }
