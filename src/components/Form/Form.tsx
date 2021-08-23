@@ -3,7 +3,6 @@ import './Form.css'
 import { UploadButton } from '../UploadButton/UploadButton'
 import { Challenge, Course } from '../../model/ChallengeConfiguration'
 import { GPXFile } from '../../model/gpx-file'
-import { title } from 'process'
 import { firebaseDB } from '../../model/firebase-config'
 import { useTracks } from '../../model/useFiles'
 
@@ -39,7 +38,7 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
             tracks: tracks,
             course: course,
             metadata: {
-              title: title,
+              title: metadata.title,
               description: metadata.description,
               creator: metadata.creator,
             },

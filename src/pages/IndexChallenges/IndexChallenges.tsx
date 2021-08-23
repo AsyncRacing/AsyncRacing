@@ -29,6 +29,7 @@ const IndexChallenges = () => {
             <li>
               <Link to={`/challenges/${challengeID}`}>
                 Challenge: {challenge.metadata.title}
+                <ul>Creator: {challenge.metadata.creator}</ul>
               </Link>
             </li>
           )
