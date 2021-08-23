@@ -64,7 +64,6 @@ export const Form = ({ addFiles, clearFiles, files }: FormProps) => {
             tracks: [],
             metadata: {},
           })
-          console.log(e)
           newChallengeRef.set({
             ...challenge.val(),
             tracks: tracks,
