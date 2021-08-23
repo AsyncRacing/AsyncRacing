@@ -2,26 +2,21 @@
 import React, { useState, useEffect } from 'react'
 
 /* component imports */
-import { ChallengeMap } from '../../components/Map/ChallengeMap'
+import { CourseMap } from '../../components/CourseMap/CourseMap'
 import { Form } from '../../components/Form/Form'
 import { Timer } from '../../components/Timer/Timer'
 
 /* helper imports */
 import { useFiles, useTracks } from '../../model/useFiles'
-import { GPXFile } from '../../model/gpx-file'
-import { Challenge, Track } from '../../model/ChallengeConfiguration'
+import { Course } from '../../model/ChallengeConfiguration'
 
 /* react components */
 const NewChallenge = () => {
-  const emptyChallenge: Challenge = {
-    course: {
-      start: null,
-      finish: null,
-    },
-    tracks: [],
-    metadata: {},
+  const emptyCourse: Course = {
+    start: null,
+    finish: null,
   }
-  const [challenge, setChallenge] = useState<Challenge>(emptyChallenge)
+  const [course, setCourse] = useState<Course>(emptyCourse)
   // File upload manipulation
   const [files, , addFiles, clearFiles] = useFiles()
   const tracks = useTracks(files)
@@ -29,7 +24,7 @@ const NewChallenge = () => {
   // When tracks changes, and start and finish are null,
   //  the Challenge will automatically update to the track's start and finish point.
   useEffect(() => {
-    let { start, finish } = challenge.course
+    let { start, finish } = course
     if (tracks.length > 0) {
       if (start === null) {
         const startPoint = tracks[0].path[0]
@@ -45,9 +40,10 @@ const NewChallenge = () => {
         ]
       }
     }
-    setChallenge({
-      ...challenge,
-      course: { ...challenge.course, start, finish },
+    setCourse({
+      ...course,
+      start,
+      finish,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tracks.length])
@@ -63,11 +59,7 @@ const NewChallenge = () => {
 
   return (
     <>
-      <ChallengeMap
-        challenge={challenge}
-        setChallenge={setChallenge}
-        tracks={tracks}
-      />
+      <CourseMap course={course} setCourse={setCourse} tracks={tracks} />
       {/* Need to fix width and spacing for p tag and Timer tag and Upload Button div */}
       <div
         style={{
@@ -75,14 +67,19 @@ const NewChallenge = () => {
           position: 'relative',
         }}
       >
-        <Form files={files} addFiles={addFiles} clearFiles={clearFiles} />
+        <Form
+          course={course}
+          files={files}
+          addFiles={addFiles}
+          clearFiles={clearFiles}
+        />
         <p>Track Times</p>
         <ul>
           {tracks.map((track, id) => {
             return (
               <li key={id}>
                 <p>{track.metadata.title}</p>
-                <Timer track={track} challenge={challenge} />
+                <Timer track={track} course={course} />
               </li>
             )
           })}

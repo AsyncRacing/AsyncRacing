@@ -23,7 +23,7 @@ const Template: ComponentStory<typeof Timer> = () => {
           color: [0, 250, 250],
         },
       }}
-      challenge={defaultChallenge}
+      course={defaultChallenge.course}
     />
   )
 }

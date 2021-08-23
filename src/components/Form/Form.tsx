@@ -11,12 +11,12 @@ interface FormProps {
   addFiles: (file: any) => void
   clearFiles: () => void
   files: Array<GPXFile>
+  course: Course
 }
 
-export const Form = ({ files, addFiles, clearFiles }: FormProps) => {
+export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
   const tracks = useTracks(files)
   const [metadata, setMetadata] = useState<Challenge['metadata']>({})
-  const [course, setCourse] = useState<Course>({ start: null, finish: null })
 
   return (
     <div className="wrapper">
