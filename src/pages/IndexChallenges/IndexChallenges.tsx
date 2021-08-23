@@ -9,10 +9,16 @@ const IndexChallenges = () => {
   //const challengeDBRef = firebaseDB.ref(`challenges/${challengeID}`)
   useEffect(() => {
     ;(async () => {
-      const challengesFromDB = await firebaseDB.ref('challenges').get()
-      console.log(challengesFromDB.val())
+      const challengesFromDB = (await firebaseDB.ref('challenges').get()).val()
+      Object.values(challengesFromDB).forEach((challenge: any) => {
+        challenge.tracks = {}
+        challenge.tracks = Object.values(challenge.tracks)
+      })
+      setChallengeDB(challengesFromDB)
     })()
   })
+
+  console.log(challengeDB)
 
   //   challengeDBRef.on('challenge added', (challenge) => {
   //     const key: string = challenge.key as string
@@ -35,6 +41,11 @@ const IndexChallenges = () => {
   return (
     <>
       <h2>Home</h2>
+      <p>
+        {Object.keys(challengeDB).map((challengeID) => (
+          <p>{challengeID}</p>
+        ))}
+      </p>
       <ul>
         {challenges.map((challenge, challengeID) => {
           return (
@@ -52,7 +63,3 @@ const IndexChallenges = () => {
 }
 
 export { IndexChallenges }
-
-interface challengeList {
-  uid: string
-}
