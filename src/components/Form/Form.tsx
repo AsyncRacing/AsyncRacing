@@ -47,7 +47,7 @@ export const Form = ({ files, addFiles, clearFiles }: FormProps) => {
               description: metadata.description,
               creator: metadata.creator,
               //uploadDate: metadata.uploadDate,
-              phoneNumber: metadata.phoneNumber,
+              // phoneNumber: metadata.phoneNumber,
             },
           })
         }}
@@ -99,20 +99,6 @@ export const Form = ({ files, addFiles, clearFiles }: FormProps) => {
                 setMetadata({
                   ...metadata,
                   description,
-                })
-              }}
-            />
-          </label>
-          <label>
-            <p>Share Track</p>
-            <input
-              name="phoneNumber"
-              value={metadata.phoneNumber}
-              onChange={(e) => {
-                const phoneNumber = e.target.value
-                setMetadata({
-                  ...metadata,
-                  phoneNumber,
                 })
               }}
             />
