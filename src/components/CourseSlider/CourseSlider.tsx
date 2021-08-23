@@ -3,7 +3,7 @@ import React, { useCallback } from 'react'
 import { Marker, SVGOverlay } from 'react-map-gl'
 
 /* local imports */
-import { Challenge, Point, Waypoint } from '../../model/ChallengeConfiguration'
+import { Course, Point, Waypoint } from '../../model/ChallengeConfiguration'
 import pinImg from '../../assets/red-pin.png'
 
 /* interfaces & types */
@@ -12,9 +12,9 @@ interface PinProps {
   setPoint: any
 }
 
-interface CourseProps {
-  challenge: Challenge
-  setChallenge: any
+interface CourseSliderProps {
+  setCourse: any
+  course: Course
 }
 
 interface LineProps {
@@ -94,19 +94,16 @@ const Line = ({ waypoint, setWaypoint, color }: LineProps) => {
 }
 
 // exported component
-const ChallengeCourse = ({ challenge, setChallenge }: CourseProps) => {
-  const { start, finish } = challenge.course
+const CourseSlider = ({ course, setCourse }: CourseSliderProps) => {
+  const { start, finish } = course
 
   const getSetWaypointOf = useCallback(
     (name: string) => (waypoint: Waypoint) =>
-      setChallenge({
-        ...challenge,
-        course: {
-          ...challenge.course,
-          [name]: waypoint,
-        },
+      setCourse({
+        ...course,
+        [name]: waypoint,
       }),
-    [challenge, setChallenge],
+    [course, setCourse],
   )
 
   return (
@@ -139,4 +136,4 @@ const ChallengeCourse = ({ challenge, setChallenge }: CourseProps) => {
   )
 }
 
-export { ChallengeCourse }
+export { CourseSlider }

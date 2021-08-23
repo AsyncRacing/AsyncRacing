@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const IndexChallenges = () => {
   // get challenges from firebase DB
@@ -14,11 +15,14 @@ const IndexChallenges = () => {
         {challenges.map((challenge, challengeID) => {
           return (
             <li>
-              <a href={`./challenges/${challengeID}`}>{challenge}</a>
+              <Link to={`/challenges/${challengeID}`}>
+                Challenge: {challenge}
+              </Link>
             </li>
           )
         })}
       </ul>
+      <Link to="/challenges/new">New Challenge</Link>
     </>
   )
 }
