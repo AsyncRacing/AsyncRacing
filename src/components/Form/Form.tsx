@@ -101,8 +101,9 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
               }}
             />
           </label>
-
-          <button type="submit">Save</button>
+          <div>
+            <button type="submit">Save</button>
+          </div>
         </fieldset>
       </form>
     </>
