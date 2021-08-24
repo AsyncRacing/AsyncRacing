@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useObjectVal } from 'react-firebase-hooks/database'
 import { useParams } from 'react-router-dom'
 import {

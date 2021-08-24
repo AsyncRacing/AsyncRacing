@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { useObjectVal } from 'react-firebase-hooks/database'
 import { ChallengeSchema } from '../../model/ChallengeConfiguration'
