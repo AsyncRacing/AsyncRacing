@@ -1,6 +1,9 @@
 /* module imports */
 import React, { useState, useEffect } from 'react'
 
+/* style import */
+import './NewChallenge.css'
+
 /* component imports */
 import { RaceMap } from '../../components/RaceMap/RaceMap'
 import { Form } from '../../components/Form/Form'
@@ -61,12 +64,7 @@ const NewChallenge = () => {
     <>
       <RaceMap course={course} setCourse={setCourse} tracks={tracks} />
       {/* Need to fix width and spacing for p tag and Timer tag and Upload Button div */}
-      <div
-        style={{
-          zIndex: 2,
-          position: 'relative',
-        }}
-      >
+      <div className="new__challenge_div_wrapper">
         <Form
           course={course}
           files={files}
@@ -74,7 +72,7 @@ const NewChallenge = () => {
           clearFiles={clearFiles}
         />
         <p>Track Times</p>
-        <ul>
+        <ul className="new__challenge_list">
           {tracks.map((track, id) => {
             return (
               <li key={id}>

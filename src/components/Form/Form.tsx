@@ -20,6 +20,7 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
     <>
       <h1>AsyncRacing</h1>
       <form
+        className="form__main"
         onSubmit={async (e) => {
           e.preventDefault()
 
@@ -56,7 +57,7 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
           console.warn('Need to redirect to', redirect)
         }}
       >
-        <fieldset>
+        <fieldset className="form__main_fieldset">
           <label>
             <p>Upload GPX Files</p>
             <UploadButton
@@ -69,6 +70,7 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
           <label>
             <p>Creator's Name</p>
             <input
+              type="text"
               name="creator"
               value={metadata.creator}
               onChange={(e) => {
@@ -81,6 +83,7 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
           <label>
             <p>Title</p>
             <input
+              type="text"
               name="title"
               value={metadata.title}
               onChange={(e) => {
@@ -93,6 +96,7 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
           <label>
             <p>Description</p>
             <input
+              type="text"
               name="description"
               value={metadata.description}
               onChange={(e) => {
@@ -101,7 +105,7 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
               }}
             />
           </label>
-          <div>
+          <div className="form__main_button">
             <button type="submit">Save</button>
           </div>
         </fieldset>
