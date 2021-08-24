@@ -20,6 +20,84 @@
 | Netlify           | Hosting; Continuous Integration      |
 | MapBox            | Map API                              |
 
+# Firebase Live DB Schema
+
+```json
+{
+  "challenges": {
+    "<challengeID>": {
+      "course": {
+        "start": [
+          {
+            "latitude": 0,
+            "longitude": 0
+          },
+          {
+            "latitude": 0,
+            "longitude": 0
+          }
+        ],
+        "finish": [
+          {
+            "latitude": 0,
+            "longitude": 0
+          },
+          {
+            "latitude": 0,
+            "longitude": 0
+          }
+        ],
+        "checkpoints": [
+          [
+            {
+              "latitude": 0,
+              "longitude": 0
+            },
+            {
+              "latitude": 0,
+              "longitude": 0
+            }
+          ],
+          [
+            {
+              "latitude": 0,
+              "longitude": 0
+            },
+            {
+              "latitude": 0,
+              "longitude": 0
+            }
+          ]
+        ]
+      },
+      "tracks": {
+        "<trackID>": {
+          "path": [
+            {
+              "latitude": 0,
+              "longitude": 0,
+              "time": "<JS Date>"
+            }
+          ],
+          "metadata": {
+            "title": "testTrack",
+            "creator": "",
+            "uploadDate": "",
+            "color": [0, 0, 255]
+          }
+        }
+      },
+      "metadata": {
+        "title": "Cool Challenge",
+        "description": "This challenge is very cool.",
+        "creator": "Ben",
+        "uploadDate": "<JS Date>"
+      }
+    }
+  }
+}
+```
+
 # Contributors
 
 - [Ben Simpson]

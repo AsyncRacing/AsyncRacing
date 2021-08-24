@@ -1,14 +1,14 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 
-import { GetMapTrack } from './GetMapTrack'
+import { NewChallenge } from './NewChallenge'
 
 export default {
   title: 'components/GetMapTrack',
-  component: GetMapTrack,
-} as ComponentMeta<typeof GetMapTrack>
+  component: NewChallenge,
+} as ComponentMeta<typeof NewChallenge>
 
-const Template: ComponentStory<typeof GetMapTrack> = () => <GetMapTrack />
+const Template: ComponentStory<typeof NewChallenge> = () => <NewChallenge />
 
 export const Primary = Template.bind({})
 Primary.args = {}

@@ -6,18 +6,17 @@ import { PathLayer } from '@deck.gl/layers'
 import { ViewState } from 'react-map-gl/src/mapbox/mapbox'
 
 /* local imports */
-import { Challenge, Track } from '../../model/ChallengeConfiguration'
-//import { Circuit } from '../Circuit/Circuit'
+import { Course, Track } from '../../model/ChallengeConfiguration'
 import { trackBounds } from '../../model/track-bounds'
 import { FlyToInterpolator } from '@deck.gl/core'
 import { WebMercatorViewport } from 'react-map-gl'
-import { ChallengeCourse } from '../Course/ChallengeCourse'
+import { CourseSlider } from '../CourseSlider/CourseSlider'
 
 /* interfaces & types */
 interface PropTypes {
   tracks: Track[]
-  challenge: Challenge
-  setChallenge: any
+  course: Course
+  setCourse: any
 }
 
 /* helpers & constants */
@@ -29,7 +28,7 @@ const defaultView: ViewState = {
 }
 
 /* react component */
-const ChallengeMap = ({ tracks, challenge, setChallenge }: PropTypes) => {
+const CourseMap = ({ tracks, course, setCourse }: PropTypes) => {
   // Map's viewstate
   const [viewState, setViewState] = useState<ViewState>(defaultView)
   const handleViewStateChange = useCallback(
@@ -40,7 +39,7 @@ const ChallengeMap = ({ tracks, challenge, setChallenge }: PropTypes) => {
   )
   React.useEffect(() => {
     if (tracks.length > 0 && tracks[0].path.length > 0) {
-      const bounds = trackBounds(tracks[0].path)
+      const bounds = trackBounds(tracks.map((track) => track.path).flat(1))
       setViewState((vs) => {
         const { longitude, latitude, zoom } = new WebMercatorViewport({
           ...vs,
@@ -68,8 +67,8 @@ const ChallengeMap = ({ tracks, challenge, setChallenge }: PropTypes) => {
       data: tracks,
       pickable: true,
       widthMinPixels: 2,
-      getPath: (d) => d.path.map((point) => [point.lon, point.lat]),
-      getColor: (d) => d.color,
+      getPath: (d) => d.path.map((point) => [point.longitude, point.latitude]),
+      getColor: (track: Track) => track.metadata.color || [0, 0, 255],
       getWidth: () => 5,
     }),
   ]
@@ -88,9 +87,9 @@ const ChallengeMap = ({ tracks, challenge, setChallenge }: PropTypes) => {
         width="100%"
         height="100%"
       />
-      <ChallengeCourse challenge={challenge} setChallenge={setChallenge} />
+      <CourseSlider course={course} setCourse={setCourse} />
     </DeckGL>
   )
 }
 
-export { ChallengeMap }
+export { CourseMap }
