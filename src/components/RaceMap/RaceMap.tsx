@@ -1,3 +1,10 @@
+/*
+The RaceMap component shows a couple of things:
+- The map
+- An active challenge
+- Any uploaded tracks
+*/
+
 /* module imports */
 import DeckGL from '@deck.gl/react'
 import React, { useCallback, useState } from 'react'
@@ -28,7 +35,7 @@ const defaultView: ViewState = {
 }
 
 /* react component */
-const CourseMap = ({ tracks, course, setCourse }: PropTypes) => {
+const RaceMap = ({ tracks, course, setCourse }: PropTypes) => {
   // Map's viewstate
   const [viewState, setViewState] = useState<ViewState>(defaultView)
   const handleViewStateChange = useCallback(
@@ -92,4 +99,4 @@ const CourseMap = ({ tracks, course, setCourse }: PropTypes) => {
   )
 }
 
-export { CourseMap }
+export { RaceMap }

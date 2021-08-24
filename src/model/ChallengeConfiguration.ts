@@ -37,6 +37,7 @@ type Path = Array<Step>
 interface Track {
   path: Path
   metadata: {
+    id?: string
     title?: string
     creator?: string
     uploadDate?: Date
@@ -66,6 +67,7 @@ interface Challenge {
   course: Course
   tracks: Array<Track> // SEE FOOTNOTE
   metadata: {
+    id?: string
     title?: string
     description?: string
     creator?: string
@@ -79,4 +81,38 @@ interface Challenge {
 // The schema randomly decides what <trackID> is.
 // We won't be able to immediately access the ID in the frontend for types.
 
-export type { Challenge, Course, Path, Point, Step, Track, Waypoint }
+/*
+FIREBASE DB SCHEMA TYPES
+========================
+
+These types are used when the firebase data is fetched from the server.
+Importantly, Records of Tracks and Challenges are at the root of the database.
+The implication is challenge does not store track data, but ids of tracks.
+*/
+
+// TrackSchema is no different right now, but if it ever changes, this needs to update.
+interface TrackSchema extends Track {}
+
+// ChallengeSchema holds an array of track IDs for the tracks key.
+interface ChallengeSchema extends Omit<Challenge, 'tracks'> {
+  tracks: Array<string>
+}
+
+// The DatabaseSchema represents the type of the entire database.
+interface DatabaseSchema {
+  challenges: Record<string, ChallengeSchema>
+  tracks: Record<string, TrackSchema>
+}
+
+export type {
+  Challenge,
+  ChallengeSchema,
+  Course,
+  DatabaseSchema,
+  Path,
+  Point,
+  Step,
+  Track,
+  TrackSchema,
+  Waypoint,
+}

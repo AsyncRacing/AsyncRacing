@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 
 /* component imports */
-import { CourseMap } from '../../components/CourseMap/CourseMap'
+import { RaceMap } from '../../components/RaceMap/RaceMap'
 import { Form } from '../../components/Form/Form'
 import { Timer } from '../../components/Timer/Timer'
 
@@ -59,7 +59,7 @@ const NewChallenge = () => {
 
   return (
     <>
-      <CourseMap course={course} setCourse={setCourse} tracks={tracks} />
+      <RaceMap course={course} setCourse={setCourse} tracks={tracks} />
       {/* Need to fix width and spacing for p tag and Timer tag and Upload Button div */}
       <div
         style={{
