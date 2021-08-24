@@ -18,8 +18,6 @@ const IndexChallenges = () => {
     })()
   })
 
-  console.log(challengeDB)
-
   return (
     <>
       <h2>Home</h2>
