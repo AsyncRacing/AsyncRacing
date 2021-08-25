@@ -88,9 +88,6 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
                 setMetadata({ ...metadata, creator })
               }}
             />
-          </label>
-
-          <label>
             <p>Title</p>
             <input
               name="title"
