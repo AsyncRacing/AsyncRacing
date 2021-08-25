@@ -90,8 +90,15 @@ Importantly, Records of Tracks and Challenges are at the root of the database.
 The implication is challenge does not store track data, but ids of tracks.
 */
 
+// StepSchema has a JSON date instead of a JS date.
+interface StepSchema extends Omit<Step, 'time'> {
+  time: string // The string must be ISO-8601 date compatible.
+}
+
 // TrackSchema is no different right now, but if it ever changes, this needs to update.
-interface TrackSchema extends Track {}
+interface TrackSchema extends Omit<Track, 'path'> {
+  path: Array<StepSchema>
+}
 
 // ChallengeSchema holds an array of track IDs for the tracks key.
 interface ChallengeSchema extends Omit<Challenge, 'tracks'> {
@@ -112,6 +119,7 @@ export type {
   Path,
   Point,
   Step,
+  StepSchema,
   Track,
   TrackSchema,
   Waypoint,

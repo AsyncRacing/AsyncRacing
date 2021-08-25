@@ -3,6 +3,7 @@ import { useObjectVal } from 'react-firebase-hooks/database'
 import { useParams } from 'react-router-dom'
 import {
   ChallengeSchema,
+  StepSchema,
   Track,
   TrackSchema,
 } from '../../model/ChallengeConfiguration'
@@ -40,11 +41,13 @@ const ShowChallenge = () => {
           <strong>Error!</strong>
         </p>
       )}
+
       {(challengeLoading || tracksLoading) && (
         <p>
           <em>Loading...</em>
         </p>
       )}
+
       {challenge && tracks && (
         <>
           <p>{challenge.metadata.title}</p>
@@ -58,11 +61,21 @@ const ShowChallenge = () => {
             <p>Track Times</p>
             <ul>
               {challenge.tracks.map((trackID) => {
-                const track = tracks[trackID]
+                const trackSchema = tracks[trackID]
+                const track = {
+                  // Copy track schema.
+                  ...trackSchema,
+
+                  // Convert all the paths to use JS date instead of ISO date.
+                  path: trackSchema.path.map((step: StepSchema) => ({
+                    ...step,
+                    time: new Date(step.time),
+                  })),
+                }
                 return (
                   <li key={trackID}>
                     <p>{track.metadata.title}</p>
-                    <Timer track={track as Track} course={challenge.course} />
+                    <Timer track={track} course={challenge.course} />
                   </li>
                 )
               })}
