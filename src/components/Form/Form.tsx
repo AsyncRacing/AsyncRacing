@@ -34,14 +34,12 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
 
           // Create a new trackRef for each track.
           const newTrackRefs = tracks.map((track) => {
-            track.path.forEach((step: Step) => {
-              // TODO: Talk to tyler about this.
-              // The "step" variable has a time.
-              console.log(step)
-              // That is good, but the time doesn't save to the db!!!!
-              // That is not good
-            })
-            const newTrackRef = tracksRef.push({ ...track })
+            const fixedPath = track.path.map((step: Step) => ({
+              ...step,
+              time: step.time.toJSON(),
+            }))
+
+            const newTrackRef = tracksRef.push({ ...track, path: fixedPath })
             return newTrackRef
           })
 
