@@ -62,7 +62,7 @@ const ShowChallenge = () => {
             <ul>
               {challenge.tracks.map((trackID) => {
                 const trackSchema = tracks[trackID]
-                const track = {
+                const track: Track = {
                   // Copy track schema.
                   ...trackSchema,
 
