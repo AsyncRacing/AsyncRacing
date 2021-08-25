@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useObjectVal } from 'react-firebase-hooks/database'
 import { useParams } from 'react-router-dom'
 import {
   ChallengeSchema,
-  StepSchema,
   Track,
   TrackSchema,
 } from '../../model/ChallengeConfiguration'
@@ -30,9 +29,28 @@ const ShowChallenge = () => {
   ] = useObjectVal<ChallengeSchema>(firebaseDB.ref('challenges/' + challengeId))
 
   // Get tracks data
-  const [tracks, tracksLoading, tracksError] = useObjectVal<
+  const [trackSchemas, tracksLoading, tracksError] = useObjectVal<
     Record<string, TrackSchema>
   >(firebaseDB.ref('tracks'))
+
+  const [tracks, setTracks] = useState<Record<string, Track>>({})
+  const tracksLength = Object.keys(trackSchemas ?? {}).length
+
+  // useMemo instead of useEffect
+  // no need for [tracks, setTracks] = useState(...)
+  useEffect(() => {
+    const newTracks: Record<string, Track> = {}
+    Object.entries(trackSchemas ?? {}).forEach(([trackId, trackSchema]) => {
+      newTracks[trackId] = {
+        ...trackSchema,
+        path: trackSchema.path.map((step) => ({
+          ...step,
+          time: new Date(step.time),
+        })),
+      }
+    })
+    setTracks(newTracks)
+  }, [tracksLength, trackSchemas])
 
   return (
     <>
@@ -48,7 +66,7 @@ const ShowChallenge = () => {
         </p>
       )}
 
-      {challenge && tracks && (
+      {challenge && Object.keys(tracks).length > 0 && trackSchemas && (
         <>
           <p>{challenge.metadata.title}</p>
           <p>Tracks: {challenge.tracks.join(', ')}</p>
@@ -60,20 +78,10 @@ const ShowChallenge = () => {
           >
             <p>Track Times</p>
             <ul>
-              {challenge.tracks.map((trackID) => {
-                const trackSchema = tracks[trackID]
-                const track: Track = {
-                  // Copy track schema.
-                  ...trackSchema,
-
-                  // Convert all the paths to use JS date instead of ISO date.
-                  path: trackSchema.path.map((step: StepSchema) => ({
-                    ...step,
-                    time: new Date(step.time),
-                  })),
-                }
+              {challenge.tracks.map((trackId) => {
+                const track = tracks[trackId]
                 return (
-                  <li key={trackID}>
+                  <li key={trackId}>
                     <p>{track.metadata.title}</p>
                     <Timer track={track} course={challenge.course} />
                   </li>
