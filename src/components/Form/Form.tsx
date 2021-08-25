@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Form.css'
 import { UploadButton } from '../UploadButton/UploadButton'
-import { Challenge, Course } from '../../model/ChallengeConfiguration'
+import { Challenge, Course, Step } from '../../model/ChallengeConfiguration'
 import { GPXFile } from '../../model/gpx-file'
 import { firebaseDB } from '../../model/firebase-config'
 import { useTracks } from '../../model/useFiles'
@@ -15,7 +15,12 @@ interface FormProps {
 
 export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
   const tracks = useTracks(files)
-  const [metadata, setMetadata] = useState<Challenge['metadata']>({})
+  const [metadata, setMetadata] = useState<Challenge['metadata']>({
+    id: undefined,
+    title: undefined,
+    creator: undefined,
+    uploadDate: undefined,
+  })
   return (
     <>
       <h1>AsyncRacing</h1>
@@ -29,6 +34,13 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
 
           // Create a new trackRef for each track.
           const newTrackRefs = tracks.map((track) => {
+            track.path.forEach((step: Step) => {
+              // TODO: Talk to tyler about this.
+              // The "step" variable has a time.
+              console.log(step)
+              // That is good, but the time doesn't save to the db!!!!
+              // That is not good
+            })
             const newTrackRef = tracksRef.push({ ...track })
             return newTrackRef
           })
@@ -39,8 +51,8 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
           // Create a new challenge containing those trackIDs.
           const newChallengeRef = challengesRef.push({
             course: {
-              start: null,
-              finish: null,
+              start: course.start,
+              finish: course.finish,
             },
             tracks: newTrackIds,
             metadata: {
