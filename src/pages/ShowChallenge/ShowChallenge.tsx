@@ -38,6 +38,7 @@ const ShowChallenge = () => {
 
   // useMemo instead of useEffect
   // no need for [tracks, setTracks] = useState(...)
+  // const tracks = useMemo(() => {…}, [tracksLength, trackSchemas])
   useEffect(() => {
     const newTracks: Record<string, Track> = {}
     Object.entries(trackSchemas ?? {}).forEach(([trackId, trackSchema]) => {
@@ -54,6 +55,10 @@ const ShowChallenge = () => {
 
   return (
     <>
+      {/* <RaceMap
+        course={challenge?.course ?? { start: null, finish: null }}
+        tracks={Object.values(tracks)}
+      /> */}
       {(challengeError || tracksError) && (
         <p>
           <strong>Error!</strong>
