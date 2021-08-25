@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useObjectVal } from 'react-firebase-hooks/database'
 import { useParams } from 'react-router-dom'
 import {
@@ -7,6 +7,7 @@ import {
   Track,
   TrackSchema,
 } from '../../model/ChallengeConfiguration'
+import { RaceMap } from '../../components/RaceMap/RaceMap'
 
 /* component imports */
 //import { RaceMap } from '../../components/RaceMap/RaceMap'
@@ -30,12 +31,33 @@ const ShowChallenge = () => {
   ] = useObjectVal<ChallengeSchema>(firebaseDB.ref('challenges/' + challengeId))
 
   // Get tracks data
-  const [tracks, tracksLoading, tracksError] = useObjectVal<
+  const [trackSchemas, tracksLoading, tracksError] = useObjectVal<
     Record<string, TrackSchema>
   >(firebaseDB.ref('tracks'))
+  const [tracks, setTracks] = useState<Record<string, Track>>({})
 
+  useEffect(() => {
+    Object.entries(trackSchemas ?? {}).forEach(([trackID, trackSchema]) => {
+      if (trackSchema === undefined) {
+        return
+      }
+      const path = trackSchema.path.map((schemaStep) => {
+        return {
+          ...schemaStep,
+          time: new Date(schemaStep.time),
+        }
+      })
+      tracks[trackID] = { ...trackSchema, path }
+      setTracks(tracks)
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [Object.keys(trackSchemas ?? {}).length])
   return (
     <>
+      {/* <RaceMap
+        course={challenge?.course ?? { start: null, finish: null }}
+        tracks={Object.values(tracks)}
+      /> */}
       {(challengeError || tracksError) && (
         <p>
           <strong>Error!</strong>
@@ -48,7 +70,7 @@ const ShowChallenge = () => {
         </p>
       )}
 
-      {challenge && tracks && (
+      {challenge && trackSchemas && (
         <>
           <p>{challenge.metadata.title}</p>
           <p>Tracks: {challenge.tracks.join(', ')}</p>
@@ -61,17 +83,8 @@ const ShowChallenge = () => {
             <p>Track Times</p>
             <ul>
               {challenge.tracks.map((trackID) => {
-                const trackSchema = tracks[trackID]
-                const track: Track = {
-                  // Copy track schema.
-                  ...trackSchema,
-
-                  // Convert all the paths to use JS date instead of ISO date.
-                  path: trackSchema.path.map((step: StepSchema) => ({
-                    ...step,
-                    time: new Date(step.time),
-                  })),
-                }
+                const track = tracks[trackID]
+                console.log(tracks)
                 return (
                   <li key={trackID}>
                     <p>{track.metadata.title}</p>
