@@ -78,6 +78,7 @@ export const ChallengeForm = ({
           <Form.Field>
             <label htmlFor="upload-button">Upload GPX Files</label>
             <UploadButton
+              id="upload-button"
               files={files}
               addFiles={addFiles}
               clearFiles={clearFiles}
