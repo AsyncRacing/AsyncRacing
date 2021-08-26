@@ -1,0 +1,9 @@
+.new__challenge_div_wrapper {
+  z-index: 2;
+  position:absolute;
+  right: 0;
+}
+
+.new__challenge_list {
+  list-style: none;
+}
