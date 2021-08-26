@@ -13,6 +13,7 @@ import { Timer } from '../../components/Timer/Timer'
 
 /* helper imports */
 import { firebaseDB } from '../../model/firebase-config'
+import { useMemo } from 'react'
 
 interface Params {
   challengeId: string
@@ -28,18 +29,13 @@ const ShowChallenge = () => {
     challengeError,
   ] = useObjectVal<ChallengeSchema>(firebaseDB.ref('challenges/' + challengeId))
 
-  // Get tracks data
+  // Get Track data, starting with the schemas.
   const [trackSchemas, tracksLoading, tracksError] = useObjectVal<
     Record<string, TrackSchema>
   >(firebaseDB.ref('tracks'))
 
-  const [tracks, setTracks] = useState<Record<string, Track>>({})
-  const tracksLength = Object.keys(trackSchemas ?? {}).length
-
-  // useMemo instead of useEffect
-  // no need for [tracks, setTracks] = useState(...)
-  // const tracks = useMemo(() => {…}, [tracksLength, trackSchemas])
-  useEffect(() => {
+  // Use memoization on tracks via spreadTracks to get tracks variable.
+  const spreadTracks = (trackSchemas: Record<string, TrackSchema>) => {
     const newTracks: Record<string, Track> = {}
     Object.entries(trackSchemas ?? {}).forEach(([trackId, trackSchema]) => {
       newTracks[trackId] = {
@@ -50,8 +46,10 @@ const ShowChallenge = () => {
         })),
       }
     })
-    setTracks(newTracks)
-  }, [tracksLength, trackSchemas])
+    return newTracks
+  }
+  // See? Getting the tracks here!
+  const tracks = useMemo(() => spreadTracks(trackSchemas ?? {}), [trackSchemas])
 
   return (
     <>
