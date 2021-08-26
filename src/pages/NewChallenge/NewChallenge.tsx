@@ -9,6 +9,7 @@ import { Timer } from '../../components/Timer/Timer'
 /* helper imports */
 import { useFiles, useTracks } from '../../model/useFiles'
 import { Course } from '../../model/ChallengeConfiguration'
+import { CourseSlider } from '../../components/CourseSlider/CourseSlider'
 
 /* react components */
 const NewChallenge = () => {
@@ -59,20 +60,21 @@ const NewChallenge = () => {
 
   return (
     <>
-      <RaceMap course={course} setCourse={setCourse} tracks={tracks} />
-      {/* Need to fix width and spacing for p tag and Timer tag and Upload Button div */}
       <div
         style={{
           zIndex: 2,
           position: 'relative',
         }}
       >
+        {/* Show the challenge creation form */}
         <Form
           course={course}
           files={files}
           addFiles={addFiles}
           clearFiles={clearFiles}
         />
+
+        {/* Temporary placeholder list for track times */}
         <p>Track Times</p>
         <ul>
           {tracks.map((track, id) => {
@@ -85,6 +87,11 @@ const NewChallenge = () => {
           })}
         </ul>
       </div>
+
+      {/* The map plus challenge slider */}
+      <RaceMap tracks={tracks}>
+        <CourseSlider course={course} setCourse={setCourse} />
+      </RaceMap>
     </>
   )
 }
