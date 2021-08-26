@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useObjectVal } from 'react-firebase-hooks/database'
 import { ChallengeSchema } from '../../model/ChallengeConfiguration'
 import { firebaseDB } from '../../model/firebase-config'
-import { Button, Icon, List, Table, Container, Header } from 'semantic-ui-react'
+import { Button, Icon, Table, Container, Header } from 'semantic-ui-react'
 
 /* css import */
 import './IndexChallenges.css'

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './Form.css'
+import './ChallengeForm.css'
 import { UploadButton } from '../UploadButton/UploadButton'
 import { Challenge, Course, Step } from '../../model/ChallengeConfiguration'
 import { GPXFile } from '../../model/gpx-file'

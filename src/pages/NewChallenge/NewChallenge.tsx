@@ -7,7 +7,7 @@ import './NewChallenge.css'
 
 /* component imports */
 import { RaceMap } from '../../components/RaceMap/RaceMap'
-import { ChallengeForm } from '../../components/Form/Form'
+import { ChallengeForm } from '../../components/ChallengeForm/ChallengeForm'
 import { Timer } from '../../components/Timer/Timer'
 
 /* helper imports */
