@@ -65,6 +65,8 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
           // TODO: Implement redirect.
           const redirect = `/challenges/${newChallengeRef.key}`
           console.warn('Need to redirect to', redirect)
+          const sendwithRedirect = `${newChallengeRef.key}`
+          shareTrack(sendwithRedirect)
         }}
       >
         <fieldset>
