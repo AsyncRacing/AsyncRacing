@@ -3,11 +3,10 @@ import { useObjectVal } from 'react-firebase-hooks/database'
 import { useParams } from 'react-router-dom'
 import {
   ChallengeSchema,
-  StepSchema,
   Track,
   TrackSchema,
 } from '../../model/ChallengeConfiguration'
-import { RaceMap } from '../../components/RaceMap/RaceMap'
+//import { RaceMap } from '../../components/RaceMap/RaceMap'
 
 /* component imports */
 //import { RaceMap } from '../../components/RaceMap/RaceMap'
@@ -38,9 +37,6 @@ const ShowChallenge = () => {
 
   useEffect(() => {
     Object.entries(trackSchemas ?? {}).forEach(([trackID, trackSchema]) => {
-      if (trackSchema === undefined) {
-        return
-      }
       const path = trackSchema.path.map((schemaStep) => {
         return {
           ...schemaStep,
@@ -48,10 +44,10 @@ const ShowChallenge = () => {
         }
       })
       tracks[trackID] = { ...trackSchema, path }
-      setTracks(tracks)
     })
+    setTracks(tracks)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [Object.keys(trackSchemas ?? {}).length])
+  }, [Object.keys(trackSchemas ?? {}).length, trackSchemas])
   return (
     <>
       {/* <RaceMap
@@ -70,7 +66,7 @@ const ShowChallenge = () => {
         </p>
       )}
 
-      {challenge && trackSchemas && (
+      {challenge && trackSchemas && Object.keys(tracks).length > 0 && (
         <>
           <p>{challenge.metadata.title}</p>
           <p>Tracks: {challenge.tracks.join(', ')}</p>
@@ -84,7 +80,6 @@ const ShowChallenge = () => {
             <ul>
               {challenge.tracks.map((trackID) => {
                 const track = tracks[trackID]
-                console.log(tracks)
                 return (
                   <li key={trackID}>
                     <p>{track.metadata.title}</p>

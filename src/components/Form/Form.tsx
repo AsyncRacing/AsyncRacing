@@ -5,6 +5,7 @@ import { Challenge, Course, Step } from '../../model/ChallengeConfiguration'
 import { GPXFile } from '../../model/gpx-file'
 import { firebaseDB } from '../../model/firebase-config'
 import { useTracks } from '../../model/useFiles'
+import { shareTrack } from '../ShareMapTrack/sms-track'
 
 interface FormProps {
   addFiles: (file: any) => void

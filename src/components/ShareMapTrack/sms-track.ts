@@ -6,15 +6,14 @@ const authToken = process.env.TWILIO_AUTH_TOKEN
 const twilioNumber = process.env.TWILIO_PHONE_NUMBER
 const myNumber = process.env.MY_NUMBER
 
-export const shareTrack = () => {
+export const shareTrack = (challengeRef: string) => {
   if (accountSid && authToken && myNumber && twilioNumber) {
     const client = new Twilio(accountSid, authToken)
-    console.log(client)
     client.messages
       .create({
         from: twilioNumber,
         to: myNumber,
-        body: 'This is a test text message',
+        body: `I challenge you to a race! Follow this link www.asyncracing.com/challenges/${challengeRef}`,
       })
       .then((message) => console.log(message.sid))
   } else {
