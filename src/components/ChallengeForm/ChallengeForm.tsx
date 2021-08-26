@@ -34,8 +34,8 @@ export const ChallengeForm = ({
       <h1>AsyncRacing</h1>
       <Form
         className="form__main"
-        onSubmit={async (e) => {
-          e.preventDefault()
+        onSubmit={async (event) => {
+          event.preventDefault()
 
           // Refer to the challenges object and tracks object.
           const challengesRef = firebaseDB.ref('challenges')
@@ -76,62 +76,53 @@ export const ChallengeForm = ({
       >
         <Form.Group>
           <Form.Field>
-            <label>
-              <p>Upload GPX Files</p>
-              <UploadButton
-                files={files}
-                addFiles={addFiles}
-                clearFiles={clearFiles}
-              />
-            </label>
+            <label htmlFor="upload-button">Upload GPX Files</label>
+            <UploadButton
+              files={files}
+              addFiles={addFiles}
+              clearFiles={clearFiles}
+            />
           </Form.Field>
         </Form.Group>
 
         <Form.Group widths="equal">
           <Form.Field>
-            <label>
-              <p>Creator's Name</p>
-              <input
-                type="text"
-                name="creator"
-                value={metadata.creator}
-                onChange={(e) => {
-                  const creator = e.target.value
-                  setMetadata({ ...metadata, creator })
-                }}
-              />
-            </label>
+            <label htmlFor="creator">Creator's Name</label>
+            <input
+              type="text"
+              name="creator"
+              value={metadata.creator}
+              onChange={(event) => {
+                const creator = event.target.value
+                setMetadata({ ...metadata, creator })
+              }}
+            />
           </Form.Field>
 
           <Form.Field>
-            <label>
-              <p>Title</p>
-              <input
-                type="text"
-                name="title"
-                value={metadata.title}
-                onChange={(e) => {
-                  const title = e.target.value
-                  setMetadata({ ...metadata, title })
-                }}
-              />
-            </label>
+            <label htmlFor="title">Title</label>
+            <input
+              type="text"
+              name="title"
+              value={metadata.title}
+              onChange={(event) => {
+                const title = event.target.value
+                setMetadata({ ...metadata, title })
+              }}
+            />
           </Form.Field>
         </Form.Group>
 
         <Form.TextArea
           label="Description"
+          name="description"
+          value={metadata.description}
           placeholder="Tell us about your race"
-        >
-          <input
-            name="description"
-            value={metadata.description}
-            onChange={(e) => {
-              const description = e.target.value
-              setMetadata({ ...metadata, description })
-            }}
-          />
-        </Form.TextArea>
+          onChange={(event) => {
+            const description = event.target.value
+            setMetadata({ ...metadata, description })
+          }}
+        />
 
         <Form.Group fluid>
           <Button positive animated>
