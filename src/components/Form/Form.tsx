@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Form.css'
 import { UploadButton } from '../UploadButton/UploadButton'
-import { Challenge, Course } from '../../model/ChallengeConfiguration'
+import { Challenge, Course, Step } from '../../model/ChallengeConfiguration'
 import { GPXFile } from '../../model/gpx-file'
 import { firebaseDB } from '../../model/firebase-config'
 import { useTracks } from '../../model/useFiles'
@@ -15,7 +15,12 @@ interface FormProps {
 
 export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
   const tracks = useTracks(files)
-  const [metadata, setMetadata] = useState<Challenge['metadata']>({})
+  const [metadata, setMetadata] = useState<Challenge['metadata']>({
+    id: undefined,
+    title: undefined,
+    creator: undefined,
+    uploadDate: undefined,
+  })
   return (
     <>
       <h1>AsyncRacing</h1>
@@ -29,7 +34,12 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
 
           // Create a new trackRef for each track.
           const newTrackRefs = tracks.map((track) => {
-            const newTrackRef = tracksRef.push({ ...track })
+            const fixedPath = track.path.map((step: Step) => ({
+              ...step,
+              time: step.time.toJSON(),
+            }))
+
+            const newTrackRef = tracksRef.push({ ...track, path: fixedPath })
             return newTrackRef
           })
 
@@ -39,8 +49,8 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
           // Create a new challenge containing those trackIDs.
           const newChallengeRef = challengesRef.push({
             course: {
-              start: null,
-              finish: null,
+              start: course.start,
+              finish: course.finish,
             },
             tracks: newTrackIds,
             metadata: {
@@ -76,9 +86,6 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
                 setMetadata({ ...metadata, creator })
               }}
             />
-          </label>
-
-          <label>
             <p>Title</p>
             <input
               name="title"

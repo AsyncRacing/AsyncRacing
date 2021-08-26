@@ -43,8 +43,8 @@ const UploadButton = ({ id, files, addFiles, clearFiles }: PropTypes) => (
     />
 
     {/* These tags describe the currently-active files. */}
-    {files.map((file) => {
-      return <p>{file.name}</p>
+    {files.map((file, index) => {
+      return <p key={index}>{file.name}</p>
     })}
 
     {/* This button clears the filelist. */}
