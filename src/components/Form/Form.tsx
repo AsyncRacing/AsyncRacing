@@ -34,6 +34,7 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
 
           // Create a new trackRef for each track.
           const newTrackRefs = tracks.map((track) => {
+            // Fix the time to use json date string before upload.
             const fixedPath = track.path.map((step: Step) => ({
               ...step,
               time: step.time.toJSON(),

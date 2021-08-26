@@ -19,7 +19,7 @@ import { trackBounds } from '../../model/track-bounds'
 
 /* interfaces & types */
 interface PropTypes {
-  children: any
+  children?: any
   tracks: Track[]
 }
 
