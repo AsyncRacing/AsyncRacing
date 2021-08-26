@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Button, Container, List } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import { GPXFile } from '../../model/gpx-file'
 
 interface PropTypes {
