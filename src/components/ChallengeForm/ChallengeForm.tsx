@@ -24,7 +24,6 @@ export const ChallengeForm = ({
 }: FormProps) => {
   const tracks = useTracks(files)
   const [metadata, setMetadata] = useState<Challenge['metadata']>({
-    id: undefined,
     title: undefined,
     creator: undefined,
     uploadDate: undefined,
@@ -36,6 +35,11 @@ export const ChallengeForm = ({
         className="form__main"
         onSubmit={async (event) => {
           event.preventDefault()
+
+          if (!(metadata.title && metadata.creator && tracks.length > 0)) {
+            alert('Please enter your name and the title.')
+            return
+          }
 
           // Refer to the challenges object and tracks object.
           const challengesRef = firebaseDB.ref('challenges')
@@ -64,7 +68,7 @@ export const ChallengeForm = ({
             tracks: newTrackIds,
             metadata: {
               title: metadata.title,
-              description: metadata.description,
+              description: metadata.description ?? '',
               creator: metadata.creator,
             },
           })
