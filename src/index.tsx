@@ -23,7 +23,7 @@ ReactDOM.render(
           <NewChallenge />
         </Route>
 
-        <Route path="/challenges/:challengeID">
+        <Route path="/challenges/:challengeId">
           <ShowChallenge />
         </Route>
 

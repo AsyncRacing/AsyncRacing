@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Form.css'
 import { UploadButton } from '../UploadButton/UploadButton'
-import { Challenge, Course } from '../../model/ChallengeConfiguration'
+import { Challenge, Course, Step } from '../../model/ChallengeConfiguration'
 import { GPXFile } from '../../model/gpx-file'
 import { firebaseDB } from '../../model/firebase-config'
 import { useTracks } from '../../model/useFiles'
@@ -23,7 +23,12 @@ export const ChallengeForm = ({
   course,
 }: FormProps) => {
   const tracks = useTracks(files)
-  const [metadata, setMetadata] = useState<Challenge['metadata']>({})
+  const [metadata, setMetadata] = useState<Challenge['metadata']>({
+    id: undefined,
+    title: undefined,
+    creator: undefined,
+    uploadDate: undefined,
+  })
   return (
     <>
       <h1>AsyncRacing</h1>
@@ -38,7 +43,12 @@ export const ChallengeForm = ({
 
           // Create a new trackRef for each track.
           const newTrackRefs = tracks.map((track) => {
-            const newTrackRef = tracksRef.push({ ...track })
+            const fixedPath = track.path.map((step: Step) => ({
+              ...step,
+              time: step.time.toJSON(),
+            }))
+
+            const newTrackRef = tracksRef.push({ ...track, path: fixedPath })
             return newTrackRef
           })
 
@@ -48,8 +58,8 @@ export const ChallengeForm = ({
           // Create a new challenge containing those trackIDs.
           const newChallengeRef = challengesRef.push({
             course: {
-              start: null,
-              finish: null,
+              start: course.start,
+              finish: course.finish,
             },
             tracks: newTrackIds,
             metadata: {
@@ -76,6 +86,7 @@ export const ChallengeForm = ({
             </label>
           </Form.Field>
         </Form.Group>
+
         <Form.Group widths="equal">
           <Form.Field>
             <label>
@@ -91,6 +102,7 @@ export const ChallengeForm = ({
               />
             </label>
           </Form.Field>
+
           <Form.Field>
             <label>
               <p>Title</p>
@@ -106,6 +118,7 @@ export const ChallengeForm = ({
             </label>
           </Form.Field>
         </Form.Group>
+
         <Form.TextArea
           label="Description"
           placeholder="Tell us about your race"
@@ -119,6 +132,7 @@ export const ChallengeForm = ({
             }}
           />
         </Form.TextArea>
+
         <Form.Group fluid>
           <Button positive animated>
             <Button.Content visible>Save Race</Button.Content>

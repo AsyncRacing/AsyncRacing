@@ -86,7 +86,7 @@ const Line = ({ waypoint, setWaypoint, color }: LineProps) => {
 
   return (
     <>
-      <SVGOverlay redraw={redraw} style={{ 'pointer-events': 'none' }} />
+      <SVGOverlay redraw={redraw} style={{ pointerEvents: 'none' }} />
       <Pin point={waypoint[0]} setPoint={getSetPointAt(0)} />
       <Pin point={waypoint[1]} setPoint={getSetPointAt(1)} />
     </>

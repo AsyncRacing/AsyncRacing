@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { Challenge } from '../../model/ChallengeConfiguration'
+import { useObjectVal } from 'react-firebase-hooks/database'
+import { ChallengeSchema } from '../../model/ChallengeConfiguration'
 import { firebaseDB } from '../../model/firebase-config'
 import { Button, Icon, List, Table, Container, Header } from 'semantic-ui-react'
 
@@ -10,27 +11,27 @@ import { Navbar } from '../../components/Navbar/Navbar'
 
 const IndexChallenges = () => {
   // get challenges from firebase DB
-  const [challengeDB, setChallengeDB] = useState<Record<string, Challenge>>({})
-  //const challengeDBRef = firebaseDB.ref(`challenges/${challengeID}`)
-  useEffect(() => {
-    ;(async () => {
-      const challengesFromDB = (await firebaseDB.ref('challenges').get()).val()
-      Object.values(challengesFromDB).forEach((challenge: any) => {
-        challenge.tracks = {}
-        challenge.tracks = Object.values(challenge.tracks)
-      })
-      setChallengeDB(challengesFromDB)
-    })()
-  })
+  const [challenges, loading, error] = useObjectVal<ChallengeSchema>(
+    firebaseDB.ref('challenges'),
+  )
 
   return (
     <>
       <Container textAlign="center">
         <Navbar />
       </Container>
-      <div className="homepage__container">
-        <div className="homepage__wrapper">
-          <Header as="h1" content="All Challenges"></Header>
+
+      <Header as="h1" content="All Challenges"></Header>
+
+      <Button as={Link} to="/challenges/new" primary animated>
+        <Button.Content visible>New Challenge</Button.Content>
+        <Button.Content hidden>
+          <Icon name="arrow right" />
+        </Button.Content>
+      </Button>
+
+      {challenges && (
+        <>
           <Table cell striped>
             <Table.Header position="center">
               <Table.Row>
@@ -40,14 +41,15 @@ const IndexChallenges = () => {
                 </Table.HeaderCell>
               </Table.Row>
             </Table.Header>
+
             <Table.Body>
-              {Object.entries(challengeDB).map(([challengeID, challenge]) => {
+              {Object.entries(challenges).map(([challengeId, challenge]) => {
                 return (
                   <Table.Row>
                     <Table.Cell>
                       <Header
                         as={Link}
-                        to={`/challenges/${challengeID}`}
+                        to={`/challenges/${challengeId}`}
                         color="blue"
                       >
                         {challenge.metadata.title}
@@ -61,15 +63,20 @@ const IndexChallenges = () => {
               })}
             </Table.Body>
           </Table>
-          <List as="ul" className="homepage__list"></List>
-          <Button as={Link} to="/challenges/new" primary animated>
-            <Button.Content visible>New Challenge</Button.Content>
-            <Button.Content hidden>
-              <Icon name="arrow right" />
-            </Button.Content>
-          </Button>
-        </div>
-      </div>
+        </>
+      )}
+
+      {loading && (
+        <p>
+          <em>Loading Database...</em>
+        </p>
+      )}
+
+      {error && (
+        <p>
+          <strong>Database Error!</strong>
+        </p>
+      )}
     </>
   )
 }
