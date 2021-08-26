@@ -6,6 +6,9 @@ import { GPXFile } from '../../model/gpx-file'
 import { firebaseDB } from '../../model/firebase-config'
 import { useTracks } from '../../model/useFiles'
 
+/* css library import */
+import { Form, Button, Icon } from 'semantic-ui-react'
+
 interface FormProps {
   addFiles: (file: any) => void
   clearFiles: () => void
@@ -13,13 +16,18 @@ interface FormProps {
   course: Course
 }
 
-export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
+export const ChallengeForm = ({
+  files,
+  addFiles,
+  clearFiles,
+  course,
+}: FormProps) => {
   const tracks = useTracks(files)
   const [metadata, setMetadata] = useState<Challenge['metadata']>({})
   return (
     <>
       <h1>AsyncRacing</h1>
-      <form
+      <Form
         className="form__main"
         onSubmit={async (e) => {
           e.preventDefault()
@@ -52,64 +60,74 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
           })
 
           // Redirect to URL using newChallengeRef's key.
-          // TODO: Implement redirect.
           const redirect = `/challenges/${newChallengeRef.key}`
           console.warn('Need to redirect to', redirect)
         }}
       >
-        <fieldset className="form__main_fieldset">
-          <label>
-            <p>Upload GPX Files</p>
-            <UploadButton
-              files={files}
-              addFiles={addFiles}
-              clearFiles={clearFiles}
-            />
-          </label>
-
-          <label>
-            <p>Creator's Name</p>
-            <input
-              type="text"
-              name="creator"
-              value={metadata.creator}
-              onChange={(e) => {
-                const creator = e.target.value
-                setMetadata({ ...metadata, creator })
-              }}
-            />
-          </label>
-
-          <label>
-            <p>Title</p>
-            <input
-              type="text"
-              name="title"
-              value={metadata.title}
-              onChange={(e) => {
-                const title = e.target.value
-                setMetadata({ ...metadata, title })
-              }}
-            />
-          </label>
-
-          <label>
-            <p>Description</p>
-            <input
-              type="text"
-              name="description"
-              value={metadata.description}
-              onChange={(e) => {
-                const description = e.target.value
-                setMetadata({ ...metadata, description })
-              }}
-            />
-          </label>
-          <div className="form__main_button">
-            <button type="submit">Save</button>
-          </div>
-        </fieldset>
-      </form>
+        <Form.Group>
+          <Form.Field>
+            <label>
+              <p>Upload GPX Files</p>
+              <UploadButton
+                files={files}
+                addFiles={addFiles}
+                clearFiles={clearFiles}
+              />
+            </label>
+          </Form.Field>
+        </Form.Group>
+        <Form.Group widths="equal">
+          <Form.Field>
+            <label>
+              <p>Creator's Name</p>
+              <input
+                type="text"
+                name="creator"
+                value={metadata.creator}
+                onChange={(e) => {
+                  const creator = e.target.value
+                  setMetadata({ ...metadata, creator })
+                }}
+              />
+            </label>
+          </Form.Field>
+          <Form.Field>
+            <label>
+              <p>Title</p>
+              <input
+                type="text"
+                name="title"
+                value={metadata.title}
+                onChange={(e) => {
+                  const title = e.target.value
+                  setMetadata({ ...metadata, title })
+                }}
+              />
+            </label>
+          </Form.Field>
+        </Form.Group>
+        <Form.TextArea
+          label="Description"
+          placeholder="Tell us about your race"
+        >
+          <input
+            name="description"
+            value={metadata.description}
+            onChange={(e) => {
+              const description = e.target.value
+              setMetadata({ ...metadata, description })
+            }}
+          />
+        </Form.TextArea>
+        <Form.Group fluid>
+          <Button positive animated>
+            <Button.Content visible>Save Race</Button.Content>
+            <Button.Content hidden>
+              <Icon name="arrow right" />
+            </Button.Content>
+          </Button>
+        </Form.Group>
+      </Form>
     </>
   )
 }
