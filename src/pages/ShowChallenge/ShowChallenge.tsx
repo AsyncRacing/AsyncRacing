@@ -85,26 +85,29 @@ const ShowChallenge = () => {
 
   return (
     <>
-      {(challengeError || tracksError) && (
-        <p>
-          <strong>Error!</strong>
-        </p>
-      )}
+      <div
+        style={{
+          zIndex: 2,
+          position: 'relative',
+        }}
+      >
+        {/* Error State */}
+        {(challengeError || tracksError) && (
+          <p>
+            <strong>Error!</strong>
+          </p>
+        )}
 
-      {(challengeLoading || tracksLoading) && (
-        <p>
-          <em>Loading...</em>
-        </p>
-      )}
+        {/* Loading State */}
+        {(challengeLoading || tracksLoading) && (
+          <p>
+            <em>Loading...</em>
+          </p>
+        )}
 
-      {challenge && tracksById && (
-        <>
-          <div
-            style={{
-              zIndex: 2,
-              position: 'relative',
-            }}
-          >
+        {/* Done State */}
+        {challenge && tracksById && (
+          <>
             <form
               onSubmit={async (e) => {
                 e.preventDefault()
@@ -168,12 +171,12 @@ const ShowChallenge = () => {
                 )
               })}
             </ul>
-          </div>
+          </>
+        )}
+      </div>
 
-          {/* The map plus challenge lines */}
-          <RaceMap tracks={[...userTracks, ...Object.values(tracksById)]} />
-        </>
-      )}
+      {/* The map plus challenge lines */}
+      <RaceMap tracks={[...userTracks, ...Object.values(tracksById ?? {})]} />
     </>
   )
 }
