@@ -1,6 +1,16 @@
 import React, { useMemo } from 'react'
 import { useObjectVal } from 'react-firebase-hooks/database'
 import { useParams } from 'react-router-dom'
+
+/* component imports */
+import { Timer } from '../../components/Timer/Timer'
+import { RaceMap } from '../../components/RaceMap/RaceMap'
+import { UploadButton } from '../../components/UploadButton/UploadButton'
+import { Navbar } from '../../components/Navbar/Navbar'
+
+/* helper imports */
+import { firebaseDB } from '../../model/firebase-config'
+import { useFiles, useTracks } from '../../model/useFiles'
 import {
   Challenge,
   ChallengeSchema,
@@ -8,16 +18,6 @@ import {
   Track,
   TrackSchema,
 } from '../../model/ChallengeConfiguration'
-
-/* component imports */
-//import { RaceMap } from '../../components/RaceMap/RaceMap'
-import { Timer } from '../../components/Timer/Timer'
-
-/* helper imports */
-import { firebaseDB } from '../../model/firebase-config'
-import { RaceMap } from '../../components/RaceMap/RaceMap'
-import { UploadButton } from '../../components/UploadButton/UploadButton'
-import { useFiles, useTracks } from '../../model/useFiles'
 
 /* styling imports */
 import { Container, Header, Table, Button } from 'semantic-ui-react'
@@ -88,6 +88,14 @@ const ShowChallenge = () => {
 
   return (
     <>
+      <Container
+        style={{
+          zIndex: 2,
+          position: 'relative',
+        }}
+      >
+        <Navbar />
+      </Container>
       <Container>
         <div
           style={{
