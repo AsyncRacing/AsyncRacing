@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import './ChallengeForm.css'
 import { UploadButton } from '../UploadButton/UploadButton'
 import { Challenge, Course, Step } from '../../model/ChallengeConfiguration'
 import { GPXFile } from '../../model/gpx-file'
 import { firebaseDB } from '../../model/firebase-config'
 import { useTracks } from '../../model/useFiles'
+import { shareTrack } from '../ShareMapTrack/sms-track'
 
 /* css library import */
 import { Form, Button, Icon } from 'semantic-ui-react'
@@ -28,6 +29,12 @@ export const ChallengeForm = ({
     creator: undefined,
     uploadDate: undefined,
   })
+  const [phoneNumber, setPhoneNumber] = useState<string>('')
+  const formattedPhoneNumber = useMemo(() => {
+    let newPhoneNumber = phoneNumber.replace(/-/g, '')
+    newPhoneNumber = `+1${newPhoneNumber}`
+    return newPhoneNumber
+  }, [phoneNumber])
   return (
     <>
       <h1>AsyncRacing</h1>
@@ -77,6 +84,8 @@ export const ChallengeForm = ({
           // Redirect to URL using newChallengeRef's key.
           const redirect = `/challenges/${newChallengeRef.key}`
           console.warn('Need to redirect to', redirect)
+          const sendwithRedirect = `${newChallengeRef.key}`
+          shareTrack(sendwithRedirect, formattedPhoneNumber)
         }}
       >
         <Form.Group>
@@ -129,6 +138,22 @@ export const ChallengeForm = ({
             setMetadata({ ...metadata, description })
           }}
         />
+
+        <Form.Group>
+          <Form.Field>
+            <label htmlFor="phone-number">Phone Number</label>
+            <input
+              type="tel"
+              name="phone-number"
+              value={phoneNumber}
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              onChange={(event) => {
+                let number = event.target.value
+                setPhoneNumber(number)
+              }}
+            />
+          </Form.Field>
+        </Form.Group>
 
         <Form.Group fluid>
           <Button positive animated>
