@@ -76,7 +76,7 @@ const RaceMap = ({ tracks, children }: PropTypes) => {
       widthMinPixels: 2,
       getPath: (d) => d.path.map((point) => [point.longitude, point.latitude]),
       getColor: (track: Track) => track.metadata.color || [0, 0, 255],
-      getWidth: () => 5,
+      getWidth: () => 3,
     }),
   ]
 
