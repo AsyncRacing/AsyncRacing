@@ -6,14 +6,15 @@ import { Container } from 'semantic-ui-react'
 import './NewChallenge.css'
 
 /* component imports */
-import { RaceMap } from '../../components/RaceMap/RaceMap'
 import { ChallengeForm } from '../../components/ChallengeForm/ChallengeForm'
+import { Navbar } from '../../components/Navbar/Navbar'
+import { RaceMap } from '../../components/RaceMap/RaceMap'
 import { Timer } from '../../components/Timer/Timer'
 
 /* helper imports */
-import { useFiles, useTracks } from '../../model/useFiles'
 import { Course } from '../../model/ChallengeConfiguration'
-import { Navbar } from '../../components/Navbar/Navbar'
+import { CourseSlider } from '../../components/CourseSlider/CourseSlider'
+import { useFiles, useTracks } from '../../model/useFiles'
 
 /* react components */
 const NewChallenge = () => {
@@ -64,30 +65,45 @@ const NewChallenge = () => {
 
   return (
     <>
-      <RaceMap course={course} setCourse={setCourse} tracks={tracks} />
-      {/* Need to fix width and spacing for p tag and Timer tag and Upload Button div */}
-      <Container>
-        <Navbar />
-      </Container>
-      <div className="new__challenge_div_wrapper">
-        <ChallengeForm
-          course={course}
-          files={files}
-          addFiles={addFiles}
-          clearFiles={clearFiles}
-        />
-        <p>Track Times</p>
-        <ul className="new__challenge_list">
-          {tracks.map((track, id) => {
-            return (
-              <li key={id}>
-                <p>{track.metadata.title}</p>
-                <Timer track={track} course={course} />
-              </li>
-            )
-          })}
-        </ul>
+      <div
+        style={{
+          zIndex: 2,
+          position: 'relative',
+        }}
+      >
+        {/* Need to fix width and spacing for p tag and Timer tag and Upload Button div */}
+        <Container>
+          <Navbar />
+        </Container>
+
+        {/* Show the challenge creation form */}
+        <div className="new__challenge_div_wrapper">
+          <ChallengeForm
+            course={course}
+            files={files}
+            addFiles={addFiles}
+            clearFiles={clearFiles}
+          />
+
+          {/* Temporary placeholder list for track times */}
+          <p>Track Times</p>
+          <ul className="new__challenge_list">
+            {tracks.map((track, id) => {
+              return (
+                <li key={id}>
+                  <p>{track.metadata.title}</p>
+                  <Timer track={track} course={course} />
+                </li>
+              )
+            })}
+          </ul>
+        </div>
       </div>
+
+      {/* The map plus challenge slider */}
+      <RaceMap tracks={tracks}>
+        <CourseSlider course={course} setCourse={setCourse} />
+      </RaceMap>
     </>
   )
 }

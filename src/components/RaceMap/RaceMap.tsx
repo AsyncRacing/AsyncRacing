@@ -6,24 +6,21 @@ The RaceMap component shows a couple of things:
 */
 
 /* module imports */
-import DeckGL from '@deck.gl/react'
-import React, { useCallback, useState } from 'react'
-import ReactMapGL, { _MapContext } from 'react-map-gl'
-import { PathLayer } from '@deck.gl/layers'
+import React, { useCallback, useEffect, useState } from 'react'
+import ReactMapGL, { WebMercatorViewport, _MapContext } from 'react-map-gl'
 import { ViewState } from 'react-map-gl/src/mapbox/mapbox'
+import { FlyToInterpolator } from '@deck.gl/core'
+import { PathLayer } from '@deck.gl/layers'
+import DeckGL from '@deck.gl/react'
 
 /* local imports */
-import { Course, Track } from '../../model/ChallengeConfiguration'
+import { Track } from '../../model/ChallengeConfiguration'
 import { trackBounds } from '../../model/track-bounds'
-import { FlyToInterpolator } from '@deck.gl/core'
-import { WebMercatorViewport } from 'react-map-gl'
-import { CourseSlider } from '../CourseSlider/CourseSlider'
 
 /* interfaces & types */
 interface PropTypes {
+  children?: any
   tracks: Track[]
-  course: Course
-  setCourse: any
 }
 
 /* helpers & constants */
@@ -35,7 +32,7 @@ const defaultView: ViewState = {
 }
 
 /* react component */
-const RaceMap = ({ tracks, course, setCourse }: PropTypes) => {
+const RaceMap = ({ tracks, children }: PropTypes) => {
   // Map's viewstate
   const [viewState, setViewState] = useState<ViewState>(defaultView)
   const handleViewStateChange = useCallback(
@@ -44,7 +41,9 @@ const RaceMap = ({ tracks, course, setCourse }: PropTypes) => {
     },
     [],
   )
-  React.useEffect(() => {
+
+  // Fly to track bounds!
+  useEffect(() => {
     if (tracks.length > 0 && tracks[0].path.length > 0) {
       const bounds = trackBounds(tracks.map((track) => track.path).flat(1))
       setViewState((vs) => {
@@ -68,6 +67,7 @@ const RaceMap = ({ tracks, course, setCourse }: PropTypes) => {
     }
   }, [tracks])
 
+  // Track-path layers
   const layers = [
     new PathLayer({
       id: 'path-layer',
@@ -94,7 +94,7 @@ const RaceMap = ({ tracks, course, setCourse }: PropTypes) => {
         width="100%"
         height="100%"
       />
-      <CourseSlider course={course} setCourse={setCourse} />
+      {children}
     </DeckGL>
   )
 }

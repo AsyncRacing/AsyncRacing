@@ -1,6 +1,4 @@
-import React, { useState } from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Course } from '../../model/ChallengeConfiguration'
 import { RaceMap } from './RaceMap'
 
 export default {
@@ -8,14 +6,7 @@ export default {
   component: RaceMap,
 } as ComponentMeta<typeof RaceMap>
 
-const Template: ComponentStory<typeof RaceMap> = (args) => {
-  const emptyCourse: Course = {
-    start: null,
-    finish: null,
-  }
-  const [course, setCourse] = useState<Course>(emptyCourse)
-  return <RaceMap {...args} course={course} setCourse={setCourse} />
-}
+const Template: ComponentStory<typeof RaceMap> = (args) => <RaceMap {...args} />
 
 export const EmptyTrack = Template.bind({})
 EmptyTrack.args = {
