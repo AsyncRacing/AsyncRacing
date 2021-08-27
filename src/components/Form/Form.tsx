@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import './Form.css'
 import { UploadButton } from '../UploadButton/UploadButton'
 import { Challenge, Course, Step } from '../../model/ChallengeConfiguration'
@@ -22,6 +22,12 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
     creator: undefined,
     uploadDate: undefined,
   })
+  const [phoneNumber, setPhoneNumber] = useState<string>('')
+  const formattedPhoneNumber = useMemo(() => {
+    let newPhoneNumber = phoneNumber.replace(/-/g, '')
+    newPhoneNumber = `+1${newPhoneNumber}`
+    return newPhoneNumber
+  }, [phoneNumber])
   return (
     <>
       <h1>AsyncRacing</h1>
@@ -66,7 +72,7 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
           const redirect = `/challenges/${newChallengeRef.key}`
           console.warn('Need to redirect to', redirect)
           const sendwithRedirect = `${newChallengeRef.key}`
-          shareTrack(sendwithRedirect)
+          shareTrack(sendwithRedirect, formattedPhoneNumber)
         }}
       >
         <fieldset>
@@ -108,6 +114,19 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
               onChange={(e) => {
                 const description = e.target.value
                 setMetadata({ ...metadata, description })
+              }}
+            />
+          </label>
+          <label>
+            <p>Phone Number</p>
+            <input
+              name="phoneNumber"
+              value={phoneNumber}
+              type="tel"
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              onChange={(e) => {
+                let number = e.target.value
+                setPhoneNumber(number)
               }}
             />
           </label>
