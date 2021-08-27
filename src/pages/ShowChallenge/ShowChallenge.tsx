@@ -1,6 +1,16 @@
 import React, { useMemo } from 'react'
 import { useObjectVal } from 'react-firebase-hooks/database'
 import { useParams } from 'react-router-dom'
+
+/* component imports */
+import { Timer } from '../../components/Timer/Timer'
+import { RaceMap } from '../../components/RaceMap/RaceMap'
+import { UploadButton } from '../../components/UploadButton/UploadButton'
+import { Navbar } from '../../components/Navbar/Navbar'
+
+/* helper imports */
+import { firebaseDB } from '../../model/firebase-config'
+import { useFiles, useTracks } from '../../model/useFiles'
 import {
   Challenge,
   ChallengeSchema,
@@ -9,15 +19,8 @@ import {
   TrackSchema,
 } from '../../model/ChallengeConfiguration'
 
-/* component imports */
-//import { RaceMap } from '../../components/RaceMap/RaceMap'
-import { Timer } from '../../components/Timer/Timer'
-
-/* helper imports */
-import { firebaseDB } from '../../model/firebase-config'
-import { RaceMap } from '../../components/RaceMap/RaceMap'
-import { UploadButton } from '../../components/UploadButton/UploadButton'
-import { useFiles, useTracks } from '../../model/useFiles'
+/* styling imports */
+import { Container, Header, Table, Button } from 'semantic-ui-react'
 
 /* helpers */
 const formatPathTimes = (
@@ -85,95 +88,122 @@ const ShowChallenge = () => {
 
   return (
     <>
-      <div
+      <Container
         style={{
           zIndex: 2,
           position: 'relative',
         }}
       >
-        {/* Error State */}
-        {(challengeError || tracksError) && (
-          <p>
-            <strong>Error!</strong>
-          </p>
-        )}
+        <Navbar />
+      </Container>
+      <Container>
+        <div
+          style={{
+            zIndex: 2,
+            position: 'absolute',
+            right: 20,
+            top: 20,
+          }}
+        >
+          {/* Error State */}
+          {(challengeError || tracksError) && (
+            <p>
+              <strong>Error!</strong>
+            </p>
+          )}
 
-        {/* Loading State */}
-        {(challengeLoading || tracksLoading) && (
-          <p>
-            <em>Loading...</em>
-          </p>
-        )}
+          {/* Loading State */}
+          {(challengeLoading || tracksLoading) && (
+            <p>
+              <em>Loading...</em>
+            </p>
+          )}
 
-        {/* Done State */}
-        {challenge && tracksById && (
-          <>
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault()
+          {/* Done State */}
+          {challenge && tracksById && (
+            <>
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault()
 
-                // Refer to the challenges object and tracks object.
-                const challengeTracksRef = firebaseDB.ref(
-                  `challenges/${challengeId}/tracks`,
-                )
-                const tracksRef = firebaseDB.ref('tracks')
+                  // Refer to the challenges object and tracks object.
+                  const challengeTracksRef = firebaseDB.ref(
+                    `challenges/${challengeId}/tracks`,
+                  )
+                  const tracksRef = firebaseDB.ref('tracks')
 
-                // Create a new trackRef for each user-selected track.
-                const newTrackRefs = userTracks.map((track) => {
-                  // Fix the time to use json date string before upload.
-                  const fixedPath = track.path.map((step: Step) => ({
-                    ...step,
-                    time: step.time.toJSON(),
-                  }))
+                  // Create a new trackRef for each user-selected track.
+                  const newTrackRefs = userTracks.map((track) => {
+                    // Fix the time to use json date string before upload.
+                    const fixedPath = track.path.map((step: Step) => ({
+                      ...step,
+                      time: step.time.toJSON(),
+                    }))
 
-                  const newTrackRef = tracksRef.push({
-                    ...track,
-                    path: fixedPath,
+                    const newTrackRef = tracksRef.push({
+                      ...track,
+                      path: fixedPath,
+                    })
+                    return newTrackRef
                   })
-                  return newTrackRef
-                })
 
-                // Get the IDs of the tracks.
-                const newTrackIds = newTrackRefs.map((ref) => ref.key)
-                challengeTracksRef.set([
-                  ...challenge.tracks.map(
-                    (track: Track): string => track.metadata.id as string,
-                  ),
-                  ...newTrackIds,
-                ])
+                  // Get the IDs of the tracks.
+                  const newTrackIds = newTrackRefs.map((ref) => ref.key)
+                  challengeTracksRef.set([
+                    ...challenge.tracks.map(
+                      (track: Track): string => track.metadata.id as string,
+                    ),
+                    ...newTrackIds,
+                  ])
 
-                clearFiles()
-              }}
-            >
-              {/* Show the upload button */}
-              <UploadButton
-                files={files}
-                addFiles={addFiles}
-                clearFiles={clearFiles}
-              />
+                  clearFiles()
+                }}
+              >
+                {/* Show the upload button */}
+                <UploadButton
+                  files={files}
+                  addFiles={addFiles}
+                  clearFiles={clearFiles}
+                />
 
-              {/*
-                Unfortunately we need a way to trigger
-                the upload, so here's another button
-              */}
-              <button type="submit">Upload Tracks!</button>
-            </form>
+                {/*
+                  Unfortunately we need a way to trigger
+                  the upload, so here's another button
+                */}
+                <Button fluid type="submit" color="green">
+                  Upload Tracks!
+                </Button>
+              </form>
 
-            {/* Temporary placeholder list for track times */}
-            <p>Track Times</p>
-            <ul>
-              {challenge.tracks.map((track) => {
-                return (
-                  <li key={track.metadata.id}>
-                    <p>{track.metadata.title}</p>
-                    <Timer track={track} course={challenge.course} />
-                  </li>
-                )
-              })}
-            </ul>
-          </>
-        )}
-      </div>
+              {/* Temporary placeholder list for track times */}
+              <Header textAlign="center" content="Track Times"></Header>
+              <Table celled striped singleline collapsing>
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell>Race ID</Table.HeaderCell>
+                    <Table.HeaderCell>Time</Table.HeaderCell>
+                  </Table.Row>
+                </Table.Header>
+
+                <Table.Body>
+                  {challenge.tracks.map((track) => {
+                    return (
+                      <Table.Row>
+                        <Table.Cell key={track.metadata.id}>
+                          {track.metadata.title}
+                        </Table.Cell>
+                        <Table.Cell>
+                          <Timer track={track} course={challenge.course} />
+                        </Table.Cell>
+                      </Table.Row>
+                    )
+                  })}
+                </Table.Body>
+              </Table>
+            </>
+          )}
+        </div>
+      </Container>
 
       {/* The map plus challenge lines */}
       <RaceMap tracks={[...userTracks, ...Object.values(tracksById ?? {})]} />

@@ -20,63 +20,64 @@ const IndexChallenges = () => {
       <Container textAlign="center">
         <Navbar />
       </Container>
+      <Container>
+        <Container>
+          <Header as="h1" content="All Challenges"></Header>
 
-      <Header as="h1" content="All Challenges"></Header>
+          <Button as={Link} to="/challenges/new" primary animated>
+            <Button.Content visible>New Challenge</Button.Content>
+            <Button.Content hidden>
+              <Icon name="arrow right" />
+            </Button.Content>
+          </Button>
+        </Container>
+        {challenges && (
+          <>
+            <Table cell striped>
+              <Table.Header position="center">
+                <Table.Row>
+                  <Table.HeaderCell colSpan="1">Challenge</Table.HeaderCell>
+                  <Table.HeaderCell colSpan="2" textAlign="right">
+                    Created By
+                  </Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
 
-      <Button as={Link} to="/challenges/new" primary animated>
-        <Button.Content visible>New Challenge</Button.Content>
-        <Button.Content hidden>
-          <Icon name="arrow right" />
-        </Button.Content>
-      </Button>
+              <Table.Body>
+                {Object.entries(challenges).map(([challengeId, challenge]) => {
+                  return (
+                    <Table.Row>
+                      <Table.Cell>
+                        <Header
+                          as={Link}
+                          to={`/challenges/${challengeId}`}
+                          color="blue"
+                        >
+                          {challenge.metadata.title}
+                        </Header>
+                      </Table.Cell>
+                      <Table.Cell textAlign="right">
+                        {challenge.metadata.creator}
+                      </Table.Cell>
+                    </Table.Row>
+                  )
+                })}
+              </Table.Body>
+            </Table>
+          </>
+        )}
+        {loading && (
+          <p>
+            <em>Loading Database...</em>
+          </p>
+        )}
 
-      {challenges && (
-        <>
-          <Table cell striped>
-            <Table.Header position="center">
-              <Table.Row>
-                <Table.HeaderCell colSpan="1">Challenge</Table.HeaderCell>
-                <Table.HeaderCell colSpan="2" textAlign="right">
-                  Created By
-                </Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-
-            <Table.Body>
-              {Object.entries(challenges).map(([challengeId, challenge]) => {
-                return (
-                  <Table.Row>
-                    <Table.Cell>
-                      <Header
-                        as={Link}
-                        to={`/challenges/${challengeId}`}
-                        color="blue"
-                      >
-                        {challenge.metadata.title}
-                      </Header>
-                    </Table.Cell>
-                    <Table.Cell textAlign="right">
-                      {challenge.metadata.creator}
-                    </Table.Cell>
-                  </Table.Row>
-                )
-              })}
-            </Table.Body>
-          </Table>
-        </>
-      )}
-
-      {loading && (
-        <p>
-          <em>Loading Database...</em>
-        </p>
-      )}
-
-      {error && (
-        <p>
-          <strong>Database Error!</strong>
-        </p>
-      )}
+        {error && (
+          <p>
+            <strong>Database Error!</strong>
+          </p>
+        )}
+      </Container>
     </>
   )
 }
