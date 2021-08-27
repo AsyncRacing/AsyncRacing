@@ -1,0 +1,20 @@
+.homepage__wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  height: 250px;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+.homepage__list {
+  list-style: none;
+}
+
+.homepage__container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,11 +1,14 @@
-import React, { useState, useMemo } from 'react'
-import './Form.css'
+import React, { useMemo, useState } from 'react'
+import './ChallengeForm.css'
 import { UploadButton } from '../UploadButton/UploadButton'
 import { Challenge, Course, Step } from '../../model/ChallengeConfiguration'
 import { GPXFile } from '../../model/gpx-file'
 import { firebaseDB } from '../../model/firebase-config'
 import { useTracks } from '../../model/useFiles'
 import { shareTrack } from '../ShareMapTrack/sms-track'
+
+/* css library import */
+import { Form, Button, Icon } from 'semantic-ui-react'
 
 interface FormProps {
   addFiles: (file: any) => void
@@ -14,10 +17,14 @@ interface FormProps {
   course: Course
 }
 
-export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
+export const ChallengeForm = ({
+  files,
+  addFiles,
+  clearFiles,
+  course,
+}: FormProps) => {
   const tracks = useTracks(files)
   const [metadata, setMetadata] = useState<Challenge['metadata']>({
-    id: undefined,
     title: undefined,
     creator: undefined,
     uploadDate: undefined,
@@ -31,9 +38,15 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
   return (
     <>
       <h1>AsyncRacing</h1>
-      <form
-        onSubmit={async (e) => {
-          e.preventDefault()
+      <Form
+        className="form__main"
+        onSubmit={async (event) => {
+          event.preventDefault()
+
+          if (!(metadata.title && metadata.creator && tracks.length > 0)) {
+            alert('Please enter your name and the title.')
+            return
+          }
 
           // Refer to the challenges object and tracks object.
           const challengesRef = firebaseDB.ref('challenges')
@@ -41,6 +54,7 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
 
           // Create a new trackRef for each track.
           const newTrackRefs = tracks.map((track) => {
+            // Fix the time to use json date string before upload.
             const fixedPath = track.path.map((step: Step) => ({
               ...step,
               time: step.time.toJSON(),
@@ -62,79 +76,94 @@ export const Form = ({ files, addFiles, clearFiles, course }: FormProps) => {
             tracks: newTrackIds,
             metadata: {
               title: metadata.title,
-              description: metadata.description,
+              description: metadata.description ?? '',
               creator: metadata.creator,
             },
           })
 
           // Redirect to URL using newChallengeRef's key.
-          // TODO: Implement redirect.
           const redirect = `/challenges/${newChallengeRef.key}`
           console.warn('Need to redirect to', redirect)
           const sendwithRedirect = `${newChallengeRef.key}`
           shareTrack(sendwithRedirect, formattedPhoneNumber)
         }}
       >
-        <fieldset>
-          <label>
-            <p>Upload GPX Files</p>
+        <Form.Group>
+          <Form.Field>
+            <label htmlFor="upload-button">Upload GPX Files</label>
             <UploadButton
+              id="upload-button"
               files={files}
               addFiles={addFiles}
               clearFiles={clearFiles}
             />
-          </label>
+          </Form.Field>
+        </Form.Group>
 
-          <label>
-            <p>Creator's Name</p>
+        <Form.Group widths="equal">
+          <Form.Field>
+            <label htmlFor="creator">Creator's Name</label>
             <input
+              type="text"
               name="creator"
               value={metadata.creator}
-              onChange={(e) => {
-                const creator = e.target.value
+              onChange={(event) => {
+                const creator = event.target.value
                 setMetadata({ ...metadata, creator })
               }}
             />
-            <p>Title</p>
+          </Form.Field>
+
+          <Form.Field>
+            <label htmlFor="title">Title</label>
             <input
+              type="text"
               name="title"
               value={metadata.title}
-              onChange={(e) => {
-                const title = e.target.value
+              onChange={(event) => {
+                const title = event.target.value
                 setMetadata({ ...metadata, title })
               }}
             />
-          </label>
+          </Form.Field>
+        </Form.Group>
 
-          <label>
-            <p>Description</p>
+        <Form.TextArea
+          label="Description"
+          name="description"
+          value={metadata.description}
+          placeholder="Tell us about your race"
+          onChange={(event) => {
+            const description = event.target.value
+            setMetadata({ ...metadata, description })
+          }}
+        />
+
+        <Form.Group>
+          <Form.Field>
+            <label htmlFor="phone-number">Phone Number</label>
             <input
-              name="description"
-              value={metadata.description}
-              onChange={(e) => {
-                const description = e.target.value
-                setMetadata({ ...metadata, description })
-              }}
-            />
-          </label>
-          <label>
-            <p>Phone Number</p>
-            <input
-              name="phoneNumber"
-              value={phoneNumber}
               type="tel"
+              name="phone-number"
+              value={phoneNumber}
               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-              onChange={(e) => {
-                let number = e.target.value
+              onChange={(event) => {
+                let number = event.target.value
                 setPhoneNumber(number)
               }}
             />
-          </label>
-          <div>
-            <button type="submit">Save</button>
-          </div>
-        </fieldset>
-      </form>
+          </Form.Field>
+        </Form.Group>
+
+        <Form.Group fluid>
+          <Button positive animated>
+            <Button.Content visible>Save Race</Button.Content>
+            <Button.Content hidden>
+              <Icon name="arrow right" />
+            </Button.Content>
+          </Button>
+        </Form.Group>
+      </Form>
     </>
   )
 }
