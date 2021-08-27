@@ -171,7 +171,7 @@ const ShowChallenge = () => {
           </div>
 
           {/* The map plus challenge lines */}
-          <RaceMap tracks={userTracks} />
+          <RaceMap tracks={[...userTracks, ...Object.values(tracksById)]} />
         </>
       )}
     </>
