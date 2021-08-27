@@ -1,11 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Menu } from 'semantic-ui-react'
+import { Menu, Button } from 'semantic-ui-react'
 
 const Navbar = () => {
   return (
     <Menu pointing compact position="center">
-      <Menu.Item header as={Link} to="/" content="Async Racing"></Menu.Item>
+      <Menu.Item
+        header
+        fitted="vertically"
+        as="h3"
+        verticalAlign="middle"
+        content="Async Racing"
+      ></Menu.Item>
+      <Menu.Item as={Link} to="/" content="All Challenges"></Menu.Item>
       <Menu.Item
         as={Link}
         to="/challenges/new"
