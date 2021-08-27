@@ -78,6 +78,7 @@ export const ChallengeForm = ({
               title: metadata.title,
               description: metadata.description ?? '',
               creator: metadata.creator,
+              uploadDate: new Date(Date.now()).toJSON(),
             },
           })
 

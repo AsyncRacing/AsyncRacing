@@ -4,6 +4,7 @@ import { useObjectVal } from 'react-firebase-hooks/database'
 import { ChallengeSchema } from '../../model/ChallengeConfiguration'
 import { firebaseDB } from '../../model/firebase-config'
 import { Button, Icon, Table, Container, Header } from 'semantic-ui-react'
+import { DateTime, DateTime as LuxonDate } from 'luxon'
 
 /* css import */
 import './IndexChallenges.css'
@@ -55,6 +56,11 @@ const IndexChallenges = () => {
                         >
                           {challenge.metadata.title}
                         </Header>
+                      </Table.Cell>
+                      <Table.Cell>
+                        {LuxonDate.fromISO(
+                          challenge.metadata.uploadDate,
+                        ).toLocaleString(DateTime.DATETIME_SHORT)}
                       </Table.Cell>
                       <Table.Cell textAlign="right">
                         {challenge.metadata.creator}
