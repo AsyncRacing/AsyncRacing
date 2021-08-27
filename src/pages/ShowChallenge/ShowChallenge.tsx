@@ -88,29 +88,32 @@ const ShowChallenge = () => {
 
   return (
     <>
-      {(challengeError || tracksError) && (
-        <p>
-          <strong>Error!</strong>
-        </p>
-      )}
+      <Container>
+        <div
+          style={{
+            zIndex: 2,
+            position: 'absolute',
+            right: 20,
+            top: 20,
+          }}
+        >
+          {/* Error State */}
+          {(challengeError || tracksError) && (
+            <p>
+              <strong>Error!</strong>
+            </p>
+          )}
 
-      {(challengeLoading || tracksLoading) && (
-        <p>
-          <em>Loading...</em>
-        </p>
-      )}
+          {/* Loading State */}
+          {(challengeLoading || tracksLoading) && (
+            <p>
+              <em>Loading...</em>
+            </p>
+          )}
 
-      {challenge && tracksById && (
-        <>
-          <Container>
-            <div
-              style={{
-                zIndex: 2,
-                position: 'absolute',
-                right: 20,
-                top: 20,
-              }}
-            >
+          {/* Done State */}
+          {challenge && tracksById && (
+            <>
               <form
                 onSubmit={async (e) => {
                   e.preventDefault()
@@ -156,9 +159,9 @@ const ShowChallenge = () => {
                 />
 
                 {/*
-                Unfortunately we need a way to trigger
-                the upload, so here's another button
-              */}
+                  Unfortunately we need a way to trigger
+                  the upload, so here's another button
+                */}
                 <Button fluid type="submit" color="green">
                   Upload Tracks!
                 </Button>
@@ -173,29 +176,29 @@ const ShowChallenge = () => {
                     <Table.HeaderCell>Time</Table.HeaderCell>
                   </Table.Row>
                 </Table.Header>
-                {challenge.tracks.map((track) => {
-                  return (
-                    <Table.Row>
-                      <Table.Cell key={track.metadata.id}>
-                        {track.metadata.title}
-                      </Table.Cell>
-                      <Table.Cell>
-                        <Timer track={track} course={challenge.course} />
-                      </Table.Cell>
-                    </Table.Row>
-                  )
-                })}
+
                 <Table.Body>
-                  <Table.Row></Table.Row>
+                  {challenge.tracks.map((track) => {
+                    return (
+                      <Table.Row>
+                        <Table.Cell key={track.metadata.id}>
+                          {track.metadata.title}
+                        </Table.Cell>
+                        <Table.Cell>
+                          <Timer track={track} course={challenge.course} />
+                        </Table.Cell>
+                      </Table.Row>
+                    )
+                  })}
                 </Table.Body>
               </Table>
-            </div>
+            </>
+          )}
+        </div>
+      </Container>
 
-            {/* The map plus challenge lines */}
-            <RaceMap tracks={[...userTracks, ...Object.values(tracksById)]} />
-          </Container>
-        </>
-      )}
+      {/* The map plus challenge lines */}
+      <RaceMap tracks={[...userTracks, ...Object.values(tracksById ?? {})]} />
     </>
   )
 }
