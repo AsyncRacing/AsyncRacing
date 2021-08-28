@@ -24,7 +24,6 @@ const IndexChallenges = () => {
       <Container>
         <Container>
           <Header as="h1" content="All Challenges"></Header>
-
           <Button as={Link} to="/challenges/new" primary animated>
             <Button.Content visible>New Challenge</Button.Content>
             <Button.Content hidden>
