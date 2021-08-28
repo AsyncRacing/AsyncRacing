@@ -9,6 +9,7 @@ import { DateTime, DateTime as LuxonDate } from 'luxon'
 /* css import */
 import './IndexChallenges.css'
 import { Navbar } from '../../components/Navbar/Navbar'
+import { GPXLink } from './GPXLink'
 
 const IndexChallenges = () => {
   // get challenges from firebase DB
@@ -20,6 +21,7 @@ const IndexChallenges = () => {
     <>
       <Container textAlign="center">
         <Navbar />
+        <GPXLink />
       </Container>
       <Container>
         <Container>
