@@ -43,8 +43,12 @@ export const ChallengeForm = ({
         onSubmit={async (event) => {
           event.preventDefault()
 
-          if (!(metadata.title && metadata.creator && tracks.length > 0)) {
+          if (!(metadata.title && metadata.creator)) {
             alert('Please enter your name and the title.')
+            return
+          }
+          if (!(tracks.length > 0)) {
+            alert('Please upload a valid .GPX file')
             return
           }
 
@@ -84,7 +88,6 @@ export const ChallengeForm = ({
 
           // Redirect to URL using newChallengeRef's key.
           const redirect = `/challenges/${newChallengeRef.key}`
-          console.warn('Need to redirect to', redirect)
           const sendwithRedirect = `${newChallengeRef.key}`
           shareTrack(sendwithRedirect, formattedPhoneNumber)
           const onHandleClick = () => {
