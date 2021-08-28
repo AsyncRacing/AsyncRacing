@@ -21,7 +21,7 @@ import {
 
 /* styling imports */
 import { Container, Header, Table, Button } from 'semantic-ui-react'
-import { CourseLinesMutable } from '../../components/CourseLines/CourseLinesMutable'
+import { CourseLinesViewable } from '../../components/CourseLines/CourseLinesViewable'
 
 /* helpers */
 const formatPathTimes = (
@@ -208,7 +208,7 @@ const ShowChallenge = () => {
 
       {/* The map plus challenge lines */}
       <RaceMap tracks={[...userTracks, ...Object.values(tracksById ?? {})]}>
-        {challenge && <CourseLinesMutable course={challenge.course} />}
+        {challenge && <CourseLinesViewable course={challenge.course} />}
       </RaceMap>
     </>
   )
