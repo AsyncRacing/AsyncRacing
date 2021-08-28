@@ -13,7 +13,7 @@ import { Timer } from '../../components/Timer/Timer'
 
 /* helper imports */
 import { Course } from '../../model/ChallengeConfiguration'
-import { CourseSlider } from '../../components/CourseSlider/CourseSlider'
+import { CourseLinesMutable } from '../../components/CourseLines/CourseLinesMutable'
 import { useFiles, useTracks } from '../../model/useFiles'
 
 /* react components */
@@ -102,7 +102,7 @@ const NewChallenge = () => {
 
       {/* The map plus challenge slider */}
       <RaceMap tracks={tracks}>
-        <CourseSlider course={course} setCourse={setCourse} />
+        <CourseLinesMutable course={course} setCourse={setCourse} />
       </RaceMap>
     </>
   )
