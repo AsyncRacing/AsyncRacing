@@ -1,40 +1,26 @@
 /* module imports */
-import React, { useCallback } from 'react'
+import React from 'react'
 import { Marker, SVGOverlay } from 'react-map-gl'
 
 /* local imports */
 import { Course, Point, Waypoint } from '../../model/ChallengeConfiguration'
 import pinImg from '../../assets/red-pin.png'
+import { useCallback } from 'react'
 
-/* interfaces & types */
-interface PinProps {
+/* COURSE ENDPOINT */
+interface CourseEndpointProps {
   point: Point
-  setPoint: any
+  setPoint: any // TODO: declare setState type
 }
 
-interface CourseSliderProps {
-  setCourse: any
-  course: Course
-}
-
-interface LineProps {
-  waypoint: Waypoint
-  setWaypoint: any
-  color: any
-}
-
-/* helpers & constants */
-// ...
-
-/* react components */
-// helper component
-const Pin = ({ point, setPoint }: PinProps) => {
+const CourseEndpoint = ({ point, setPoint }: CourseEndpointProps) => {
   const onDrag = useCallback(
     (event: any) => {
-      setPoint({
+      const newPoint = {
         longitude: event.lngLat[0],
         latitude: event.lngLat[1],
-      })
+      }
+      setPoint(newPoint)
     },
     [setPoint],
   )
@@ -45,7 +31,7 @@ const Pin = ({ point, setPoint }: PinProps) => {
       latitude={point.latitude}
       offsetTop={-50}
       offsetLeft={-25}
-      draggable
+      draggable={true}
       onDrag={onDrag}
     >
       <img
@@ -57,83 +43,132 @@ const Pin = ({ point, setPoint }: PinProps) => {
   )
 }
 
-// helper component
-const Line = ({ waypoint, setWaypoint, color }: LineProps) => {
+/* COURSE LINE (SINGULAR) */
+interface CourseLineProps {
+  type: 'start' | 'checkpoint' | 'finish'
+  waypoint: Waypoint
+  setWaypoint: any // TODO: declare setState type
+  index?: number
+}
+
+const CourseLine = ({
+  type,
+  waypoint,
+  setWaypoint,
+  index,
+}: CourseLineProps) => {
   // This function must be updated with our waypoint points every time it changes.
   const redraw = ({ project }: { project: any }) => {
-    // The `project()` function is sort of a "magic" function that ReactMapGL
-    //   passes in as a parameter to the redraw function.
-    // Given an input of lon/lat coords on the globe,
-    //   it converts it to HTML-readable X/Y coords on the page.
+    /*
+      The `project()` function is sort of a "magic" projection algorithm
+        that ReactMapGL passes in as a parameter to the redraw function.
+      Given an input of lon/lat coords on the globe,
+        it converts it to HTML-readable X/Y coords on the page.
+    */
     const [x1, y1] = project([waypoint[0].longitude, waypoint[0].latitude])
     const [x2, y2] = project([waypoint[1].longitude, waypoint[1].latitude])
 
     // The app expects redraw to return SVG-compatible JSX elements.
     return (
-      <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth="15" />
+      <>
+        <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="black" strokeWidth="6" />
+        <line
+          x1={x1}
+          y1={y1}
+          x2={x2}
+          y2={y2}
+          stroke="white"
+          strokeDasharray="6"
+          strokeWidth="6"
+        />
+      </>
     )
   }
 
-  const getSetPointAt = useCallback(
-    (index: number) => (point: Point) => {
-      // Modify waypoint
-      waypoint[index] = point
-      // Set waypoint state
-      return setWaypoint(waypoint)
+  // Get the associated setState functions for a given point.
+  const setPointAt = useCallback(
+    (pointIndex: number) => {
+      const setPoint = (point: Point) => {
+        const newWaypoint = [...waypoint]
+        newWaypoint[pointIndex] = point
+        setWaypoint(newWaypoint, index)
+      }
+      return setPoint
     },
-    [waypoint, setWaypoint],
+    [waypoint, setWaypoint, index],
   )
 
   return (
-    <>
-      <SVGOverlay redraw={redraw} style={{ pointerEvents: 'none' }} />
-      <Pin point={waypoint[0]} setPoint={getSetPointAt(0)} />
-      <Pin point={waypoint[1]} setPoint={getSetPointAt(1)} />
-    </>
+    waypoint && (
+      <>
+        <SVGOverlay redraw={redraw} style={{ pointerEvents: 'none' }} />
+        <CourseEndpoint point={waypoint[0]} setPoint={setPointAt(0)} />
+        <CourseEndpoint point={waypoint[1]} setPoint={setPointAt(1)} />
+      </>
+    )
   )
 }
 
-// exported component
-const CourseSlider = ({ course, setCourse }: CourseSliderProps) => {
-  const { start, finish } = course
+/* COURSE LINES (PLURAL) */
+interface CourseLinesProps {
+  course: Course
+  setCourse?: any // TODO: declare setState type
+}
 
-  const getSetWaypointOf = useCallback(
-    (name: string) => (waypoint: Waypoint) =>
-      setCourse({
-        ...course,
-        [name]: waypoint,
-      }),
+const CourseLines = ({ course, setCourse }: CourseLinesProps) => {
+  // Get the start & finish waypoints.
+  const { start, checkpoints, finish } = course
+
+  // Get the associated setState functions for these waypoints.
+  const setStart = useCallback(
+    (newStart: Waypoint, index: void) =>
+      setCourse({ ...course, start: newStart }),
+    [course, setCourse],
+  )
+
+  const setFinish = useCallback(
+    (newFinish: Waypoint, index: void) =>
+      setCourse({ ...course, finish: newFinish }),
+    [course, setCourse],
+  )
+
+  const setCheckpoint = useCallback(
+    (checkpoint: Waypoint, index: number) => {
+      const newCheckpoints = [...(course.checkpoints as Array<Waypoint>)]
+      newCheckpoints[index] = checkpoint
+      setCourse({ ...course, checkpoints: newCheckpoints })
+    },
     [course, setCourse],
   )
 
   return (
     <>
-      {(() => {
-        if (start !== null) {
-          return (
-            <Line
-              key="start"
-              waypoint={start}
-              setWaypoint={getSetWaypointOf('start')}
-              color="green"
+      {/* Get the start line here.*/}
+      {start && (
+        <CourseLine type="start" waypoint={start} setWaypoint={setStart} />
+      )}
+
+      {/* Get the optional checkpoint lines here. */}
+      {checkpoints && (
+        <>
+          {/* Map each checkpoint to a line. */}
+          {checkpoints.map((checkpoint, index) => (
+            <CourseLine
+              type="checkpoint"
+              waypoint={checkpoint}
+              setWaypoint={setCheckpoint}
+              index={index}
             />
-          )
-        }
-      })()}
-      {(() => {
-        if (finish !== null) {
-          return (
-            <Line
-              key="finish"
-              waypoint={finish}
-              setWaypoint={getSetWaypointOf('finish')}
-              color="red"
-            />
-          )
-        }
-      })()}
+          ))}
+        </>
+      )}
+
+      {/* Get the finish line here. */}
+      {finish && (
+        <CourseLine type="finish" waypoint={finish} setWaypoint={setFinish} />
+      )}
     </>
   )
 }
 
-export { CourseSlider }
+export { CourseLines }
