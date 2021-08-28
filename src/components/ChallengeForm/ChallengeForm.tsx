@@ -87,6 +87,11 @@ export const ChallengeForm = ({
           console.warn('Need to redirect to', redirect)
           const sendwithRedirect = `${newChallengeRef.key}`
           shareTrack(sendwithRedirect, formattedPhoneNumber)
+          const onHandleClick = () => {
+            var link = `${redirect}`
+            window.location.assign(link)
+          }
+          onHandleClick()
         }}
       >
         <Form.Group>
