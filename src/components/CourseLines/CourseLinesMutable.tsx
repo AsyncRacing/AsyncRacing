@@ -37,7 +37,7 @@ const CourseEndpoint = ({ point, setPoint }: CourseEndpointProps) => {
       <img
         alt="pin"
         src={pinImg}
-        style={{ height: '50px', pointerEvents: 'none' }}
+        style={{ height: '30px', pointerEvents: 'none' }}
       />
     </Marker>
   )
