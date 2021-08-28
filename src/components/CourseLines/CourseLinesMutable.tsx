@@ -57,6 +57,19 @@ const CourseLine = ({
   setWaypoint,
   index,
 }: CourseLineProps) => {
+  // Get the associated setState functions for a given point.
+  const setPointAt = useCallback(
+    (pointIndex: number) => {
+      const setPoint = (point: Point) => {
+        const newWaypoint = [...waypoint]
+        newWaypoint[pointIndex] = point
+        setWaypoint(newWaypoint, index)
+      }
+      return setPoint
+    },
+    [waypoint, setWaypoint, index],
+  )
+
   // This function must be updated with our waypoint points every time it changes.
   const redraw = ({ project }: { project: any }) => {
     /*
@@ -85,19 +98,6 @@ const CourseLine = ({
     )
   }
 
-  // Get the associated setState functions for a given point.
-  const setPointAt = useCallback(
-    (pointIndex: number) => {
-      const setPoint = (point: Point) => {
-        const newWaypoint = [...waypoint]
-        newWaypoint[pointIndex] = point
-        setWaypoint(newWaypoint, index)
-      }
-      return setPoint
-    },
-    [waypoint, setWaypoint, index],
-  )
-
   return (
     waypoint && (
       <>
@@ -115,7 +115,9 @@ interface CourseLinesProps {
   setCourse?: any // TODO: declare setState type
 }
 
-const CourseLines = ({ course, setCourse }: CourseLinesProps) => {
+const CourseLinesMutable = ({ course, setCourse }: CourseLinesProps) => {
+  // HACK: Placeholder setcourse
+  setCourse = setCourse ?? (() => {})
   // Get the start & finish waypoints.
   const { start, checkpoints, finish } = course
 
@@ -171,4 +173,4 @@ const CourseLines = ({ course, setCourse }: CourseLinesProps) => {
   )
 }
 
-export { CourseLines }
+export { CourseLinesMutable }
