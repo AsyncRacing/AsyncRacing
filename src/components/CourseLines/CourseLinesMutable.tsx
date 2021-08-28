@@ -29,8 +29,8 @@ const CourseEndpoint = ({ point, setPoint }: CourseEndpointProps) => {
     <Marker
       longitude={point.longitude}
       latitude={point.latitude}
-      offsetTop={-50}
-      offsetLeft={-25}
+      offsetTop={-30}
+      offsetLeft={-15}
       draggable={true}
       onDrag={onDrag}
     >
@@ -84,16 +84,41 @@ const CourseLine = ({
     // The app expects redraw to return SVG-compatible JSX elements.
     return (
       <>
-        <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="black" strokeWidth="6" />
-        <line
-          x1={x1}
-          y1={y1}
-          x2={x2}
-          y2={y2}
-          stroke="white"
-          strokeDasharray="6"
-          strokeWidth="6"
-        />
+        {/* Decide line patterning */}
+        {type === 'start' && (
+          <line
+            x1={x1}
+            y1={y1}
+            x2={x2}
+            y2={y2}
+            stroke="green"
+            strokeWidth="6"
+          />
+        )}
+        {type === 'checkpoint' && (
+          <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="blue" strokeWidth="4" />
+        )}
+        {type === 'finish' && (
+          <>
+            <line
+              x1={x1}
+              y1={y1}
+              x2={x2}
+              y2={y2}
+              stroke="black"
+              strokeWidth="6"
+            />
+            <line
+              x1={x1}
+              y1={y1}
+              x2={x2}
+              y2={y2}
+              stroke="white"
+              strokeDasharray="6"
+              strokeWidth="6"
+            />
+          </>
+        )}
       </>
     )
   }
