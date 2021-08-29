@@ -8,7 +8,7 @@ import { useTracks } from '../../model/useFiles'
 import { shareTrack } from '../ShareMapTrack/sms-track'
 
 /* css library import */
-import { Form, Button, Icon } from 'semantic-ui-react'
+import { Form, Button, Icon, Header } from 'semantic-ui-react'
 
 interface FormProps {
   addFiles: (file: any) => void
@@ -37,7 +37,7 @@ export const ChallengeForm = ({
   }, [phoneNumber])
   return (
     <>
-      <h1>AsyncRacing</h1>
+      <Header as="h2">Create a New Challenge</Header>
       <Form
         className="form__main"
         onSubmit={async (event) => {

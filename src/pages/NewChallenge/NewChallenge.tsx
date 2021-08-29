@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 
 /* style import */
-import { Container } from 'semantic-ui-react'
+import { Container, Header } from 'semantic-ui-react'
 import './NewChallenge.css'
 
 /* component imports */
@@ -65,39 +65,57 @@ const NewChallenge = () => {
 
   return (
     <>
-      <div
+      <Container
         style={{
           zIndex: 2,
           position: 'relative',
         }}
+        textAlign="center"
       >
-        {/* Need to fix width and spacing for p tag and Timer tag and Upload Button div */}
-        <Container>
-          <Navbar />
-        </Container>
+        <Navbar />
+      </Container>
 
+      <Header
+        style={{
+          zIndex: 2,
+          position: 'relative',
+          pointerEvents: 'none',
+        }}
+        textAlign="center"
+        as="h1"
+      >
+        Async Racing
+      </Header>
+
+      <div
+        style={{
+          zIndex: 2,
+          position: 'relative',
+          display: 'inline-block',
+          marginRight: '20px',
+          float: 'right',
+        }}
+      >
         {/* Show the challenge creation form */}
-        <div className="new__challenge_div_wrapper">
-          <ChallengeForm
-            course={course}
-            files={files}
-            addFiles={addFiles}
-            clearFiles={clearFiles}
-          />
+        <ChallengeForm
+          course={course}
+          files={files}
+          addFiles={addFiles}
+          clearFiles={clearFiles}
+        />
 
-          {/* Temporary placeholder list for track times */}
-          <p>Track Times</p>
-          <ul className="new__challenge_list">
-            {tracks.map((track, id) => {
-              return (
-                <li key={id}>
-                  <p>{track.metadata.title}</p>
-                  <Timer track={track} course={course} />
-                </li>
-              )
-            })}
-          </ul>
-        </div>
+        {/* Temporary placeholder list for track times */}
+        <p>Track Times</p>
+        <ul className="new__challenge_list">
+          {tracks.map((track, id) => {
+            return (
+              <li key={id}>
+                <p>{track.metadata.title}</p>
+                <Timer track={track} course={course} />
+              </li>
+            )
+          })}
+        </ul>
       </div>
 
       {/* The map plus challenge slider */}

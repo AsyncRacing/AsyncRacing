@@ -94,117 +94,132 @@ const ShowChallenge = () => {
           zIndex: 2,
           position: 'relative',
         }}
+        textAlign="center"
       >
         <Navbar />
       </Container>
-      <Container>
-        <div
-          style={{
-            zIndex: 2,
-            position: 'absolute',
-            right: 20,
-            top: 20,
-          }}
-        >
-          {/* Error State */}
-          {(challengeError || tracksError) && (
-            <p>
-              <strong>Error!</strong>
-            </p>
-          )}
 
-          {/* Loading State */}
-          {(challengeLoading || tracksLoading) && (
-            <p>
-              <em>Loading...</em>
-            </p>
-          )}
+      <Header
+        textAlign="center"
+        style={{
+          zIndex: 2,
+          position: 'relative',
+          pointerEvents: 'none',
+        }}
+        as="h1"
+      >
+        Async Racing
+      </Header>
 
-          {/* Done State */}
-          {challenge && tracksById && (
-            <>
-              <form
-                onSubmit={async (e) => {
-                  e.preventDefault()
+      <div
+        style={{
+          zIndex: 2,
+          position: 'relative',
+          display: 'inline-block',
+          marginRight: '20px',
+          float: 'right',
+        }}
+      >
+        <Header as="h2">Show Challenge</Header>
+        {/* Show the challenge creation form */}
+        {/* Error State */}
+        {(challengeError || tracksError) && (
+          <p>
+            <strong>Error!</strong>
+          </p>
+        )}
 
-                  // Refer to the challenges object and tracks object.
-                  const challengeTracksRef = firebaseDB.ref(
-                    `challenges/${challengeId}/tracks`,
-                  )
-                  const tracksRef = firebaseDB.ref('tracks')
+        {/* Loading State */}
+        {(challengeLoading || tracksLoading) && (
+          <p>
+            <em>Loading...</em>
+          </p>
+        )}
 
-                  // Create a new trackRef for each user-selected track.
-                  const newTrackRefs = userTracks.map((track) => {
-                    // Fix the time to use json date string before upload.
-                    const fixedPath = track.path.map((step: Step) => ({
-                      ...step,
-                      time: step.time.toJSON(),
-                    }))
+        {/* Done State */}
+        {challenge && tracksById && (
+          <>
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault()
 
-                    const newTrackRef = tracksRef.push({
-                      ...track,
-                      path: fixedPath,
-                    })
-                    return newTrackRef
+                // Refer to the challenges object and tracks object.
+                const challengeTracksRef = firebaseDB.ref(
+                  `challenges/${challengeId}/tracks`,
+                )
+                const tracksRef = firebaseDB.ref('tracks')
+
+                // Create a new trackRef for each user-selected track.
+                const newTrackRefs = userTracks.map((track) => {
+                  // Fix the time to use json date string before upload.
+                  const fixedPath = track.path.map((step: Step) => ({
+                    ...step,
+                    time: step.time.toJSON(),
+                  }))
+
+                  const newTrackRef = tracksRef.push({
+                    ...track,
+                    path: fixedPath,
                   })
+                  return newTrackRef
+                })
 
-                  // Get the IDs of the tracks.
-                  const newTrackIds = newTrackRefs.map((ref) => ref.key)
-                  challengeTracksRef.set([
-                    ...challenge.tracks.map(
-                      (track: Track): string => track.metadata.id as string,
-                    ),
-                    ...newTrackIds,
-                  ])
+                // Get the IDs of the tracks.
+                const newTrackIds = newTrackRefs.map((ref) => ref.key)
+                challengeTracksRef.set([
+                  ...challenge.tracks.map(
+                    (track: Track): string => track.metadata.id as string,
+                  ),
+                  ...newTrackIds,
+                ])
 
-                  clearFiles()
-                }}
-              >
-                {/* Show the upload button */}
-                <UploadButton
-                  files={files}
-                  addFiles={addFiles}
-                  clearFiles={clearFiles}
-                />
+                clearFiles()
+              }}
+            >
+              {/* Show the upload button */}
+              <UploadButton
+                files={files}
+                addFiles={addFiles}
+                clearFiles={clearFiles}
+              />
 
-                {/*
+              {/*
                   Unfortunately we need a way to trigger
                   the upload, so here's another button
                 */}
-                <Button fluid type="submit" color="green">
-                  Upload Tracks!
-                </Button>
-              </form>
+              <Button fluid type="submit" color="green">
+                Upload Tracks!
+              </Button>
+            </form>
 
-              {/* Temporary placeholder list for track times */}
-              <Header textAlign="center" content="Track Times"></Header>
-              <Table celled striped singleline collapsing>
-                <Table.Header>
-                  <Table.Row>
-                    <Table.HeaderCell>Race ID</Table.HeaderCell>
-                    <Table.HeaderCell>Time</Table.HeaderCell>
-                  </Table.Row>
-                </Table.Header>
+            {/* Temporary placeholder list for track times */}
+            <Header textAlign="center" content="Track Times"></Header>
+            <Table celled striped singleline collapsing>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>Race ID</Table.HeaderCell>
+                  <Table.HeaderCell>Time</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
 
-                <Table.Body>
-                  {challenge.tracks.map((track) => {
-                    return (
-                      <Table.Row>
-                        <Table.Cell key={track.metadata.id}>
-                          {track.metadata.title}
-                        </Table.Cell>
-                        <Table.Cell>
-                          <Timer track={track} course={challenge.course} />
-                        </Table.Cell>
-                      </Table.Row>
-                    )
-                  })}
-                </Table.Body>
-              </Table>
-            </>
-          )}
-        </div>
-      </Container>
+              <Table.Body>
+                {challenge.tracks.map((track) => {
+                  return (
+                    <Table.Row>
+                      <Table.Cell key={track.metadata.id}>
+                        {track.metadata.title}
+                      </Table.Cell>
+                      <Table.Cell>
+                        <Timer track={track} course={challenge.course} />
+                      </Table.Cell>
+                    </Table.Row>
+                  )
+                })}
+              </Table.Body>
+            </Table>
+          </>
+        )}
+      </div>
 
       {/* The map plus challenge lines */}
       <RaceMap tracks={[...userTracks, ...Object.values(tracksById ?? {})]}>

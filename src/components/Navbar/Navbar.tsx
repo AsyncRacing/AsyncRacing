@@ -8,16 +8,19 @@ const Navbar = () => {
       <Menu.Item
         header
         fitted="vertically"
-        as="h3"
+        as={Link}
+        to="/"
         verticalAlign="middle"
         content="Async Racing"
-      ></Menu.Item>
-      <Menu.Item as={Link} to="/" content="All Challenges"></Menu.Item>
-      <Menu.Item
-        as={Link}
-        to="/challenges/new"
-        content="New Challenges"
-      ></Menu.Item>
+      >
+        <h3>AsyncRacing</h3>
+      </Menu.Item>
+
+      <Menu.Item as={Link} to="/" content="All Challenges" />
+
+      <Menu.Item as={Link} to="/challenges/new" content="New Challenge" />
+
+      <Menu.Item as={Link} to="/instructions" content="Instructions" />
     </Menu>
   )
 }
