@@ -4,7 +4,7 @@ import { Marker, SVGOverlay } from 'react-map-gl'
 
 /* local imports */
 import { Course, Point, Waypoint } from '../../model/ChallengeConfiguration'
-import pinImg from '../../assets/red-pin.png'
+import pinImg from '../../assets/flag-pin.png'
 import { useCallback } from 'react'
 
 /* COURSE ENDPOINT */
@@ -30,7 +30,7 @@ const CourseEndpoint = ({ point, setPoint }: CourseEndpointProps) => {
       longitude={point.longitude}
       latitude={point.latitude}
       offsetTop={-30}
-      offsetLeft={-15}
+      offsetLeft={-10}
       draggable={true}
       onDrag={onDrag}
     >
