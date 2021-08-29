@@ -72,7 +72,7 @@ export const ChallengeForm = ({
           const newTrackIds = newTrackRefs.map((ref) => ref.key)
 
           // Create a new challenge containing those trackIDs.
-          const newChallengeRef = challengesRef.push({
+          const newChallengeRef = await challengesRef.push({
             course: {
               start: course.start,
               finish: course.finish,
