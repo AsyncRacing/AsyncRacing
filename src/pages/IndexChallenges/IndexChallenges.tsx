@@ -7,9 +7,7 @@ import { Button, Icon, Table, Container, Header } from 'semantic-ui-react'
 import { DateTime, DateTime as LuxonDate } from 'luxon'
 
 /* css import */
-import './IndexChallenges.css'
 import { Navbar } from '../../components/Navbar/Navbar'
-import { GPXLink } from './GPXLink'
 
 const IndexChallenges = () => {
   // get challenges from firebase DB
@@ -21,18 +19,28 @@ const IndexChallenges = () => {
     <>
       <Container textAlign="center">
         <Navbar />
-        <GPXLink />
+        <Header as="h1">Async Racing</Header>
       </Container>
+
       <Container>
-        <Container>
-          <Header as="h1" content="All Challenges"></Header>
+        <Header as="h2">List All Challenges</Header>
+
+        <div>
           <Button as={Link} to="/challenges/new" primary animated>
             <Button.Content visible>New Challenge</Button.Content>
             <Button.Content hidden>
               <Icon name="arrow right" />
             </Button.Content>
           </Button>
-        </Container>
+
+          <Button as={Link} to="/instructions" animated>
+            <Button.Content visible>What is GPX?</Button.Content>
+            <Button.Content hidden>
+              <Icon name="arrow right" />
+            </Button.Content>
+          </Button>
+        </div>
+
         {challenges && (
           <>
             <Table cell striped>
@@ -73,6 +81,7 @@ const IndexChallenges = () => {
             </Table>
           </>
         )}
+
         {loading && (
           <p>
             <em>Loading Database...</em>

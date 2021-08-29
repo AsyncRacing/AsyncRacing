@@ -1,7 +1,5 @@
-.new__challenge_div_wrapper {
+.new__challenge_wrapper {
   z-index: 2;
-  position:absolute;
-  right: 0;
 }
 
 .new__challenge_list {

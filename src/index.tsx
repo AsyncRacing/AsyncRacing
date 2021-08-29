@@ -10,6 +10,8 @@ import {
 import { IndexChallenges } from './pages/IndexChallenges/IndexChallenges'
 import { NewChallenge } from './pages/NewChallenge/NewChallenge'
 import { ShowChallenge } from './pages/ShowChallenge/ShowChallenge'
+import { Instructions } from './pages/Instructions/Instructions'
+
 import { reportWebVitals } from './reportWebVitals'
 import './index.css'
 import 'semantic-ui-css/semantic.min.css'
@@ -29,6 +31,10 @@ ReactDOM.render(
 
         <Route path="/challenges">
           <Redirect to="/" />
+        </Route>
+
+        <Route path="/instructions">
+          <Instructions />
         </Route>
 
         <Route path="/">
